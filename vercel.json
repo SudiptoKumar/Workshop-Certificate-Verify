@@ -1,16 +1,8 @@
 {
-  "rewrites": [
-    {
-      "source": "/",
-      "destination": "/api/verify-proxy"
-    },
-    {
-      "source": "/verify",
-      "destination": "/api/verify-proxy"
-    },
-    {
-      "source": "/verify/:certificateId",
-      "destination": "/api/verify-proxy?certificateId=:certificateId"
-    }
+  "version": 2,
+  "redirects": [
+    {"source":"/verify/:certificateId","destination":"https://script.google.com/macros/s/AKfycbwGUpohTALTcSXKOEKM8rQW32myItCcukGOMNZ0rJozVXFrs0x1T-ku0omWVtqZIbK9kQ/exec?page=verify&certificateId=:certificateId","permanent":false},
+    {"source":"/verify","destination":"https://script.google.com/macros/s/AKfycbwGUpohTALTcSXKOEKM8rQW32myItCcukGOMNZ0rJozVXFrs0x1T-ku0omWVtqZIbK9kQ/exec?page=verify","permanent":false},
+    {"source":"/","destination":"https://script.google.com/macros/s/AKfycbwGUpohTALTcSXKOEKM8rQW32myItCcukGOMNZ0rJozVXFrs0x1T-ku0omWVtqZIbK9kQ/exec?page=verify","permanent":false}
   ]
 }
