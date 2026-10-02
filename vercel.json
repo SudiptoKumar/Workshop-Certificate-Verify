@@ -1,20 +1,6 @@
 {
   "rewrites": [
-    {
-      "source": "/",
-      "destination": "/api/verify-page"
-    },
-    {
-      "source": "/verify",
-      "destination": "/api/verify-page"
-    },
-    {
-      "source": "/verify/",
-      "destination": "/api/verify-page"
-    },
-    {
-      "source": "/verify/:certificateId",
-      "destination": "/api/verify-page?certificateId=:certificateId"
-    }
+    {"source":"/verify","destination":"/api/verify-page"},
+    {"source":"/verify/:certificateId","destination":"/api/verify-page?certificateId=:certificateId"}
   ]
 }
