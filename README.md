@@ -1,19 +1,30 @@
-# WORKSHOP V1 — Vercel Redirect to Original Apps Script Verification
+# WORKSHOP V1 — Vercel Verification Page
 
-This package intentionally contains NO Verify.html and NO verification frontend.
+This is the stable Vercel frontend for the WORKSHOP certificate verifier.
 
-Vercel is only a public redirect layer. The original Google Apps Script deployment remains the single source of truth for the verification page, branding, JavaScript runtime, certificate lookup, and future design changes.
+## Architecture
 
-## Routes
+Vercel serves a copy of the Apps Script `Verify.html` design and sends verification requests server-side to the current Apps Script Web App. The browser never calls `google.script.run`; Vercel uses the Apps Script JSON verification endpoint instead.
 
-- `/` redirects to the original Apps Script verification page.
-- `/verify` redirects to the original Apps Script verification page.
-- `/verify/CERTIFICATE_ID` redirects to the original Apps Script verification page with `certificateId` in the query string.
+The Apps Script deployment remains the source of truth for certificate data.
 
-## Current Apps Script deployment
+## Public URLs
 
-https://script.google.com/macros/s/AKfycbwGUpohTALTcSXKOEKM8rQW32myItCcukGOMNZ0rJozVXFrs0x1T-ku0omWVtqZIbK9kQ/exec
+- `https://financeclubpstu.vercel.app/`
+- `https://financeclubpstu.vercel.app/verify`
+- `https://financeclubpstu.vercel.app/verify/TEST-CERT-022C0CA90685`
+- `https://financeclubpstu.vercel.app/verify?certificateId=TEST-CERT-022C0CA90685`
+
+All routes use the same Vercel `Verify.html` page.
+
+## Branding
+
+The page asks the Apps Script Web App for the rendered `window.BRAND` settings and uses those values for the organization name and logo. If that request fails, it safely falls back to Finance Club PSTU without breaking verification.
 
 ## Important
 
-Do not add a Vercel `Verify.html`. Do not add a second certificate UI. Future verification-page design changes are made only in the Apps Script project.
+Do not deploy the redirect-only package. This package intentionally keeps the Vercel HTML frontend because it must retain the Vercel URL while using the Apps Script verification backend.
+
+## Deployment
+
+Deploy these files to the existing `financeclubpstu.vercel.app` Vercel project. No environment variable is required. `WORKSHOP_WEB_APP_URL` may optionally override the built-in Apps Script URL.
