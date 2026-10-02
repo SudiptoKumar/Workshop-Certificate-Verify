@@ -1,6 +1,16 @@
 {
   "rewrites": [
-    {"source":"/verify","destination":"/api/verify-proxy"},
-    {"source":"/verify/:certificateId","destination":"/api/verify-proxy?certificateId=:certificateId"}
+    {
+      "source": "/",
+      "destination": "/api/verify-proxy"
+    },
+    {
+      "source": "/verify",
+      "destination": "/api/verify-proxy"
+    },
+    {
+      "source": "/verify/:certificateId",
+      "destination": "/api/verify-proxy?certificateId=:certificateId"
+    }
   ]
 }
