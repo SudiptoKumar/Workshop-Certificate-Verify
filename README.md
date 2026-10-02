@@ -11,12 +11,8 @@ The browser stays on the Vercel URL. Vercel proxies the verification request ser
 ## Setup
 
 1. Copy `api/verify-page.js` and `vercel.json` into the Vercel project that serves `financeclubpstu.vercel.app`.
-2. Add a Vercel Environment Variable:
-
-`WORKSHOP_WEB_APP_URL=https://script.google.com/macros/s/<DEPLOYMENT_ID>/exec`
-
-3. Redeploy the Vercel project.
-4. Test:
+2. Redeploy the Vercel project. The adapter already contains the current Apps Script Web App URL, so no Vercel environment variable is required. If you prefer environment-based configuration, you may optionally set `WORKSHOP_WEB_APP_URL` to override the built-in URL.
+3. Test:
 
 `/verify/TEST-CERT-022C0CA90685`
 
