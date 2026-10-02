@@ -1,4 +1,4 @@
-const DEFAULT_WEB_APP_URL = 'https://script.google.com/macros/s/REPLACE_WITH_YOUR_APPS_SCRIPT_DEPLOYMENT_ID/exec';
+const DEFAULT_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwGUpohTALTcSXKOEKM8rQW32myItCcukGOMNZ0rJozFrs0x1T-ku0omWVtqZIbK9kQ/exec';
 
 function esc(value) {
   return String(value == null ? '' : value)
@@ -44,8 +44,8 @@ module.exports = async (req, res) => {
   try {
     const certificateId = String((req.query && req.query.certificateId) || '').trim();
     const base = String(process.env.WORKSHOP_WEB_APP_URL || DEFAULT_WEB_APP_URL).trim();
-    if (!/^https:\/\//i.test(base) || /REPLACE_WITH_YOUR_APPS_SCRIPT_DEPLOYMENT_ID/.test(base)) {
-      return res.status(500).send('WORKSHOP_WEB_APP_URL is not configured.');
+    if (!/^https:\/\//i.test(base)) {
+      return res.status(500).send('Verification backend URL is invalid.');
     }
     if (!certificateId) return res.status(400).send(renderPage({valid:false,message:'Certificate ID is required.'}, ''));
 
