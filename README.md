@@ -1,22 +1,39 @@
-# Finance Club PSTU — Exact Certificate Verification Page for Vercel
+# WORKSHOP V1 — Vercel → Original Apps Script Verify Page
 
-This adapter serves the same `Verify.html` design used by the WORKSHOP Automation Apps Script project. It does not introduce a second verification UI.
+This version intentionally does **not** copy or recreate `Verify.html` on Vercel.
 
-## Public URLs
+Vercel only provides the public URL and embeds the original Google Apps Script verification page.
 
-- `https://financeclubpstu.vercel.app/verify`
-- `https://financeclubpstu.vercel.app/verify/TEST-CERT-022C0CA90685`
-- `https://financeclubpstu.vercel.app/verify?certificateId=TEST-CERT-022C0CA90685`
+## Architecture
 
-All three use the same page and the same Apps Script verification backend.
+`financeclubpstu.vercel.app/verify/...`
+→ Vercel wrapper
+→ original Apps Script Web App `/exec?page=verify...`
+→ original Apps Script `Verify.html`
+→ original `google.script.run.verifyCertificatePublic()` logic
 
-## Backend
+## Why this version
 
-The Vercel adapter server-side calls the Apps Script endpoint:
-`/exec?page=verify-api&certificateId=...`
+There is now only **one** verification page source: the `Verify.html` inside Google Apps Script.
 
-The browser never calls Apps Script directly.
+When you change the verification design in Apps Script later (logo, layout, colors, text, animation, mobile design, result card, etc.), Vercel automatically shows that same updated page. No second `Verify.html` needs to be edited.
 
-## Deployment
+## Current Apps Script backend
 
-Copy the package into the existing `financeclubpstu.vercel.app` project and redeploy. No environment variable is required because the current Apps Script Web App URL is built in. `WORKSHOP_WEB_APP_URL` may optionally override it.
+`https://script.google.com/macros/s/AKfycbwGUpohTALTcSXKOEKM8rQW32myItCcukGOMNZ0rJozVXFrs0x1T-ku0omWVtqZIbK9kQ/exec`
+
+## Vercel routes
+
+- `/verify`
+- `/verify/TEST-CERT-022C0CA90685`
+- `/verify?certificateId=TEST-CERT-022C0CA90685`
+
+## Important
+
+The Vercel page is a transparent full-screen wrapper around the original Apps Script page. The Vercel address remains visible in the browser, while the actual verification UI and verification JavaScript remain owned by Apps Script.
+
+No Apps Script code change is required for this architecture.
+
+## Deploy
+
+Deploy the contents of this package to the existing `financeclubpstu.vercel.app` project.
