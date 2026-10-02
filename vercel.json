@@ -1,9 +1,12 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
     {
+      "source": "/verify",
+      "destination": "/api/verify-page"
+    },
+    {
       "source": "/verify/:certificateId",
-      "destination": "https://script.google.com/macros/s/AKfycbwGUpohTALTcSXKOEKM8rQW32myItCcukGOMNZ0rJozVXFrs0x1T-ku0omWVtqZIbK9kQ/exec?page=verify&certificateId=:certificateId"
+      "destination": "/api/verify-page?certificateId=:certificateId"
     }
   ]
 }

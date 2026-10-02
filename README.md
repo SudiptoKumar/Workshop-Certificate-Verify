@@ -1,43 +1,37 @@
-# Workshop Certificate Verification — Vercel Proxy
+# Finance Club PSTU — Custom Certificate Verification URL Adapter
 
-This project provides a clean public verification URL for the Workshop Automation V1 certificate system.
+This small Vercel adapter provides a public URL such as:
 
-## Architecture
+`https://financeclubpstu.vercel.app/verify/TEST-CERT-022C0CA90685`
 
-Visitor:
-`/verify/CERTIFICATE_ID`
+The browser stays on the Vercel URL. Vercel proxies the verification request server-side to the WORKSHOP Automation Apps Script JSON endpoint:
 
-→ Vercel rewrite
+`/exec?page=verify-api&certificateId=...`
 
-→ Google Apps Script Web App
+## Setup
 
-→ `Verify.html` / certificate database
+1. Copy `api/verify-page.js` and `vercel.json` into the Vercel project that serves `financeclubpstu.vercel.app`.
+2. Add a Vercel Environment Variable:
 
-## Backend
+`WORKSHOP_WEB_APP_URL=https://script.google.com/macros/s/<DEPLOYMENT_ID>/exec`
 
-Google Apps Script Web App:
+3. Redeploy the Vercel project.
+4. Test:
 
-`https://script.google.com/macros/s/AKfycbwGUpohTALTcSXKOEKM8rQW32myItCcukGOMNZ0rJozVXFrs0x1T-ku0omWVtqZIbK9kQ/exec`
+`/verify/TEST-CERT-022C0CA90685`
 
-## Example
+No browser-side CORS call is required because Vercel talks to Apps Script server-side.
 
-After deployment, use:
+## URL generation in WORKSHOP Automation
 
-`https://YOUR-VERCEL-DOMAIN/verify/TEST-CERT-022C0CA90685`
+Set the Apps Script Control Center → Brand & System Defaults → Public Verification URL to:
 
-The Vercel project does not contain the Workshop backend or certificate data. It only proxies the public verification route to the existing Apps Script Web App.
+`https://financeclubpstu.vercel.app/verify`
 
-## GitHub → Vercel
+The certificate email will then use:
 
-1. Upload the contents of this ZIP to a new GitHub repository.
-2. In Vercel, choose **Add New → Project**.
-3. Import the GitHub repository.
-4. Keep the default settings.
-5. Deploy.
-6. Test `/verify/TEST-CERT-022C0CA90685`.
+`https://financeclubpstu.vercel.app/verify/<CERTIFICATE_ID>`
 
-## Important
+You can also use a template value:
 
-Keep the existing Apps Script Web App deployment active. This project depends on its `/exec` URL.
-
-The Apps Script URL is already configured in `vercel.json`.
+`https://financeclubpstu.vercel.app/verify/{CERTIFICATE_ID}`
