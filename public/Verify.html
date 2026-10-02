@@ -39,7 +39,7 @@
   </style>
 </head>
 <body>
-<script>window.BRAND={organizationName:"Finance Club PSTU",logoUrl:"",verificationUrl:"https://financeclubpstu.vercel.app/verify"};window.AUTO_CERTIFICATE_ID="";</script>
+<script>window.BRAND=<?!= JSON.stringify(getPublicBranding()) ?>;window.AUTO_CERTIFICATE_ID=<?!= JSON.stringify(autoCertificateId || "") ?>;window.PUBLIC_VERIFY_BASE=<?!= JSON.stringify(publicVerificationBaseUrl || "") ?>;</script>
 <div class="wrap">
   <main class="card">
     <section class="hero">
@@ -76,33 +76,9 @@ function showResult(ok,data){
   el.style.display='block';
 }
 function verifyCertificate(){
-  const id=document.getElementById('certificateId').value.trim();
-  if(!id){showResult(false,{message:'Please enter a certificate ID.'});return;}
-  const btn=document.getElementById('verifyBtn');
-  document.getElementById('result').style.display='none';
-  document.getElementById('loading').style.display='block';
-  btn.disabled=true;
-  fetch('/api/verify-api?certificateId='+encodeURIComponent(id),{headers:{'Accept':'application/json'}})
-    .then(async function(r){
-      const text=await r.text();
-      let data;
-      try{data=JSON.parse(text);}catch(e){throw new Error('Verification service returned an invalid response.');}
-      return {ok:r.ok,data:data};
-    })
-    .then(function(result){
-      document.getElementById('loading').style.display='none';
-      btn.disabled=false;
-      if(result.data && result.data.code==='BACKEND_ERROR') {
-        showResult(false,{message:result.data.message||'Verification service is temporarily unavailable.'});
-        return;
-      }
-      showResult(!!(result.data&&result.data.valid),result.data||{});
-    })
-    .catch(function(err){
-      document.getElementById('loading').style.display='none';
-      btn.disabled=false;
-      showResult(false,{message:'Verification service is temporarily unavailable. '+(err&&err.message?err.message:String(err))});
-    });
+  const id=document.getElementById('certificateId').value.trim(); if(!id){showResult(false,{message:'Please enter a certificate ID.'});return;}
+  const btn=document.getElementById('verifyBtn'); document.getElementById('result').style.display='none'; document.getElementById('loading').style.display='block'; btn.disabled=true;
+  google.script.run.withSuccessHandler(function(res){document.getElementById('loading').style.display='none';btn.disabled=false;showResult(!!(res&&res.valid),res||{});}).withFailureHandler(function(err){document.getElementById('loading').style.display='none';btn.disabled=false;showResult(false,{message:err&&err.message?err.message:String(err)});}).verifyCertificatePublic(id);
 }
 document.getElementById('certificateId').addEventListener('keydown',function(e){if(e.key==='Enter')verifyCertificate();});
 (function(){
