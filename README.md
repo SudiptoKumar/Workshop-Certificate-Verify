@@ -1,33 +1,22 @@
-# Finance Club PSTU — Custom Certificate Verification URL Adapter
+# Finance Club PSTU — Exact Certificate Verification Page for Vercel
 
-This small Vercel adapter provides a public URL such as:
+This adapter serves the same `Verify.html` design used by the WORKSHOP Automation Apps Script project. It does not introduce a second verification UI.
 
-`https://financeclubpstu.vercel.app/verify/TEST-CERT-022C0CA90685`
+## Public URLs
 
-The browser stays on the Vercel URL. Vercel proxies the verification request server-side to the WORKSHOP Automation Apps Script JSON endpoint:
+- `https://financeclubpstu.vercel.app/verify`
+- `https://financeclubpstu.vercel.app/verify/TEST-CERT-022C0CA90685`
+- `https://financeclubpstu.vercel.app/verify?certificateId=TEST-CERT-022C0CA90685`
 
+All three use the same page and the same Apps Script verification backend.
+
+## Backend
+
+The Vercel adapter server-side calls the Apps Script endpoint:
 `/exec?page=verify-api&certificateId=...`
 
-## Setup
+The browser never calls Apps Script directly.
 
-1. Copy `api/verify-page.js` and `vercel.json` into the Vercel project that serves `financeclubpstu.vercel.app`.
-2. Redeploy the Vercel project. The adapter already contains the current Apps Script Web App URL, so no Vercel environment variable is required. If you prefer environment-based configuration, you may optionally set `WORKSHOP_WEB_APP_URL` to override the built-in URL.
-3. Test:
+## Deployment
 
-`/verify/TEST-CERT-022C0CA90685`
-
-No browser-side CORS call is required because Vercel talks to Apps Script server-side.
-
-## URL generation in WORKSHOP Automation
-
-Set the Apps Script Control Center → Brand & System Defaults → Public Verification URL to:
-
-`https://financeclubpstu.vercel.app/verify`
-
-The certificate email will then use:
-
-`https://financeclubpstu.vercel.app/verify/<CERTIFICATE_ID>`
-
-You can also use a template value:
-
-`https://financeclubpstu.vercel.app/verify/{CERTIFICATE_ID}`
+Copy the package into the existing `financeclubpstu.vercel.app` project and redeploy. No environment variable is required because the current Apps Script Web App URL is built in. `WORKSHOP_WEB_APP_URL` may optionally override it.
