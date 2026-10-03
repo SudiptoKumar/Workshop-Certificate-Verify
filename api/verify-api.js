@@ -1,4 +1,4 @@
-const { WORKSHOP_WEB_APP_URL } = require('./backend-config');
+const DEFAULT_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyli_bIMimi0Xuog_0l0KNkcG6N_KnMylb8MAYvlgkxx0HclAVWx08GHwigjp-C23u4/exec';
 const TIMEOUT_MS = 25000;
 
 module.exports = async (req, res) => {
@@ -7,11 +7,13 @@ module.exports = async (req, res) => {
   if (!id) return res.status(400).json({ valid: false, code: 'MISSING_ID', message: 'Certificate ID is required.' });
   if (id.length > 120) return res.status(400).json({ valid: false, code: 'INVALID_ID', message: 'That certificate ID is too long.' });
 
-  const base = String(WORKSHOP_WEB_APP_URL || '').trim().replace(/\/+$/, '');
-  if (!/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(base)) {
-    return res.status(500).json({ valid: false, code: 'BACKEND_URL_INVALID', message: 'The Apps Script Web App URL is invalid. Check api/backend-config.js.' });
-  }
-
+  let base = String(process.env.WORKSHOP_WEB_APP_URL || DEFAULT_WEB_APP_URL).trim().replace(/\/+$/, '');
+  // Google may show an account-scoped browser URL such as /macros/u/5/s/... .
+  // That /u/<account-index>/ segment is not part of the stable Web App URL and
+  // can return 404 when the same link is opened under another account/device.
+  // Normalize it away so both canonical and accidentally copied account-scoped
+  // URLs work from Vercel.
+  base = base.replace(/(https:\/\/script\.google\.com\/macros)\/u\/\d+(\/s\/)/i, '$1$2');
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
   try {
@@ -24,7 +26,7 @@ module.exports = async (req, res) => {
       return res.status(502).json({
         valid: false,
         code: 'BACKEND_NON_JSON',
-        message: 'The Apps Script verification backend did not return JSON. Check the Web App deployment, access setting, and backend URL.'
+        message: 'The verification backend did not return valid data. Check that the Apps Script Web App is deployed with access set to "Anyone".'
       });
     }
     return res.status(data && data.valid ? 200 : 404).json(data);
