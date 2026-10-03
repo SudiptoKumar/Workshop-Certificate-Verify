@@ -1,7 +1,7 @@
 // Fallback backend for the current Finance Club PSTU WORKSHOP deployment.
 // For any new Apps Script project/account, prefer the Vercel environment variable
 // WORKSHOP_WEB_APP_URL and redeploy the Vercel project.
-const DEFAULT_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwGUpohTALTcSXKOEKM8rQW32myItCcukGOMNZ0rJozVXFrs0x1T-ku0omWVtqZIbK9kQ/exec';
+const DEFAULT_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyli_bIMimi0Xuog_0l0KNkcG6N_KnMylb8MAYvlgkxx0HclAVWx08GHwigjp-C23u4/exec';
 const TIMEOUT_MS = 25000;
 
 module.exports = async (req, res) => {
