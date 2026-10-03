@@ -1,12 +1,22 @@
 # Finance Club PSTU — Certificate Verification (Vercel)
 
-A reusable Vercel verification frontend for the **WORKSHOP Automation** Apps Script backend.
+Vercel hosts the public verification page and proxies certificate lookups to the WORKSHOP Automation Apps Script Web App.
 
-The important design rule is:
+## Current backend
 
-> **Vercel is the public verification page. Apps Script is the data/backend source.**
+This project is currently connected to:
 
-The Vercel project does not store certificate records itself. It forwards the certificate ID to the configured Apps Script Web App and returns the result.
+```text
+https://script.google.com/macros/s/AKfycbyli_bIMimi0Xuog_0l0KNkcG6N_KnMylb8MAYvlgkxx0HclAVWx08GHwigjp-C23u4/exec
+```
+
+The backend URL is intentionally stored in **one file only**:
+
+```text
+api/backend-config.js
+```
+
+Do not put a second backend URL in `verify-api.js` or in a Vercel environment variable.
 
 ## Public URLs
 
@@ -14,309 +24,241 @@ The Vercel project does not store certificate records itself. It forwards the ce
 - `https://financeclubpstu.vercel.app/verify/<CERTIFICATE_ID>`
 - `https://financeclubpstu.vercel.app/verify?certificateId=<CERTIFICATE_ID>`
 
-## How data is extracted
+Example:
 
-The request flow is:
+- `https://financeclubpstu.vercel.app/verify/TEST-CERT-E642808D4472`
+
+## How the system works
 
 ```text
-Browser
+Visitor
   ↓
-https://financeclubpstu.vercel.app/verify/<CERTIFICATE_ID>
+Vercel /verify/<CERTIFICATE_ID>
   ↓
-Vercel: /api/verify-api
+public/Verify.html
   ↓
-Apps Script Web App: /exec?page=verify-api&certificateId=<CERTIFICATE_ID>
+/api/verify-api
   ↓
-WORKSHOP Certificates sheet
+api/backend-config.js
   ↓
-JSON verification result
+Google Apps Script /exec?page=verify-api&certificateId=...
   ↓
-Vercel
+Certificate sheet
   ↓
-Browser
+JSON response
+  ↓
+Vercel verification result
 ```
 
-The browser never reads the Google Sheet directly.
+The browser does **not** call Apps Script directly.
 
-## The issue that caused the recent failure
+## IMPORTANT: Updating the Apps Script URL
 
-The repository had an **old Apps Script `/exec` URL hard-coded** in `api/verify-api.js`.
+### Case A — Same Apps Script project, new deployment version
 
-So even when a new Apps Script Web App was deployed, Vercel could still send the request to the old backend unless `WORKSHOP_WEB_APP_URL` was updated in Vercel.
+If you are only updating the existing WORKSHOP Apps Script project:
 
-The previous page branding URL is **not** the backend URL. Changing this line in `public/Verify.html` only changes the visible verification URL/branding:
+1. Save the Apps Script code.
+2. Create a new Apps Script version.
+3. Edit the existing Web App deployment.
+4. Select the new version.
+5. Keep the same `/exec` deployment URL.
+6. **Do not change this Vercel project.**
+
+The Vercel backend URL stays the same because the deployment URL is unchanged.
+
+### Case B — New Apps Script project
+
+If you create a completely new Apps Script project:
+
+1. Deploy that project as a Web App.
+2. Set **Execute as:** `Me`.
+3. Set **Who has access:** `Anyone`.
+4. Copy the new URL ending in `/exec`.
+5. Open:
+
+```text
+api/backend-config.js
+```
+
+6. Change only this line:
 
 ```javascript
-window.BRAND.verificationUrl = "https://financeclubpstu.vercel.app/verify";
+const WORKSHOP_WEB_APP_URL = 'PASTE_NEW_APPS_SCRIPT_EXEC_URL_HERE';
 ```
 
-The actual backend is selected here:
+7. Commit/push the change.
+8. Redeploy the Vercel project.
+9. Test the Vercel API directly.
+10. Test the public certificate URL.
 
-```javascript
-process.env.WORKSHOP_WEB_APP_URL || DEFAULT_WEB_APP_URL
-```
+### Case C — New Google account
 
-This version updates the built-in fallback to the current Finance Club PSTU Apps Script deployment:
+A different Google account does not change the Vercel architecture.
 
-```text
-https://script.google.com/macros/s/AKfycbwGUpohTALTcSXKOEKM8rQW32myItCcukGOMNZ0rJozVXFrs0x1T-ku0omWVtqZIbK9kQ/exec
-```
-
-For future projects/accounts, **do not edit the source code every time**. Use the Vercel environment variable described below.
-
-## Required Apps Script Web App settings
-
-For the backend deployment:
-
-- Deployment type: **Web app**
-- Execute as: **Me**
-- Who has access: **Anyone**
-- Use the production URL ending in `/exec`, not the `/dev` test URL.
-- The Apps Script `doGet(e)` must support `page=verify-api`.
-
-Google's deployment model uses a versioned deployment. When code changes, create a new version and edit the existing deployment to point to that version; this keeps the same deployment URL/ID. citehttps://developers.google.com/apps-script/concepts/deployments
-
-## FIRST SETUP — One Apps Script project / one account
-
-1. Deploy the Apps Script project as a Web App.
-2. Copy the production `/exec` URL.
-3. In Vercel open:
-   `Project → Settings → Environment Variables`
-4. Create/update:
-
-```text
-Name:  WORKSHOP_WEB_APP_URL
-Value: https://script.google.com/macros/s/XXXXXXXX/exec
-Environment: Production
-```
-
-5. Save it.
-6. **Redeploy the Vercel project.**
-
-Vercel environment-variable changes are applied to deployments when you redeploy, so changing the variable without a new deployment can leave the running deployment using the previous value. citehttps://vercel.com/academy/vercel-foundations/vercel-settings
-
-## Every time Apps Script code is updated
-
-### Same Apps Script project
-
-Usually **do not change the Vercel URL**.
-
-Use:
-
-```text
-Apps Script
-  → Deploy
-  → Manage deployments
-  → Edit existing Web App deployment
-  → Select the new version
-  → Deploy
-```
-
-The existing `/exec` deployment URL remains the same. Vercel does not need to be changed just because the Apps Script code version changed. citehttps://developers.google.com/apps-script/concepts/deployments
-
-### New Apps Script project in the same Google account
-
-This creates a new Web App deployment URL.
-
-Do this:
-
-```text
-1. Create/deploy the new Apps Script project.
-2. Copy the new /exec URL.
-3. Vercel → Settings → Environment Variables.
-4. Update WORKSHOP_WEB_APP_URL.
-5. Redeploy Vercel.
-6. Test /api/verify-api?certificateId=<NEW_TEST_CERT_ID>.
-```
-
-You **do not need a new Vercel project** when you are replacing the backend and only one backend needs to be active.
-
-### New Apps Script project in a DIFFERENT Google account
-
-Treat it as a **new backend**.
+The new account creates its own Apps Script Web App. After deployment:
 
 ```text
 New Google account
-  ↓
+      ↓
 New Apps Script project
-  ↓
-New Web App /exec URL
-  ↓
-Set WORKSHOP_WEB_APP_URL in the Vercel project
-  ↓
-Redeploy Vercel
+      ↓
+New /exec URL
+      ↓
+api/backend-config.js
+      ↓
+Vercel redeploy
 ```
 
-The verification frontend is reusable; the Apps Script backend is account/project specific.
+Only `api/backend-config.js` needs to change.
 
-Google notes that web apps can be affected when ownership moves across domains/accounts, so for a new independent account/project it is cleaner to deploy the Web App from that account rather than relying on an ownership transfer. citehttps://developers.google.com/apps-script/guides/web
+### Case D — Different workshop in the SAME Apps Script project
 
-## IMPORTANT — One Vercel project vs multiple independent workshops
+Do **not** create a new Vercel backend URL just because a new workshop is created.
 
-There are two different situations.
+The Apps Script backend is designed to contain multiple workshops/events. The certificate ID is looked up inside the backend's certificate data.
 
-### A. Only ONE backend is active at a time
+Create the workshop normally in WORKSHOP Automation and keep the same Apps Script `/exec` URL.
 
-Use **one Vercel project**.
+## Critical rule about Vercel environment variables
 
-Each time a completely new Apps Script project becomes the active backend:
+This project does **not** read `WORKSHOP_WEB_APP_URL` from Vercel environment variables.
+
+That is intentional.
+
+A stale Vercel environment variable can silently override the URL you just changed in code and make the verifier contact an old Apps Script project.
+
+Therefore:
+
+- `api/backend-config.js` = single source of truth.
+- `verify-api.js` = never contains a second URL.
+- Vercel environment variable `WORKSHOP_WEB_APP_URL` = not required.
+
+If an old `WORKSHOP_WEB_APP_URL` variable exists in your Vercel project, remove it or leave it unused. The code will always use `api/backend-config.js`.
+
+## Apps Script requirements
+
+The Apps Script Web App must:
+
+- be deployed as a Web App
+- use the `/exec` URL, not `/dev`
+- execute as the owner (`Me`)
+- allow access to `Anyone`
+- contain a `doGet(e)` route for `page=verify-api`
+- return JSON for the verification API request
+
+The Vercel proxy calls:
 
 ```text
-Change WORKSHOP_WEB_APP_URL
-        ↓
-Redeploy Vercel
-        ↓
-All verification requests use the new backend
+<YOUR_EXEC_URL>/exec?page=verify-api&certificateId=<ID>
 ```
 
-This is the simplest setup.
-
-**Warning:** old certificate links can stop verifying after you switch to a backend that does not contain those old certificate records.
-
-### B. Multiple accounts/workshops must remain verifiable at the same time
-
-Do **not** keep changing one Vercel backend URL back and forth.
-
-Use either:
-
-- one Vercel project per independent Apps Script backend/account, or
-- a future multi-backend routing system that maps an event/account key to the correct Apps Script Web App.
-
-For the current architecture, **one Vercel project per independent backend is the safest simple option** when old certificates must continue to work.
-
-Example:
+Actually, because the configured value already includes `/exec`, the final request is:
 
 ```text
-Finance Club PSTU Account A
-  → Apps Script A
-  → Vercel Verify A
-
-Another Account B
-  → Apps Script B
-  → Vercel Verify B
+<YOUR_EXEC_URL>?page=verify-api&certificateId=<ID>
 ```
 
-The page design/code can be identical; only the backend URL differs.
+## Testing after every URL change
 
-## Recommended workflow for every NEW workshop/account
+### 1. Test Apps Script directly
 
-```text
-STEP 1
-Create/open the WORKSHOP Apps Script project
-
-STEP 2
-Run the system setup/repair
-
-STEP 3
-Create the Workshop/Event
-
-STEP 4
-Confirm the Certificates sheet exists
-
-STEP 5
-Deploy Apps Script as Web App
-Execute as: Me
-Who has access: Anyone
-
-STEP 6
-Copy the new /exec URL
-
-STEP 7
-Open the Vercel project used by this backend
-
-STEP 8
-Set:
-WORKSHOP_WEB_APP_URL = new /exec URL
-
-STEP 9
-Redeploy Vercel
-
-STEP 10
 Open:
-/api/verify-api?certificateId=<TEST_CERTIFICATE_ID>
-
-STEP 11
-Then test:
-/verify/<TEST_CERTIFICATE_ID>
-
-STEP 12
-Only after that, use the verification URL in certificate emails.
-```
-
-## Do NOT use the Apps Script `/dev` URL in production
-
-Use:
 
 ```text
-.../exec
+https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?page=verify-api&certificateId=YOUR_CERTIFICATE_ID
 ```
 
-Not:
+Expected result: JSON, for example:
+
+```json
+{
+  "valid": true,
+  "code": "VALID"
+}
+```
+
+If this direct URL does not return JSON, fix Apps Script first. Vercel cannot repair a broken backend deployment.
+
+### 2. Test the Vercel API
+
+Open:
 
 ```text
-.../dev
+https://financeclubpstu.vercel.app/api/verify-api?certificateId=YOUR_CERTIFICATE_ID
 ```
 
-Google documents `/dev` as the development/test deployment URL, while `/exec` is the deployed web-app endpoint. citehttps://developers.google.com/apps-script/guides/web
+Expected:
+
+```json
+{
+  "valid": true
+}
+```
+
+### 3. Test the public page
+
+Open:
+
+```text
+https://financeclubpstu.vercel.app/verify/YOUR_CERTIFICATE_ID
+```
+
+The certificate details should appear.
 
 ## Troubleshooting
 
 ### `BACKEND_NON_JSON`
 
-Vercel reached something, but Apps Script returned HTML or another non-JSON response.
+Apps Script returned HTML instead of JSON. Usually check:
 
-Check:
-
-1. `WORKSHOP_WEB_APP_URL` is the correct `/exec` URL.
-2. Apps Script Web App access is **Anyone**.
-3. Vercel was redeployed after changing the environment variable.
-4. The backend supports `page=verify-api`.
+- wrong `/exec` URL
+- `/dev` URL used instead of `/exec`
+- Web App is not deployed
+- access is not `Anyone`
+- Apps Script `doGet` does not support `page=verify-api`
+- deployment was not updated after code changes
 
 ### `BACKEND_ERROR`
 
-The Vercel server could not reach the Apps Script backend or the request timed out.
+Vercel could not successfully reach the Apps Script endpoint or the request timed out.
 
-Check the Apps Script deployment first, then test the endpoint directly.
+First test the Apps Script URL directly.
 
-### `NOT_FOUND`
+### `Certificate not found`
 
-The backend answered correctly but the certificate ID was not found in that backend's certificate data.
+The backend responded successfully, but that certificate ID is not present in the selected Apps Script project's certificate data.
 
-This is different from a connection/configuration error.
+This is different from a broken Vercel connection.
 
-### Direct backend test
+### Vercel page works but data is empty/not found
 
-Open this pattern in a browser:
-
-```text
-https://script.google.com/macros/s/XXXXXXXX/exec?page=verify-api&certificateId=TEST-CERT-XXXXXXXX
-```
-
-Expected result is JSON.
-
-Then test the Vercel proxy:
+Check in this order:
 
 ```text
-https://YOUR-VERCEL-DOMAIN/api/verify-api?certificateId=TEST-CERT-XXXXXXXX
+1. api/backend-config.js contains the correct /exec URL
+2. Vercel has been redeployed after the change
+3. Apps Script direct API URL returns JSON
+4. Vercel /api/verify-api returns JSON
+5. Public /verify/<ID> page returns the certificate
 ```
-
-If the Apps Script URL works but the Vercel API does not, check the Vercel environment variable and redeployment.
 
 ## Files
 
 ```text
-api/
-  verify-api.js     # Server-side proxy to Apps Script
-  verify-page.js    # Serves verification page and injects certificate ID
-
-public/
-  Verify.html       # Verification UI
-
-vercel.json         # Routes + function configuration
+Workshop-Certificate-Verify-main/
+├── README.md
+├── api/
+│   ├── backend-config.js   ← change this when backend URL changes
+│   ├── verify-api.js
+│   └── verify-page.js
+├── public/
+│   └── Verify.html
+└── vercel.json
 ```
 
-## Important rule
+## Deployment
 
-**Never put a Google Sheet ID, participant data, service-account key, or other private credential in `public/Verify.html`.**
+Deploy the project to the existing Vercel project that serves `financeclubpstu.vercel.app`.
 
-Only the public verification request should be exposed to the browser. The Apps Script endpoint is the authoritative certificate data source.
+Node 18+ is required.

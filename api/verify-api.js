@@ -1,7 +1,4 @@
-// Fallback backend for the current Finance Club PSTU WORKSHOP deployment.
-// For any new Apps Script project/account, prefer the Vercel environment variable
-// WORKSHOP_WEB_APP_URL and redeploy the Vercel project.
-const DEFAULT_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyli_bIMimi0Xuog_0l0KNkcG6N_KnMylb8MAYvlgkxx0HclAVWx08GHwigjp-C23u4/exec';
+const { WORKSHOP_WEB_APP_URL } = require('./backend-config');
 const TIMEOUT_MS = 25000;
 
 module.exports = async (req, res) => {
@@ -10,7 +7,11 @@ module.exports = async (req, res) => {
   if (!id) return res.status(400).json({ valid: false, code: 'MISSING_ID', message: 'Certificate ID is required.' });
   if (id.length > 120) return res.status(400).json({ valid: false, code: 'INVALID_ID', message: 'That certificate ID is too long.' });
 
-  const base = String(process.env.WORKSHOP_WEB_APP_URL || DEFAULT_WEB_APP_URL).trim().replace(/\/+$/, '');
+  const base = String(WORKSHOP_WEB_APP_URL || '').trim().replace(/\/+$/, '');
+  if (!/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(base)) {
+    return res.status(500).json({ valid: false, code: 'BACKEND_URL_INVALID', message: 'The Apps Script Web App URL is invalid. Check api/backend-config.js.' });
+  }
+
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
   try {
@@ -23,7 +24,7 @@ module.exports = async (req, res) => {
       return res.status(502).json({
         valid: false,
         code: 'BACKEND_NON_JSON',
-        message: 'The verification backend did not return valid data. Check that the Apps Script Web App is deployed with access set to "Anyone".'
+        message: 'The Apps Script verification backend did not return JSON. Check the Web App deployment, access setting, and backend URL.'
       });
     }
     return res.status(data && data.valid ? 200 : 404).json(data);
