@@ -1,6 +1,10 @@
 {
+  "functions": {
+    "api/verify-page.js": { "includeFiles": "public/Verify.html", "maxDuration": 10 },
+    "api/verify-api.js": { "maxDuration": 30 }
+  },
   "rewrites": [
-    {"source":"/verify","destination":"/api/verify-page"},
-    {"source":"/verify/:certificateId","destination":"/api/verify-page?certificateId=:certificateId"}
+    { "source": "/verify", "destination": "/api/verify-page" },
+    { "source": "/verify/:certificateId", "destination": "/api/verify-page?certificateId=:certificateId" }
   ]
 }

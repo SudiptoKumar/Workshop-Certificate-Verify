@@ -205,7 +205,7 @@
         <span class="laser" aria-hidden="true"></span>
         <label for="certificateId">Certificate ID</label>
         <div class="input-wrap">
-          <input id="certificateId" autocomplete="off" autocapitalize="characters" spellcheck="false" enterkeyhint="search" placeholder="e.g. CERT-2026-00001" aria-describedby="hint">
+          <input id="certificateId" autocomplete="off" spellcheck="false" enterkeyhint="search" placeholder="e.g. CERT-2026-00001" aria-describedby="hint">
           <button type="button" class="paste" id="pasteBtn">Paste</button>
         </div>
         <button id="verifyBtn" class="go" type="submit"><span class="spin" aria-hidden="true"></span><span class="btn-label">Verify Certificate</span></button>
@@ -370,15 +370,15 @@ function verifyCertificate(){
     .then(async function(r){
       var text=await r.text(), data;
       try{data=JSON.parse(text);}catch(e){throw new Error('Verification service returned an invalid response.');}
-      return {ok:r.ok,data:data};
+      return {ok:r.ok,status:r.status,data:data};
     });
   var pause=new Promise(function(res){setTimeout(res,reduceMotion?0:1100);});
   Promise.all([request,pause]).then(function(out){
-    var result=out[0];
+    var result=out[0], d=result.data||{};
     setBusy(false);
-    if(result.data&&result.data.code==='BACKEND_ERROR'){showInvalid('error',result.data.message||'Verification service is temporarily unavailable.');return;}
-    if(result.data&&result.data.valid){showValid(result.data);}
-    else{showInvalid('notfound',result.data&&result.data.message);}
+    if(d.code==='BACKEND_ERROR'||d.code==='BACKEND_NON_JSON'||(!d.valid&&result.status>=500)){showInvalid('error',d.message||'Verification service is temporarily unavailable.');return;}
+    if(d.valid){showValid(d);}
+    else{showInvalid('notfound',d.message);}
   }).catch(function(err){
     setBusy(false);
     showInvalid('error','Verification service is temporarily unavailable. '+(err&&err.message?err.message:String(err)));
