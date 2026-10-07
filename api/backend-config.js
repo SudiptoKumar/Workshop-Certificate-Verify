@@ -1,7 +1,7 @@
 // SINGLE SOURCE OF TRUTH for the Apps Script production Web App URL.
 // Update only this value when the backend moves to a different Apps Script
 // project or Google account, then redeploy Vercel.
-const WORKSHOP_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyli_bIMimi0Xuog_0l0KNkcG6N_KnMylb8MAYvlgkxx0HclAVWx08GHwigjp-C23u4/exec';
+const WORKSHOP_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbycZT3XG3uze7FSUewT2Id1oifqkNVAPRnjDc3IbWOU8th7CFCfiemReUbdOj41wJGL/exec';
 
 function normalizeWebAppUrl(value) {
   let url = String(value || '').trim();
