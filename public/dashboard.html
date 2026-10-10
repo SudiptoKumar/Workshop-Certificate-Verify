@@ -234,7 +234,7 @@
   // Stable Lucide rendering for both static chrome and dynamically generated views.
   function renderLucideIcons(root=document){
     try{
-      if(window.lucide && typeof window.lucide.createIcons==='function'){
+      if(window.lucide && typeof window.lucide.createIcons==='function' && root.querySelector('i[data-lucide]')){
         window.lucide.createIcons({attrs:{'stroke-width':1.8,'aria-hidden':'true'}});
         document.documentElement.classList.remove('icons-unavailable');
       }
