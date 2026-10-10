@@ -154,7 +154,7 @@
 </div>
 <div class="modal-backdrop" id="modalBackdrop" onclick="backdropClose(event)"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><div><h2 id="modalTitle">New workshop</h2><p id="modalSubtitle">Create and configure the complete workshop lifecycle.</p></div><button class="modal-close" onclick="closeModal()" aria-label="Close dialog"><i data-lucide="x" aria-hidden="true"></i></button></div><div class="modal-body" id="modalBody"></div><div class="modal-foot"><div class="helper" id="modalFootHint">Required fields are marked with *</div><div class="right"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" id="modalSaveBtn" onclick="submitWorkshopForm()">Create workshop</button></div></div></section></div>
 <div class="toast-stack" id="toastStack" aria-live="polite"></div>
-<script src="https://unpkg.com/lucide@1.54.0/dist/umd/lucide.js" onerror="document.documentElement.classList.add('icons-unavailable')"></script>
+<script defer src="https://unpkg.com/lucide@1.54.0/dist/umd/lucide.js" onerror="document.documentElement.classList.add('icons-unavailable')"></script>
 <script>
   const PAGE_META={dashboard:['Dashboard','Overview'],workshops:['Workshops','Manage events'],participants:['Participants','Registration database'],certificates:['Certificates','Issuance records'],email:['Email Center','Communication'],selftest:['Self Test','Workflow testing'],settings:['Settings','Configuration'],system:['System Health','Administration']};
   const state={page:'dashboard',data:null,workshopSearch:'',workshopStatus:'ALL',participantSearch:'',participantEvent:'ALL',participantStatus:'ALL',certSearch:'',queueSearch:'',queueStatus:'ALL',editEventId:'',readiness:null};
