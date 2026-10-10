@@ -14,6 +14,10 @@ const ALLOWED_METHODS = Object.freeze({
   runReadinessFromSoftware: 0,
   registerCertificateMasterFromSoftware: 0,
   setupFromSoftware: 0,
+  resetSoftwareAccessLinkFromSoftware: 0,
+  reinstallSchedulerFromSoftware: 0,
+  normalizeStableDefaultsFromSoftware: 0,
+  repairRegistrationFormsFromSoftware: 0,
 });
 
 const GOOGLE_HOSTS = new Set(['script.google.com', 'script.googleusercontent.com']);
