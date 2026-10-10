@@ -348,18 +348,110 @@ i[data-lucide] svg{width:1.15em;height:1.15em}
   .top-actions .btn-quiet{display:none}
 }
 
+
+/* ================= V2 premium elevation (visual only) ================= */
+/* Auth: mesh blobs + floating brand */
+.auth-gate{position:relative;overflow:hidden}
+.auth-blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;pointer-events:none;animation:blobFloat 11s ease-in-out infinite}
+.auth-blob.b1{width:430px;height:430px;left:-130px;top:-110px;background:radial-gradient(circle,var(--o200),transparent 70%)}
+.auth-blob.b2{width:390px;height:390px;right:-110px;bottom:-90px;background:radial-gradient(circle,var(--o300),transparent 70%);animation-delay:-4s}
+.auth-blob.b3{width:260px;height:260px;left:56%;top:6%;background:radial-gradient(circle,var(--o100),transparent 70%);animation-delay:-7s;opacity:.75}
+@keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(34px,26px) scale(1.08)}}
+.auth-card{position:relative;z-index:1;overflow:hidden;box-shadow:0 2px 6px rgba(67,20,7,.06),0 24px 70px rgba(124,45,18,.17)}
+.auth-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--o400),var(--o700),var(--o400))}
+.auth-card .brand-mark{animation:brandFloat 5.5s ease-in-out infinite}
+@keyframes brandFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.auth-input-wrap{position:relative}
+.auth-input-wrap>i[data-lucide],.auth-input-wrap>svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--ink3);pointer-events:none;z-index:1}
+.auth-input-wrap input{padding-left:42px!important}
+.auth-input-wrap:focus-within input{border-color:var(--o500);box-shadow:0 0 0 4px rgba(249,115,22,.16)}
+/* Buttons: gradient primary, shine sweep, press scale, loading spinner */
+.btn:active{transform:scale(.98)}
+.btn-primary{background:linear-gradient(135deg,var(--o600),var(--o700));border-color:var(--o700);position:relative;overflow:hidden}
+.btn-primary:hover{background:linear-gradient(135deg,var(--o500),var(--o600));border-color:var(--o600);box-shadow:0 6px 20px rgba(194,65,12,.36)}
+.btn-primary::after{content:'';position:absolute;top:0;bottom:0;left:-70%;width:45%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.38),transparent);transform:skewX(-18deg);transition:left .55s var(--ease);pointer-events:none}
+.btn-primary:hover::after{left:135%}
+.btn.is-loading{pointer-events:none;opacity:.88}
+.btn-spinner{width:15px;height:15px;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:spin .7s linear infinite;flex-shrink:0}
+.btn:not(.btn-primary) .btn-spinner{border-color:var(--o200);border-top-color:var(--o600)}
+/* Sidebar: active indicator bar */
+.nav-btn{position:relative}
+.nav-btn:hover{transform:translateX(2px)}
+.nav-btn.active{position:relative}
+.nav-btn.active::before{content:'';position:absolute;left:-12px;top:9px;bottom:9px;width:4px;border-radius:4px;background:linear-gradient(180deg,#fff,var(--o200));box-shadow:0 0 10px rgba(255,255,255,.35)}
+/* Panels: layered shadow, title marker */
+.panel{box-shadow:0 1px 2px rgba(67,20,7,.05),0 12px 32px rgba(67,20,7,.07)}
+.panel-title{display:flex;align-items:center;gap:10px}
+.panel-title::before{content:'';width:9px;height:9px;border-radius:3px;background:linear-gradient(135deg,var(--o500),var(--o700));flex-shrink:0;box-shadow:0 2px 6px rgba(234,88,12,.4)}
+.stat-card::after{content:'';position:absolute;top:0;right:0;width:130px;height:130px;background:radial-gradient(circle at top right,rgba(249,115,22,.10),transparent 70%);pointer-events:none}
+/* Modal: spring entrance + backdrop blur */
+.modal-backdrop{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.modal{transform:translateY(16px) scale(.96);opacity:0;transition:transform 210ms cubic-bezier(.3,1.25,.45,1),opacity 170ms ease}
+.modal-backdrop.open .modal{transform:none;opacity:1}
+/* Toasts: slide from right + icon */
+.toast{display:flex;align-items:flex-start;gap:10px}
+.toast .t-ico{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.13);flex-shrink:0;margin-top:1px}
+.toast .t-ico svg{width:15px;height:15px}
+.toast-out{opacity:0!important;transform:translateX(20px)!important;transition:opacity .22s ease,transform .22s ease}
+@keyframes toastIn{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+/* Tables: sticky header + refined empty state */
+.table-wrap{overflow:auto;max-height:min(74vh,880px)}
+thead th{position:sticky;top:0;z-index:5;box-shadow:0 1px 0 var(--border)}
+.empty{padding:46px 20px}
+.empty-ico{width:48px;height:48px;border-radius:16px;background:var(--o100);color:var(--o700);display:inline-flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.empty-ico svg{width:23px;height:23px}
+.empty-msg{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px}
+/* Page transition + splash */
+#content.page-enter{animation:pageIn 150ms ease-out}
+@keyframes pageIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.loading-cover.splash-out{opacity:0;pointer-events:none;transition:opacity .35s ease}
+/* Date picker */
+.dp-wrap{position:relative}
+.dp-native{position:absolute!important;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.dp-trigger{width:100%;justify-content:space-between;font-weight:500;color:var(--ink)}
+.dp-trigger .dp-label{font-variant-numeric:tabular-nums}
+.dp-trigger.empty .dp-label{color:var(--ink3)}
+.dp-trigger>svg,.dp-trigger>i[data-lucide]{color:var(--o600);width:17px;height:17px;flex-shrink:0}
+.dp-pop{position:absolute;top:calc(100% + 8px);left:0;z-index:250;width:292px;max-width:calc(100vw - 60px);background:var(--surface);border:1px solid var(--border);border-radius:var(--r-l);box-shadow:0 2px 6px rgba(67,20,7,.06),0 20px 55px rgba(67,20,7,.20);padding:14px;display:none}
+.dp-pop.open{display:block;animation:dpIn 160ms var(--ease)}
+@keyframes dpIn{from{opacity:0;transform:translateY(-6px) scale(.98)}to{opacity:1;transform:none}}
+.dp-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.dp-title{font-family:var(--font-display);font-weight:800;font-size:14px;background:none;border:0;padding:6px 10px;border-radius:8px;color:var(--ink)}
+.dp-nav{width:32px;height:32px;border-radius:10px;border:1px solid var(--border);background:var(--surface);display:inline-flex;align-items:center;justify-content:center;color:var(--o700)}
+.dp-nav:hover{background:var(--o50);border-color:var(--o300)}
+.dp-nav svg{width:16px;height:16px}
+.dp-week{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:6px}
+.dp-week span{text-align:center;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--ink3);padding:4px 0;text-transform:uppercase}
+.dp-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.dp-day{aspect-ratio:1;border:0;border-radius:10px;background:transparent;font-size:13px;font-weight:500;color:var(--ink);display:flex;align-items:center;justify-content:center;min-height:36px;min-width:0}
+.dp-day:hover{background:var(--o100)}
+.dp-day:focus-visible{outline:2px solid var(--o500);outline-offset:1px}
+.dp-day.out{color:var(--ink3);opacity:.45}
+.dp-day.today{font-weight:800;color:var(--o700);box-shadow:inset 0 0 0 1.5px var(--o400)}
+.dp-day.sel{background:linear-gradient(135deg,var(--o600),var(--o700));color:#fff;font-weight:700;box-shadow:0 4px 12px rgba(234,88,12,.35)}
+.dp-day.sel.today{box-shadow:0 4px 12px rgba(234,88,12,.35),inset 0 0 0 1.5px rgba(255,255,255,.65)}
+.dp-foot{display:flex;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+@media (prefers-reduced-motion:reduce){
+  .auth-blob,.auth-card .brand-mark{animation:none}
+  .btn-primary::after{display:none}
+  #content.page-enter,.dp-pop.open{animation:none}
+}
+
 </style>
 </head>
 <body>
 <script>const API_ENDPOINT = '/api/workshop'; let SOFTWARE_TOKEN = sessionStorage.getItem('WORKSHOP_SOFTWARE_TOKEN') || '';</script>
 <div id="authGate" class="auth-gate">
+  <div class="auth-blob b1" aria-hidden="true"></div>
+  <div class="auth-blob b2" aria-hidden="true"></div>
+  <div class="auth-blob b3" aria-hidden="true"></div>
   <form class="auth-card" onsubmit="loginAccess(event)">
     <div class="brand-mark">FC</div>
     <div class="auth-kicker">Finance Club PSTU</div>
     <h1>WORKSHOP Software</h1>
     <p>Connect this hosted dashboard to your existing Google Apps Script backend. Enter the private software access token from your spreadsheet-generated dashboard link.</p>
     <label for="accessTokenInput">Private access token or dashboard link</label>
-    <input id="accessTokenInput" type="password" autocomplete="current-password" placeholder="Paste token or the full Apps Script dashboard URL" required>
+    <div class="auth-input-wrap"><i data-lucide="key-round"></i><input id="accessTokenInput" type="password" autocomplete="current-password" placeholder="Paste token or the full Apps Script dashboard URL" required aria-describedby="authError"></div>
     <button class="btn btn-primary" type="submit"><i data-lucide="key-round"></i> Connect dashboard</button>
     <p id="authError" class="auth-error" role="alert"></p>
     <p class="auth-note">In the master Google Sheet, choose <b>WORKSHOP Automation &rarr; Open Software Dashboard</b>. Copy the generated link, then paste it here. Keep that link and token private. Access is stored only for this browser tab session.</p>
@@ -439,11 +531,11 @@ i[data-lucide] svg{width:1.15em;height:1.15em}
   function parseAccessToken(value){let candidate=String(value||'').trim();if(!candidate)return '';try{if(/^https?:\/\//i.test(candidate)){const url=new URL(candidate);candidate=url.searchParams.get('token')||'';}else if(/^token=/i.test(candidate)){candidate=candidate.slice(candidate.indexOf('=')+1).trim();}}catch(_){return '';}return candidate.trim();}
   async function loginAccess(event){event.preventDefault();const raw=document.getElementById('accessTokenInput').value;const token=parseAccessToken(raw);if(!token){document.getElementById('authError').textContent='Paste the raw token or the complete generated Apps Script dashboard link.';return;}SOFTWARE_TOKEN=token;sessionStorage.setItem('WORKSHOP_SOFTWARE_TOKEN',token);document.getElementById('authGate').style.display='none';document.getElementById('loadingCover').style.display='flex';document.getElementById('loadingCover').innerHTML='<div class="brand-mark" style="width:52px;height:52px;border-radius:16px;font-size:15px">FC</div><div class="spinner"></div><p>Connecting to your WORKSHOP backend…</p>';var __t0=Date.now();var __tick=setInterval(function(){var el=document.getElementById('connectMsg');if(el)el.textContent='Connecting to your WORKSHOP backend… '+Math.floor((Date.now()-__t0)/1000)+'s';},1000);try{await boot();}finally{clearInterval(__tick);}}
   function logoutAccess(){sessionStorage.removeItem('WORKSHOP_SOFTWARE_TOKEN');SOFTWARE_TOKEN='';state.data=null;showAuthGate('Session cleared. Enter your private access token to reconnect.');document.getElementById('accessTokenInput').value='';}
-  async function boot(){if(!SOFTWARE_TOKEN){showAuthGate();return;}document.getElementById('authGate').style.display='none';document.getElementById('loadingCover').style.display='flex';try{state.data=await rpc('getSoftwareAppData');renderCurrent();document.getElementById('loadingCover').style.display='none';}catch(e){const message=String(e&&e.message||e);if(/access denied|unsupported software api operation/i.test(message)){sessionStorage.removeItem('WORKSHOP_SOFTWARE_TOKEN');SOFTWARE_TOKEN='';document.getElementById('accessTokenInput').value='';showAuthGate('Access was denied. Your token may be invalid or have been reset.');return;}document.getElementById('loadingCover').innerHTML=`<div class="panel" style="padding:30px;max-width:560px;margin:20px"><h2>Unable to connect to WORKSHOP</h2><p class="muted">${esc(message)}</p><p class="helper">Confirm that doPost was added to Workshop_Automation.gs, a new Apps Script deployment was published, and APPS_SCRIPT_WEB_APP_URL is configured in your hosting platform.</p><button class="btn btn-primary" onclick="logoutAccess()">Change access token</button></div>`;}}
+  async function boot(){if(!SOFTWARE_TOKEN){showAuthGate();return;}document.getElementById('authGate').style.display='none';document.getElementById('loadingCover').style.display='flex';try{state.data=await rpc('getSoftwareAppData');renderCurrent();fadeOutCover();}catch(e){const message=String(e&&e.message||e);if(/access denied|unsupported software api operation/i.test(message)){sessionStorage.removeItem('WORKSHOP_SOFTWARE_TOKEN');SOFTWARE_TOKEN='';document.getElementById('accessTokenInput').value='';showAuthGate('Access was denied. Your token may be invalid or have been reset.');return;}document.getElementById('loadingCover').innerHTML=`<div class="panel" style="padding:30px;max-width:560px;margin:20px"><h2>Unable to connect to WORKSHOP</h2><p class="muted">${esc(message)}</p><p class="helper">Confirm that doPost was added to Workshop_Automation.gs, a new Apps Script deployment was published, and APPS_SCRIPT_WEB_APP_URL is configured in your hosting platform.</p><button class="btn btn-primary" onclick="logoutAccess()">Change access token</button></div>`;}}
   function snapshotFormState(){const snap={};try{document.querySelectorAll('#content input,#content textarea,#content select').forEach(el=>{const k=el.name||el.id;if(!k)return;const t=String(el.type||'').toLowerCase();snap[k]=(t==='checkbox'||t==='radio')?!!el.checked:el.value;});}catch(_){}return snap;}
   function restoreFormState(snap){if(!snap)return;try{document.querySelectorAll('#content input,#content textarea,#content select').forEach(el=>{const k=el.name||el.id;if(!k||!(k in snap))return;const t=String(el.type||'').toLowerCase();if(t==='checkbox'||t==='radio'){el.checked=!!snap[k];}else if(el.value!==snap[k]){el.value=snap[k];}});}catch(_){}}
   async function refreshData(silent=false){const snap=snapshotFormState();try{state.data=await rpc('getSoftwareAppData');renderCurrent();restoreFormState(snap);if(!silent)toast('Data refreshed.');}catch(e){try{renderCurrent();restoreFormState(snap);}catch(_){}toast(e.message,'error');}}
-  function toast(message,type=''){const el=document.createElement('div');el.className='toast '+type;el.textContent=message;document.getElementById('toastStack').appendChild(el);setTimeout(()=>{el.style.opacity='0';el.style.transform='translateY(6px)';setTimeout(()=>el.remove(),200);},4200);}
+  function toast(message,type=''){const el=document.createElement('div');el.className='toast '+type;const _tic=type==='error'?'triangle-alert':(type==='warn'?'info':'check');el.innerHTML='<span class="t-ico"><i data-lucide="'+_tic+'"></i></span><span class="t-msg"></span>';el.querySelector('.t-msg').textContent=message;document.getElementById('toastStack').appendChild(el);try{renderLucideIcons(el);}catch(_){}setTimeout(()=>{el.classList.add('toast-out');setTimeout(()=>el.remove(),240);},4200);}
   function setPage(page){state.page=page;document.querySelectorAll('.nav-btn[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));document.getElementById('sidebar').classList.remove('open');var sc=document.getElementById('sidebarScrim');if(sc)sc.classList.remove('open');renderCurrent();}
   function toggleSidebar(){var sb=document.getElementById('sidebar');sb.classList.toggle('open');var sc=document.getElementById('sidebarScrim');if(sc)sc.classList.toggle('open',sb.classList.contains('open'));var mm=document.querySelector('.mobile-menu');if(mm)mm.setAttribute('aria-expanded',sb.classList.contains('open')?'true':'false');}
   document.getElementById('mainNav').addEventListener('click',e=>{const b=e.target.closest('[data-page]');if(b)setPage(b.dataset.page);});
@@ -468,7 +560,7 @@ i[data-lucide] svg{width:1.15em;height:1.15em}
   const svgIcon=(path)=>`<svg viewBox="0 0 24 24" aria-hidden="true">${path}</svg>`;
   function renderDashboard(){const d=state.data,m=d.metrics,ws=d.workshops.filter(w=>!['ARCHIVED'].includes(w.status)).slice(0,6);const statuses=['OPEN','DRAFT','LIVE','COMPLETED','CANCELLED'];const bars=statuses.map(st=>({st,count:d.workshops.filter(w=>w.status===st).length}));const max=Math.max(1,...bars.map(x=>x.count));const attention=[];if(m.failedEmails)attention.push(`<div class="attention red"><div class="attention-icon">!</div><div><strong>${nfmt(m.failedEmails)} email job(s) failed</strong><span>Open Email Center to inspect errors and retry eligible jobs.</span></div></div>`);if(m.paused)attention.push(`<div class="attention"><div class="attention-icon">Ⅱ</div><div><strong>Automation is paused</strong><span>Resume it from Settings when ready.</span></div></div>`);if(String(m.emailQuota)==='0')attention.push(`<div class="attention red"><div class="attention-icon">!</div><div><strong>Email quota is exhausted</strong><span>Queued messages wait until quota becomes available.</span></div></div>`);if(!attention.length)attention.push(`<div class="attention"><div class="attention-icon">✓</div><div><strong>No urgent issues detected</strong><span>Review System Health when you need a full integration check.</span></div></div>`);
     return `<div class="page-toolbar"><div><h2>Good day. Here's your operations overview.</h2><p>Manage workshops, participants, emails, and certificates from one place. Your Google Sheet continues to store the data behind the scenes.</p></div><div class="toolbar-actions"><button class="btn" onclick="refreshData()">↻ Refresh</button><button class="btn btn-primary" onclick="openWorkshopModal()">＋ Create workshop</button></div></div>${m.paused?`<div class="status-banner"><strong>Automation paused.</strong><span>Scheduled reminders, attendance processing, and certificate workflows will not run until resumed in Settings.</span><button class="btn btn-sm" style="margin-left:auto" onclick="setPage('settings')">Open settings</button></div>`:''}<div class="grid stats-grid">${statCard('Active workshops',m.activeWorkshops,'Not cancelled or archived','<i data-lucide="calendar-days"></i>' )}${statCard('Participants',m.participants,'All registration records','<i data-lucide="users"></i>','blue')}${statCard('Certificates issued',m.certificates,'Excludes test certificates','<i data-lucide="badge-check"></i>','gold')}${statCard('Emails pending',m.pendingEmails,'Waiting to be processed','<i data-lucide="mail"></i>','blue')}${statCard('Email quota',m.emailQuota,'Remaining recipients today','<i data-lucide="circle-plus"></i>','') }</div><div class="grid two-col"><section class="panel"><div class="panel-head"><div><h3 class="panel-title">Recent workshops</h3><div class="panel-subtitle">Latest events and their registration status</div></div><button class="link-btn" onclick="setPage('workshops')">View all →</button></div><div class="panel-body">${ws.length?`<div class="simple-list">${ws.map((w,i)=>`<div class="simple-item"><div class="item-marker">${esc((w.name||'W').trim().slice(0,1).toUpperCase())}</div><div class="item-main"><div class="item-title">${esc(w.name)}</div><div class="item-meta">${esc(w.eventId)} · ${esc(fmtDate(w.date))} · ${esc(w.startTime||'')}</div></div><div class="item-tail">${pill(w.status)}<div style="margin-top:5px;font-size:10px;color:#7d887f">${nfmt(w.activeParticipantCount)} participant(s)</div></div></div>`).join('')}</div>`:`<div class="empty"><strong>No workshops yet</strong>Create your first workshop to get started.</div>`}</div></section><section class="panel"><div class="panel-head"><div><h3 class="panel-title">System attention</h3><div class="panel-subtitle">Items that may need your review</div></div><button class="btn btn-sm" onclick="setPage('system')">System health</button></div><div class="panel-body"><div class="attention-list">${attention.join('')}</div><div style="margin-top:18px"><div class="section-heading" style="margin-bottom:12px">Workshop status</div><div class="bar-chart">${bars.map(x=>`<div class="bar-row"><span class="bar-name">${esc(x.st.replaceAll('_',' '))}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.round(x.count/max*100)}%"></div></div><span class="bar-count">${x.count}</span></div>`).join('')}</div></div></div></section></div><div class="grid two-col" style="margin-top:16px"><section class="panel"><div class="panel-head"><div><h3 class="panel-title">Recent email activity</h3><div class="panel-subtitle">Most recent lifecycle email jobs</div></div><button class="link-btn" onclick="setPage('email')">Email center →</button></div>${tableHtml(['Type','Recipient','Status','Last update'],d.queue.slice(0,5).map(q=>[`<span class="primary-cell">${esc(q.type)}</span><div class="secondary-cell">${esc(q.eventId)}</div>`,esc(q.recipient),pill(q.status),esc(q.sentAt||q.scheduledAt||'—')]),'No email jobs yet.')}</section><section class="panel"><div class="panel-head"><div><h3 class="panel-title">Quick actions</h3><div class="panel-subtitle">Frequent tasks, without opening spreadsheet cells</div></div></div><div class="panel-body"><div class="link-list"><button class="link-chip" onclick="openWorkshopModal()">＋ Create workshop</button><button class="link-chip" onclick="setPage('email')">✉ Send custom email</button><button class="link-chip" onclick="setPage('selftest')">◷ Run email self-test</button><button class="link-chip" onclick="setPage('settings')">⚙ Update settings</button><button class="link-chip" onclick="setPage('certificates')">✧ View certificates</button></div><div class="inline-note" style="margin-top:15px">Daily operations are handled here. The spreadsheet remains the database and audit trail, not the interface you need to edit.</div></div></section></div><div class="footer-note">WORKSHOP Automation ${esc(d.version)} · Finance Club PSTU</div>`;}
-  function tableHtml(headers,rows,empty='No records found.',opts={}){return `<div class="table-wrap"><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.length?rows.map(r=>`<tr>${r.map(c=>`<td>${c===null||c===undefined?'':c}</td>`).join('')}</tr>`).join(''):`<tr><td colspan="${headers.length}"><div class="empty">${esc(empty)}</div></td></tr>`}</tbody></table></div>`;}
+  function tableHtml(headers,rows,empty='No records found.',opts={}){return `<div class="table-wrap"><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.length?rows.map(r=>`<tr>${r.map(c=>`<td>${c===null||c===undefined?'':c}</td>`).join('')}</tr>`).join(''):`<tr><td colspan="${headers.length}"><div class="empty"><span class="empty-ico"><i data-lucide="inbox"></i></span><div class="empty-msg">${esc(empty)}</div></div></td></tr>`}</tbody></table></div>`;}
   function renderWorkshops(){const all=state.data.workshops;const filtered=all.filter(w=>{const q=state.workshopSearch.toLowerCase();return(!q||[w.name,w.eventId,w.date,w.deliveryMode].join(' ').toLowerCase().includes(q))&&(state.workshopStatus==='ALL'||w.status===state.workshopStatus);});const rows=filtered.map(w=>[`<div class="primary-cell">${esc(w.name)}</div><div class="secondary-cell">${esc(w.eventId)}</div>`,`<div class="primary-cell">${esc(fmtDate(w.date))}</div><div class="secondary-cell">${esc(w.startTime)}–${esc(w.endTime)}</div>`,esc(w.deliveryMode),`<div class="primary-cell">${nfmt(w.activeParticipantCount)}</div><div class="secondary-cell">${nfmt(w.participantCount)} total</div>`,pill(w.status),`<div class="row-actions"><button class="btn btn-sm" onclick="openWorkshopModal('${esc(w.eventId)}')">Manage</button><button class="btn btn-sm" onclick="workshopLinks('${esc(w.eventId)}')">Links</button></div>`]);return `<div class="page-toolbar"><div><h2>Workshop management</h2><p>Create events and edit their configuration. Registration forms, attendance forms, Drive folders, email schedules, and certificate handling remain connected to the existing engine.</p></div><div class="toolbar-actions"><button class="btn" onclick="refreshData()">↻ Refresh</button><button class="btn btn-primary" onclick="openWorkshopModal()">＋ New workshop</button></div></div><section class="panel table-panel"><div class="panel-head"><div><h3 class="panel-title">All workshops</h3><div class="panel-subtitle">${nfmt(filtered.length)} workshop(s) match your filters</div></div><div class="table-controls"><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input class="control" placeholder="Search workshop or ID" value="${esc(state.workshopSearch)}" oninput="state.workshopSearch=this.value;updateWorkshopsTable()"></div><select class="control" onchange="state.workshopStatus=this.value;updateWorkshopsTable()"><option value="ALL">All statuses</option>${['DRAFT','OPEN','LIVE','COMPLETED','CANCELLED','ARCHIVED'].map(x=>`<option ${state.workshopStatus===x?'selected':''}>${x}</option>`).join('')}</select></div></div><div id="workshopsTable">${tableHtml(['Workshop','Date / time','Delivery','Participants','Status','Actions'],rows,'No workshops match your search.')}</div><div class="table-footer"><span>Showing ${filtered.length} of ${all.length} workshop(s)</span><a href="${esc(state.data.source.spreadsheetUrl)}" target="_blank" rel="noopener">Open database sheet ↗</a></div></section>`;}
   function updateWorkshopsTable(){const box=document.getElementById('workshopsTable');if(!box)return;const filtered=state.data.workshops.filter(w=>{const q=state.workshopSearch.toLowerCase();return(!q||[w.name,w.eventId,w.date,w.deliveryMode].join(' ').toLowerCase().includes(q))&&(state.workshopStatus==='ALL'||w.status===state.workshopStatus);});const rows=filtered.map(w=>[`<div class="primary-cell">${esc(w.name)}</div><div class="secondary-cell">${esc(w.eventId)}</div>`,`<div class="primary-cell">${esc(fmtDate(w.date))}</div><div class="secondary-cell">${esc(w.startTime)}–${esc(w.endTime)}</div>`,esc(w.deliveryMode),`<div class="primary-cell">${nfmt(w.activeParticipantCount)}</div><div class="secondary-cell">${nfmt(w.participantCount)} total</div>`,pill(w.status),`<div class="row-actions"><button class="btn btn-sm" onclick="openWorkshopModal('${esc(w.eventId)}')">Manage</button><button class="btn btn-sm" onclick="workshopLinks('${esc(w.eventId)}')">Links</button></div>`]);box.innerHTML=tableHtml(['Workshop','Date / time','Delivery','Participants','Status','Actions'],rows,'No workshops match your search.');}
   function workshopLinks(eventId){const w=state.data.workshops.find(x=>x.eventId===eventId);if(!w)return;const list=[w.registrationFormUrl?`<a class="link-chip" href="${esc(w.registrationFormUrl)}" target="_blank" rel="noopener">Registration form ↗</a>`:'',w.attendanceFormUrl?`<a class="link-chip" href="${esc(w.attendanceFormUrl)}" target="_blank" rel="noopener">Attendance form ↗</a>`:'',w.folderUrl?`<a class="link-chip" href="${esc(w.folderUrl)}" target="_blank" rel="noopener">Workshop Drive folder ↗</a>`:''].filter(Boolean);showInfoModal(w.name,`<div class="section-card"><div class="section-heading">Workshop links</div><div class="link-list">${list.join('')||'<span class="muted">No links available for this workshop.</span>'}</div></div><div class="inline-note">These links are generated by the existing WORKSHOP automation. Do not rename or move integration files manually.</div>`);}
@@ -484,11 +576,11 @@ i[data-lucide] svg{width:1.15em;height:1.15em}
   const PRESETS={'Important Update':['Important update — {{workshop_name}}','Important update','We have an important update about your upcoming workshop.'],'Schedule Change':['Schedule update — {{workshop_name}}','The workshop schedule has changed','Please review the updated workshop schedule below.'],'Venue Change':['Venue update — {{workshop_name}}','The workshop venue has changed','Please note the updated venue information for your workshop.'],'Meeting Link Update':['Updated meeting link — {{workshop_name}}','Your meeting link has been updated','Please use the updated meeting link below to join the workshop.'],'Last Call':['Last call — {{workshop_name}}','Your workshop is coming up','This is a final reminder to keep your workshop details ready.'],'Workshop Information':['Workshop information — {{workshop_name}}','Workshop information','Here are the latest details for your workshop.'],'Thank You':['Thank you — {{workshop_name}}','Thank you for joining us','Thank you for taking part in our workshop.'],'Certificate Information':['Certificate information — {{workshop_name}}','Certificate information','Here is an important update about your workshop certificate.']};
   function applyEmailPreset(){const form=document.getElementById('customEmailForm');if(!form)return;const p=PRESETS[form.elements.messageType.value];if(p){form.elements.subject.value=p[0];form.elements.heading.value=p[1];form.elements.message.value=p[2];}}
   function previewEmail(){const f=document.getElementById('customEmailForm');const box=document.getElementById('emailPreview');box.style.display='block';box.innerHTML=`<div class="section-card" style="background:#fbfcfa"><div class="section-heading">Preview · ${esc(f.elements.subject.value||'No subject')}</div><div style="font:800 18px var(--display);margin-bottom:8px">${esc(f.elements.heading.value||'Email heading')}</div><div style="white-space:pre-wrap;line-height:1.7;color:#56645a">${esc(f.elements.message.value||'Your message will appear here.')}</div>${f.elements.ctaEnabled.checked?`<div style="margin-top:15px"><span class="btn btn-primary">${esc(f.elements.ctaText.value||'Button')}</span></div>`:''}<div class="helper" style="margin-top:12px">Preview of content only. The actual email uses your configured WORKSHOP email theme.</div></div>`;}
-  async function submitCustomEmail(e){e.preventDefault();const f=e.currentTarget;if(!confirm('Queue this broadcast using the current recipient selection? Email delivery will occur through the central queue.'))return;const btn=document.getElementById('sendEmailBtn');btn.disabled=true;btn.textContent='Queueing…';try{const p=Object.fromEntries(new FormData(f).entries());p.ctaEnabled=f.elements.ctaEnabled.checked;p.ctaText=f.elements.ctaText.value;p.ctaUrl=f.elements.ctaUrl.value;const r=await rpc('sendCustomEmailFromSoftware',p);toast(r.message);f.reset();document.getElementById('emailPreview').style.display='none';await refreshData(true);}catch(err){toast(err.message,'error');}finally{btn.disabled=false;btn.textContent='Queue broadcast';}}
+  async function submitCustomEmail(e){e.preventDefault();const f=e.currentTarget;if(!confirm('Queue this broadcast using the current recipient selection? Email delivery will occur through the central queue.'))return;const btn=document.getElementById('sendEmailBtn');setBtnLoading(btn,'Queueing…');try{const p=Object.fromEntries(new FormData(f).entries());p.ctaEnabled=f.elements.ctaEnabled.checked;p.ctaText=f.elements.ctaText.value;p.ctaUrl=f.elements.ctaUrl.value;const r=await rpc('sendCustomEmailFromSoftware',p);toast(r.message);f.reset();document.getElementById('emailPreview').style.display='none';await refreshData(true);}catch(err){toast(err.message,'error');}finally{setBtnLoading(btn);}}
   async function retryEmail(jobId){if(!confirm('Queue this email job for retry?'))return;try{const r=await rpc('retryEmailFromSoftware',jobId);toast(r.message);await refreshData(true);}catch(e){toast(e.message,'error');}}
   function scrollToComposer(){document.getElementById('emailComposer')?.scrollIntoView({behavior:'smooth',block:'start'});}
   function renderSelfTest(){const d=state.data;return `<div class="page-toolbar"><div><h2>Test the communication workflow</h2><p>Send a controlled test to your own email address. This creates a Test Run snapshot, not a production participant registration.</p></div><div class="toolbar-actions"><button class="btn" onclick="refreshData()">↻ Refresh</button></div></div><div class="grid two-col"><section class="panel"><div class="panel-head"><div><h3 class="panel-title">Start a self-test</h3><div class="panel-subtitle">Use a real workshop configuration to test email themes and certificate delivery.</div></div><span class="pill blue">Safe test mode</span></div><div class="panel-body"><form id="selfTestForm" onsubmit="submitSelfTest(event)"><div class="form-grid"><div class="field span-2"><label>Workshop *</label><select name="eventId" class="control" required>${d.workshops.map(w=>`<option value="${esc(w.eventId)}">${esc(w.eventId+' · '+w.name)}</option>`).join('')}</select></div><div class="field"><label>Recipient email *</label><input name="recipient" type="email" class="control" required placeholder="you@example.com" value="${esc(d.settings.DEFAULT_SUPPORT_EMAIL||'')}"></div><div class="field"><label>Test participant name</label><input name="participantName" class="control" value="Test Participant"></div><div class="field"><label>Department (optional)</label><input name="department" class="control"></div><div class="field"><label>Season (optional)</label><input name="season" class="control" placeholder="Spring 2026"></div></div><div class="toggle-row" style="margin-top:14px"><div class="toggle-copy"><strong>Include attendance email step</strong><small>Only enable this when the selected workshop has an attendance form.</small></div><label class="switch"><input type="checkbox" name="includeAttendance"><span class="slider"></span></label></div><div class="inline-note warn">The test sends real emails. Ensure you control the recipient inbox. Follow-up stages are handled by the existing test scheduler.</div><div style="display:flex;justify-content:flex-end;margin-top:15px"><button class="btn btn-primary" type="submit" id="startTestBtn">Start test workflow</button></div></form></div></section><section class="panel"><div class="panel-head"><div><h3 class="panel-title">How the test works</h3><div class="panel-subtitle">Uses a temporary test participant only</div></div></div><div class="panel-body"><div class="simple-list"><div class="simple-item"><div class="item-marker">1</div><div class="item-main"><div class="item-title">Registration confirmation</div><div class="item-meta">Sent immediately from the configured email template.</div></div><span class="pill ok">Immediate</span></div><div class="simple-item"><div class="item-marker">2</div><div class="item-main"><div class="item-title">Reminder email</div><div class="item-meta">The standard legacy test path attempts the reminder after about one minute.</div></div></div><div class="simple-item"><div class="item-marker">3</div><div class="item-main"><div class="item-title">Certificate workflow</div><div class="item-meta">Depending on the test configuration, the system generates and sends a test certificate.</div></div></div></div><div class="inline-note" style="margin-top:16px">Test runs are recorded separately from production certificates and participants.</div></div></section></div><section class="panel table-panel" style="margin-top:16px"><div class="panel-head"><div><h3 class="panel-title">Recent test runs</h3><div class="panel-subtitle">${d.tests.length} recent run(s)</div></div></div>${tableHtml(['Run ID','Workshop','Recipient','Started','Status','Current step','Certificate ID','Error'],d.tests.map(t=>[`<span class="primary-cell">${esc(t.runId)}</span>`,esc(t.workshopName),esc(t.recipient),esc(t.startedAt||'—'),pill(t.status),esc(t.currentStep),esc(t.certificateId||'—'),t.lastError?`<span title="${esc(t.lastError)}" style="display:inline-block;max-width:180px;overflow:hidden;text-overflow:ellipsis;vertical-align:middle;color:#b5483d">${esc(t.lastError.slice(0,44))}${t.lastError.length>44?'…':''}</span>`:'—']),'No test runs yet.')}</section>`;}
-  async function submitSelfTest(e){e.preventDefault();const f=e.currentTarget;const p=Object.fromEntries(new FormData(f).entries());p.includeAttendance=f.elements.includeAttendance.checked;if(!confirm(`Send a test registration email to ${p.recipient} now? Follow-up messages may also be sent.`))return;const b=document.getElementById('startTestBtn');b.disabled=true;b.textContent='Starting test…';try{const r=await rpc('startTestFromSoftware',p);toast(r.message||'Self-test started.');await refreshData(true);}catch(err){toast(err.message,'error');}finally{b.disabled=false;b.textContent='Start test workflow';}}
+  async function submitSelfTest(e){e.preventDefault();const f=e.currentTarget;const p=Object.fromEntries(new FormData(f).entries());p.includeAttendance=f.elements.includeAttendance.checked;if(!confirm(`Send a test registration email to ${p.recipient} now? Follow-up messages may also be sent.`))return;const b=document.getElementById('startTestBtn');setBtnLoading(b,'Starting test…');try{const r=await rpc('startTestFromSoftware',p);toast(r.message||'Self-test started.');await refreshData(true);}catch(err){toast(err.message,'error');}finally{setBtnLoading(b);}}
   const SETTING_GROUPS=[{id:'branding',title:'Organization & branding',desc:'Brand identity and public verification details.',keys:[['ORGANIZATION_NAME','Organization name','text'],['SENDER_NAME','Email sender name','text'],['DEFAULT_LOGO_URL','Default logo URL','url'],['PUBLIC_VERIFY_URL','Public certificate verification URL','url'],['DEFAULT_SUPPORT_EMAIL','Support email','email'],['DEFAULT_WEBSITE','Website URL','url'],['DEFAULT_FACEBOOK','Facebook URL','url'],['DEFAULT_INSTAGRAM','Instagram URL','url'],['DEFAULT_LINKEDIN','LinkedIn URL','url'],['DEFAULT_YOUTUBE','YouTube URL','url'],['DEFAULT_X','X / Twitter URL','url']]},{id:'defaults',title:'Workshop defaults',desc:'Initial values prefilled when you create a new workshop.',keys:[['DEFAULT_TIMEZONE','Timezone','timezone'],['DEFAULT_WORKSHOP_TYPE','Default workshop type','text'],['DEFAULT_DELIVERY_MODE','Default delivery mode','select:OFFLINE,ONLINE'],['DEFAULT_MEETING_PLATFORM','Default online platform','text'],['DEFAULT_GROUP_TYPE','Default community group','text'],['DEFAULT_CAPACITY','Default capacity (0 = unlimited)','number'],['DEFAULT_OPEN_DAYS_BEFORE','Registration opens (days before)','number'],['DEFAULT_CLOSE_MINUTES_BEFORE','Registration closes (minutes before)','number'],['DEFAULT_ATTENDANCE_ENABLED','Enable attendance by default','bool'],['DEFAULT_ATTENDANCE_WINDOW_MINUTES','Attendance window (minutes)','number'],['DEFAULT_REMINDERS','Legacy reminder offsets (minutes, comma separated)','text']]},{id:'certdefaults',title:'Certificate defaults',desc:'Default certificate settings for new workshops.',keys:[['DEFAULT_CERTIFICATE_ENABLED','Enable certificates by default','bool'],['DEFAULT_CERTIFICATE_RELEASE','Default release rule','select:AFTER_WORKSHOP,NEXT_MORNING,CUSTOM_DATETIME'],['DEFAULT_CERTIFICATE_DELAY','Delay after workshop (minutes)','number'],['DEFAULT_CERTIFICATE_TIME','Next-morning release time','time'],['DEFAULT_CERTIFICATE_ELIGIBILITY','Eligibility rule','select:ALL_REGISTERED,APPROVED_ONLY,ATTENDANCE_REQUIRED'],['DEFAULT_CERTIFICATE_SUBTITLE','Default certificate subtitle','text'],['DEFAULT_CERTIFICATE_SIGNATORY_KEY','Default signatory key','text']]},{id:'emailsettings',title:'Email engine',desc:'Limits and retry behavior used by the existing queue.',keys:[['EMAIL_SAFETY_RESERVE','Daily email safety reserve','number'],['EMAIL_MAX_BATCH','Maximum emails per batch (1–100)','number'],['EMAIL_RETRY_LIMIT','Retry limit (0–10)','number'],['EMAIL_RETRY_BASE_MINUTES','Retry base delay (minutes)','number'],['EMAIL_QUOTA_RECHECK_MINUTES','Quota recheck delay (minutes)','number']]},{id:'automation',title:'Automation controls',desc:'Pause or resume scheduled processing. Pausing stops scheduler work until re-enabled.',keys:[['PAUSE_AUTOMATION','Pause automation','bool']]}];
   function settingInput(key,label,type,val){const id='setting_'+key;let input='';if(type==='bool'){input=`<select class="control" id="${id}" data-setting="${key}"><option value="FALSE" ${String(val).toUpperCase()!=='TRUE'?'selected':''}>Off / No</option><option value="TRUE" ${String(val).toUpperCase()==='TRUE'?'selected':''}>On / Yes</option></select>`;}else if(type.startsWith('select:')){const options=type.substring(7).split(',');input=`<select class="control" id="${id}" data-setting="${key}">${options.map(o=>`<option value="${esc(o)}" ${String(val)===o?'selected':''}>${esc(o.replaceAll('_',' '))}</option>`).join('')}</select>`;}else if(type==='timezone'){const opts=['Asia/Dhaka','UTC','Asia/Kolkata','Asia/Singapore','Europe/London','Europe/Paris','America/New_York','America/Los_Angeles','Australia/Sydney'];if(val&&!opts.includes(val))opts.unshift(val);input=`<select class="control" id="${id}" data-setting="${key}">${opts.map(o=>`<option ${String(val)===o?'selected':''}>${esc(o)}</option>`).join('')}</select>`;}else{input=`<input class="control" id="${id}" data-setting="${key}" type="${type==='time'?'time':type}" value="${esc(val)}" ${type==='number'?'min="0"':''}>`;}return `<div class="field"><label for="${id}">${esc(label)}</label>${input}</div>`;}
   function renderSettings(){const d=state.data;return `<div class="page-toolbar"><div><h2>System settings</h2><p>Configure defaults and automation behavior through forms. No spreadsheet-cell editing is required for routine settings.</p></div><div class="toolbar-actions"><button class="btn" onclick="refreshData()">↻ Reload</button><button class="btn btn-primary" onclick="saveSettings()">Save all settings</button></div></div>${d.metrics.paused?`<div class="status-banner"><strong>Automation is paused.</strong><span>Resume by switching Pause automation to Off and saving.</span></div>`:''}<div class="settings-layout"><nav class="settings-nav">${SETTING_GROUPS.map((g,i)=>`<button class="${i===0?'active':''}" data-target="settings-${g.id}">${esc(g.title)}</button>`).join('')}</nav><div>${SETTING_GROUPS.map((g,i)=>`<section class="panel settings-section" id="settings-${g.id}"><div class="panel-head"><div><h3>${esc(g.title)}</h3><div class="panel-subtitle">${esc(g.desc)}</div></div>${g.id==='automation'?'<span class="pill amber">Critical control</span>':''}</div><div class="panel-body"><div class="form-grid">${g.keys.map(([k,l,t])=>settingInput(k,l,t,d.settings[k]||'')).join('')}</div>${g.id==='automation'?'<div class="inline-note warn" style="margin-top:15px">When paused, automated reminders, attendance processing, certificates, and queued email processing can stop. Use only during maintenance or incident handling.</div>':''}</div></section>`).join('')}<section class=\"panel settings-section\" id=\"settings-security\"><div class=\"panel-head\"><div><h3>Security</h3><div class=\"panel-subtitle\">Software access token</div></div><span class=\"pill warn\">Sensitive</span></div><div class=\"panel-body\"><div class=\"inline-note\">The access token in your dashboard link controls who can open this software. Resetting it immediately invalidates the current token.</div><div class=\"link-list\" style=\"margin-top:12px\"><button class=\"btn btn-danger\" onclick=\"askResetToken()\"><i data-lucide=\"key-round\"></i> Reset software access token</button></div><div id=\"tokenResetResult\" class=\"inline-note\" style=\"margin-top:12px;display:none\" role=\"status\"></div></div></section><div style="display:flex;justify-content:flex-end;margin-top:16px"><button class="btn btn-primary" onclick="saveSettings()">Save all settings</button></div><div class="footer-note">Settings changes are written to the Settings database and applied by the current automation engine.</div></div></div>`;}
@@ -521,14 +613,14 @@ i[data-lucide] svg{width:1.15em;height:1.15em}
     const btn=document.getElementById('maintConfirmBtn');
     const box=document.getElementById('maintResult');
     try{
-      if(btn){btn.disabled=true;btn.textContent='Working…';}
+      if(btn){setBtnLoading(btn,'Working…');}
       const res=await rpc(c.method);
       closeModal();restoreModalButtons();
       const msg=(res&&res.message)||'Done.';
       toast(msg);
       if(box){box.style.display='block';box.innerHTML='<strong>Last result:</strong> '+esc(msg);}
     }catch(e){
-      if(btn){btn.disabled=false;btn.textContent=c.confirm;}
+      if(btn){setBtnLoading(btn);}
       toast(e.message,'error');
       if(box){box.style.display='block';box.innerHTML='<strong>Failed:</strong> '+esc(e.message);}
     }
@@ -547,7 +639,7 @@ i[data-lucide] svg{width:1.15em;height:1.15em}
     const btn=document.getElementById('resetTokenBtn');
     const box=document.getElementById('tokenResetResult');
     try{
-      if(btn){btn.disabled=true;btn.textContent='Resetting…';}
+      if(btn){setBtnLoading(btn,'Resetting…');}
       const res=await rpc('resetSoftwareAccessLinkFromSoftware');
       const newToken=res&&res.token;
       if(!newToken)throw new Error('The backend did not return a new token.');
@@ -557,7 +649,7 @@ i[data-lucide] svg{width:1.15em;height:1.15em}
       toast('Access token reset. This session now uses the new token.');
       if(box){box.style.display='block';box.innerHTML='<strong>Token reset.</strong> This session was updated automatically. Old dashboard links no longer work — generate a fresh link from the sheet menu (WORKSHOP Automation → Open Software Dashboard) if you need to share access.';}
     }catch(e){
-      if(btn){btn.disabled=false;btn.textContent='Reset token now';}
+      if(btn){setBtnLoading(btn);}
       toast(e.message,'error');
       if(box){box.style.display='block';box.innerHTML='<strong>Failed:</strong> '+esc(e.message);}
     }
@@ -575,7 +667,7 @@ i[data-lucide] svg{width:1.15em;height:1.15em}
   function syncAttendanceFields(){const f=document.getElementById('workshopForm');if(!f)return;const on=f.elements.attendanceEnabled.checked;const eventId=state.editEventId;const w=eventId?state.data.workshops.find(w=>w.eventId===eventId):null;const hasForm=!!(w&&w.attendanceFormUrl);const mode=f.elements.attendanceScheduleMode;const windowField=f.elements.attendanceWindowMinutes;if(w&&!hasForm){f.elements.attendanceEnabled.disabled=true;f.elements.attendanceEnabled.checked=false;}if(mode)mode.disabled=!on;if(windowField)windowField.disabled=!on;f.elements.attendanceScheduleValue.disabled=!on;}
   function closeModal(){document.getElementById('modalBackdrop').classList.remove('open');state.editEventId='';restoreModalButtons();}
   function backdropClose(e){if(e.target.id==='modalBackdrop')closeModal();}
-  function submitWorkshopForm(){const f=document.getElementById('workshopForm');if(!f)return;const fd=new FormData(f);const p=Object.fromEntries(fd.entries());['reminderEnabled','attendanceEnabled','certificateEnabled','groupEnabled'].forEach(k=>p[k]=f.elements[k]&&f.elements[k].checked);['capacity','attendanceWindowMinutes'].forEach(k=>p[k]=Number(p[k]||0));if(p.deliveryMode==='ONLINE'&&!String(p.meetingLink||'').trim()){toast('Meeting link is required for an online workshop.','error');return;}if(p.groupEnabled&&!String(p.groupInviteUrl||'').trim()){toast('Enter the group invite URL or turn off the community group.','error');return;}const eventId=state.editEventId;const btn=document.getElementById('modalSaveBtn');btn.disabled=true;btn.textContent=eventId?'Saving…':'Creating…';(async()=>{try{let r;if(eventId){r=await rpc('updateWorkshopFromSoftware',eventId,p);toast(r.message||'Workshop updated.');}else{r=await rpc('createWorkshopFromSoftware',p);toast(`Created ${r.eventId} · ${r.workshopName}`);if(r.registrationFormUrl){showInfoModal('Workshop created',`<p>Your workshop was created and its resources are connected.</p><div class="link-list"><a class="link-chip" href="${esc(r.registrationFormUrl)}" target="_blank" rel="noopener">Open registration form ↗</a>${r.attendanceFormUrl?`<a class="link-chip" href="${esc(r.attendanceFormUrl)}" target="_blank" rel="noopener">Open attendance form ↗</a>`:''}<a class="link-chip" href="${esc(state.data.source.spreadsheetUrl)}" target="_blank" rel="noopener">Open database ↗</a></div>`);}}closeModal();state.page='workshops';document.querySelectorAll('.nav-btn[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page==='workshops'));await refreshData(true);}catch(err){toast(err.message,'error');}finally{btn.disabled=false;btn.textContent=eventId?'Save changes':'Create workshop';}})();}
+  function submitWorkshopForm(){const f=document.getElementById('workshopForm');if(!f)return;const fd=new FormData(f);const p=Object.fromEntries(fd.entries());['reminderEnabled','attendanceEnabled','certificateEnabled','groupEnabled'].forEach(k=>p[k]=f.elements[k]&&f.elements[k].checked);['capacity','attendanceWindowMinutes'].forEach(k=>p[k]=Number(p[k]||0));if(p.deliveryMode==='ONLINE'&&!String(p.meetingLink||'').trim()){toast('Meeting link is required for an online workshop.','error');return;}if(p.groupEnabled&&!String(p.groupInviteUrl||'').trim()){toast('Enter the group invite URL or turn off the community group.','error');return;}const eventId=state.editEventId;const btn=document.getElementById('modalSaveBtn');setBtnLoading(btn,eventId?'Saving…':'Creating…');(async()=>{try{let r;if(eventId){r=await rpc('updateWorkshopFromSoftware',eventId,p);toast(r.message||'Workshop updated.');}else{r=await rpc('createWorkshopFromSoftware',p);toast(`Created ${r.eventId} · ${r.workshopName}`);if(r.registrationFormUrl){showInfoModal('Workshop created',`<p>Your workshop was created and its resources are connected.</p><div class="link-list"><a class="link-chip" href="${esc(r.registrationFormUrl)}" target="_blank" rel="noopener">Open registration form ↗</a>${r.attendanceFormUrl?`<a class="link-chip" href="${esc(r.attendanceFormUrl)}" target="_blank" rel="noopener">Open attendance form ↗</a>`:''}<a class="link-chip" href="${esc(state.data.source.spreadsheetUrl)}" target="_blank" rel="noopener">Open database ↗</a></div>`);}}closeModal();state.page='workshops';document.querySelectorAll('.nav-btn[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page==='workshops'));await refreshData(true);}catch(err){toast(err.message,'error');}finally{setBtnLoading(btn);}})();}
   async function workshopLifecycleAction(id,action){const verb=action==='CANCELLED'?'cancel':'archive';if(!confirm(`Are you sure you want to ${verb} this workshop? This stops normal processing for it.`))return;try{const r=await rpc('setWorkshopLifecycleFromSoftware',id,action);closeModal();toast(r.message);await refreshData(true);}catch(e){toast(e.message,'error');}}
   function showInfoModal(title,html){document.getElementById('modalTitle').textContent=title;document.getElementById('modalSubtitle').textContent='';document.getElementById('modalBody').innerHTML=html;document.getElementById('modalFootHint').textContent='';document.getElementById('modalSaveBtn').style.display='none';document.getElementById('modalBackdrop').classList.add('open');const foot=document.querySelector('.modal-foot .right');foot.innerHTML='<button class="btn btn-primary" onclick="closeModal();restoreModalButtons()">Close</button>';}
   function restoreModalButtons(){const msb=document.getElementById('modalSaveBtn');if(msb)msb.style.display='inline-flex';const foot=document.querySelector('.modal-foot .right');if(foot)foot.innerHTML='<button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" id="modalSaveBtn" onclick="submitWorkshopForm()">Create workshop</button>';}
@@ -583,5 +675,199 @@ i[data-lucide] svg{width:1.15em;height:1.15em}
   boot();
 
 </script>
+<script>
+/* ===== WORKSHOP dashboard V2 premium elevation — visual only. No business-logic changes. ===== */
+function setBtnLoading(btn,label){
+  if(!btn)return;
+  if(label===undefined||label===null){
+    btn.disabled=false;btn.classList.remove('is-loading');
+    if(btn.dataset.origHtml!==undefined){btn.innerHTML=btn.dataset.origHtml;delete btn.dataset.origHtml;}
+    return;
+  }
+  if(btn.dataset.origHtml===undefined){btn.dataset.origHtml=btn.innerHTML;}
+  btn.disabled=true;btn.classList.add('is-loading');
+  btn.innerHTML='<span class="btn-spinner" aria-hidden="true"></span>';
+  btn.appendChild(document.createTextNode(label));
+}
+function fadeOutCover(){
+  const c=document.getElementById('loadingCover');if(!c)return;
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){c.style.display='none';return;}
+  c.classList.add('splash-out');
+  setTimeout(function(){c.style.display='none';c.classList.remove('splash-out');},380);
+}
+const __v2ReducedMotion=function(){return window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;};
+/* page transition + stat count-up (first render per page+dataset) */
+const __v2Counted=new Set();
+function __v2AnimateStats(){
+  if(__v2ReducedMotion())return;
+  try{
+    const key=state.page+'|'+((state.data&&state.data.generatedAt)||'');
+    if(__v2Counted.has(key))return;
+    __v2Counted.add(key);
+    document.querySelectorAll('#content .stat-value').forEach(function(el){
+      const raw=el.textContent.trim().replace(/,/g,'');
+      if(!/^-?\d+(\.\d+)?$/.test(raw))return;
+      const target=parseFloat(raw),dec=(raw.split('.')[1]||'').length;
+      const t0=performance.now(),dur=750;
+      const fmt=function(v){return dec?v.toFixed(dec):Math.round(v).toLocaleString('en-US');};
+      const step=function(t){
+        const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);
+        el.textContent=fmt(target*e);
+        if(p<1)requestAnimationFrame(step);else el.textContent=fmt(target);
+      };
+      requestAnimationFrame(step);
+    });
+  }catch(_){}
+}
+function __v2PageEnter(){
+  if(__v2ReducedMotion())return;
+  const c=document.getElementById('content');if(!c)return;
+  c.classList.remove('page-enter');void c.offsetWidth;c.classList.add('page-enter');
+}
+const __renderCurrentV2=renderCurrent;
+renderCurrent=function(){__renderCurrentV2.apply(null,arguments);__v2PageEnter();__v2AnimateStats();};
+/* refresh icons after in-place table updates (search/filter) */
+['updateWorkshopsTable','updateParticipantsTable','updateCertificatesTable','updateEmailQueueTable'].forEach(function(n){
+  try{
+    const base=window[n];
+    if(typeof base==='function'){window[n]=function(){const r=base.apply(null,arguments);try{renderLucideIcons();}catch(_){}return r;};}
+  }catch(_){}
+});
+/* modal: focus first field on open, return focus on close; Escape closes date picker first */
+let __v2LastFocus=null;
+function __v2FocusFirst(){
+  const body=document.getElementById('modalBody');
+  let f=body&&body.querySelector('input:not([type="hidden"]):not(.dp-native),select,textarea,button');
+  if(!f){const foot=document.querySelector('.modal-foot .right');f=foot&&foot.querySelector('button:last-child');}
+  if(f){try{f.focus({preventScroll:true});}catch(_){try{f.focus();}catch(_2){}}}
+}
+const __openWorkshopModalV2=openWorkshopModal;
+openWorkshopModal=function(){__v2LastFocus=document.activeElement;__openWorkshopModalV2.apply(null,arguments);enhanceDateInputs();__v2FocusFirst();};
+const __showInfoModalV2=showInfoModal;
+showInfoModal=function(){__v2LastFocus=document.activeElement;__showInfoModalV2.apply(null,arguments);__v2FocusFirst();};
+const __closeModalV2=closeModal;
+closeModal=function(){closeDatePicker();__closeModalV2.apply(null,arguments);const lf=__v2LastFocus;__v2LastFocus=null;if(lf&&lf.focus){try{lf.focus();}catch(_){}}};
+document.addEventListener('keydown',function(e){
+  if(e.key!=='Escape')return;
+  const bd=document.getElementById('modalBackdrop');
+  if(!(bd&&bd.classList.contains('open')))return;
+  if(__v2DpOpen){e.stopPropagation();e.preventDefault();const t=__v2DpOpen.trig;closeDatePicker();if(t){try{t.focus();}catch(_){}}}
+},true);
+/* ---------------- custom date picker (progressive enhancement) ---------------- */
+const DP_MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DP_DOW=['Su','Mo','Tu','We','Th','Fr','Sa'];
+let __v2DpOpen=null;
+function dpParse(v){const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v||'');return m?{y:+m[1],m:+m[2]-1,d:+m[3]}:null;}
+function dpFmt(y,m,d){return y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');}
+function dpLabel(v){const p=dpParse(v);return p?DP_MONTHS[p.m].slice(0,3)+' '+p.d+', '+p.y:'Select date';}
+function enhanceDateInputs(){
+  document.querySelectorAll('#modalBody input[type="date"][name="workshopDate"]').forEach(function(native){
+    if(native.dataset.dpDone)return;native.dataset.dpDone='1';
+    const wrap=document.createElement('div');wrap.className='dp-wrap';
+    native.parentNode.insertBefore(wrap,native);wrap.appendChild(native);
+    native.classList.add('dp-native');native.setAttribute('aria-hidden','true');native.tabIndex=-1;
+    let lbl='Workshop date';
+    try{const fl=wrap.closest('.field');const l=fl&&fl.querySelector('label');if(l)lbl=l.textContent.replace(/\*$/,'').trim();}catch(_){}
+    const trig=document.createElement('button');
+    trig.type='button';trig.className='control dp-trigger';trig.setAttribute('aria-haspopup','dialog');
+    trig.setAttribute('aria-expanded','false');trig.setAttribute('aria-label',lbl);
+    trig.innerHTML='<span class="dp-label"></span><i data-lucide="calendar-days"></i>';
+    wrap.appendChild(trig);
+    const pop=document.createElement('div');pop.className='dp-pop';pop.setAttribute('role','dialog');pop.setAttribute('aria-label','Choose '+lbl);
+    wrap.appendChild(pop);
+    const sync=function(){
+      trig.querySelector('.dp-label').textContent=dpLabel(native.value);
+      trig.classList.toggle('empty',!native.value);
+    };
+    sync();
+    const p0=dpParse(native.value),now=new Date();
+    const ctx={wrap:wrap,native:native,trig:trig,pop:pop,sync:sync,st:{y:p0?p0.y:now.getFullYear(),m:p0?p0.m:now.getMonth()}};
+    trig.addEventListener('click',function(){(__v2DpOpen&&__v2DpOpen.trig===trig)?closeDatePicker():openDatePicker(ctx);});
+    trig.addEventListener('keydown',function(e){if(e.key==='ArrowDown'){e.preventDefault();openDatePicker(ctx);}});
+  });
+  try{renderLucideIcons();}catch(_){}
+}
+function openDatePicker(ctx){
+  closeDatePicker();
+  __v2DpOpen=ctx;
+  renderDpPop(ctx,null);
+  ctx.pop.classList.add('open');
+  ctx.trig.setAttribute('aria-expanded','true');
+  document.addEventListener('mousedown',dpOutside,true);
+  const sel=ctx.pop.querySelector('.dp-day.sel')||ctx.pop.querySelector('.dp-day.today')||ctx.pop.querySelector('.dp-day:not(.out)');
+  if(sel){try{sel.focus({preventScroll:true});}catch(_){try{sel.focus();}catch(_2){}}}
+}
+function closeDatePicker(){
+  if(!__v2DpOpen)return;
+  __v2DpOpen.pop.classList.remove('open');
+  __v2DpOpen.trig.setAttribute('aria-expanded','false');
+  document.removeEventListener('mousedown',dpOutside,true);
+  __v2DpOpen=null;
+}
+function dpOutside(e){if(__v2DpOpen&&!__v2DpOpen.wrap.contains(e.target)){const t=__v2DpOpen.trig;closeDatePicker();}}
+function dpSelect(ctx,val){
+  ctx.native.value=val;ctx.sync();
+  const p=dpParse(val);if(p)ctx.st={y:p.y,m:p.m};
+  const t=ctx.trig;closeDatePicker();
+  try{t.focus();}catch(_){}
+}
+function dpMoveMonth(ctx,dir,refocusIdx){
+  let ny=ctx.st.y,nm=ctx.st.m+dir;
+  if(nm<0){nm=11;ny--;}if(nm>11){nm=0;ny++;}
+  ctx.st={y:ny,m:nm};renderDpPop(ctx,dir);
+  let tgt=null;
+  if(refocusIdx!==undefined&&refocusIdx!==null){
+    const days=ctx.pop.querySelectorAll('.dp-day');
+    tgt=days[Math.max(0,Math.min(days.length-1,refocusIdx))];
+  }else{tgt=ctx.pop.querySelector('[data-dpnav="'+dir+'"]');}
+  if(tgt){try{tgt.focus();}catch(_){}}
+}
+function renderDpPop(ctx,navDir){
+  const y=ctx.st.y,m=ctx.st.m;
+  const sel=dpParse(ctx.native.value),today=new Date();
+  let html='<div class="dp-head"><button type="button" class="dp-nav" data-dpnav="-1" aria-label="Previous month"><i data-lucide="chevron-left"></i></button><div class="dp-title" aria-live="polite">'+DP_MONTHS[m]+' '+y+'</div><button type="button" class="dp-nav" data-dpnav="1" aria-label="Next month"><i data-lucide="chevron-right"></i></button></div>';
+  html+='<div class="dp-week" aria-hidden="true">'+DP_DOW.map(function(d){return '<span>'+d+'</span>';}).join('')+'</div><div class="dp-grid" role="grid" aria-label="'+DP_MONTHS[m]+' '+y+'">';
+  const first=new Date(y,m,1).getDay(),dim=new Date(y,m+1,0).getDate(),dpm=new Date(y,m,0).getDate();
+  for(let i=0;i<42;i++){
+    const dn=i-first+1;let dy=y,dm=m,dd=dn,out=false;
+    if(dn<1){dm=m-1;dd=dpm+dn;out=true;if(dm<0){dm=11;dy=y-1;}}
+    else if(dn>dim){dm=m+1;dd=dn-dim;out=true;if(dm>11){dm=0;dy=y+1;}}
+    const isSel=sel&&sel.y===dy&&sel.m===dm&&sel.d===dd;
+    const isToday=today.getFullYear()===dy&&today.getMonth()===dm&&today.getDate()===dd;
+    html+='<button type="button" role="gridcell" class="dp-day'+(out?' out':'')+(isSel?' sel':'')+(isToday?' today':'')+'" data-date="'+dpFmt(dy,dm,dd)+'" aria-label="'+DP_MONTHS[dm]+' '+dd+', '+dy+(isSel?', selected':'')+'"'+(isSel?' aria-selected="true"':'')+'>'+dd+'</button>';
+  }
+  html+='</div><div class="dp-foot"><button type="button" class="link-btn dp-todaybtn">Today</button><button type="button" class="link-btn dp-clearbtn">Clear</button></div>';
+  ctx.pop.innerHTML=html;
+  try{renderLucideIcons(ctx.pop);}catch(_){}
+  ctx.pop.querySelectorAll('[data-dpnav]').forEach(function(b){
+    b.addEventListener('click',function(){dpMoveMonth(ctx,+b.dataset.dpnav,null);});
+  });
+  ctx.pop.querySelectorAll('.dp-day').forEach(function(b){
+    b.addEventListener('click',function(){dpSelect(ctx,b.dataset.date);});
+  });
+  ctx.pop.querySelector('.dp-todaybtn').addEventListener('click',function(){const t=new Date();dpSelect(ctx,dpFmt(t.getFullYear(),t.getMonth(),t.getDate()));});
+  ctx.pop.querySelector('.dp-clearbtn').addEventListener('click',function(){dpSelect(ctx,'');});
+  ctx.pop.onkeydown=function(e){
+    if(!__v2DpOpen)return;
+    if(e.key==='PageDown'){e.preventDefault();const i=dpDayIndex();dpMoveMonth(ctx,1,i);return;}
+    if(e.key==='PageUp'){e.preventDefault();const i=dpDayIndex();dpMoveMonth(ctx,-1,i);return;}
+    const days=Array.prototype.slice.call(ctx.pop.querySelectorAll('.dp-day'));
+    const idx=days.indexOf(document.activeElement);
+    if(idx<0)return;
+    let n=-1;
+    if(e.key==='ArrowRight')n=idx+1;else if(e.key==='ArrowLeft')n=idx-1;
+    else if(e.key==='ArrowDown')n=idx+7;else if(e.key==='ArrowUp')n=idx-7;
+    else if(e.key==='Home')n=idx-(idx%7);else if(e.key==='End')n=idx+(6-(idx%7));
+    else return;
+    e.preventDefault();
+    if(n>=0&&n<days.length){try{days[n].focus();}catch(_){}}
+  };
+  function dpDayIndex(){
+    const days=Array.prototype.slice.call(ctx.pop.querySelectorAll('.dp-day'));
+    return days.indexOf(document.activeElement);
+  }
+}
+</script>
+
 </body>
 </html>
