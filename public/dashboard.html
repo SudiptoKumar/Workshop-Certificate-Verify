@@ -4,87 +4,132 @@
   <base target="_self">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#7C2D12">
+  <meta name="theme-color" content="#007AFF">
   <title>WORKSHOP Software</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-/* WORKSHOP Software — Orange Monochromatic Design System */
+  <script>try{var __t=localStorage.getItem('WORKSHOP_THEME');if(__t!=='light'&&__t!=='dark'){__t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',__t);}catch(e){document.documentElement.setAttribute('data-theme','light');}</script>
+<style>
+/* WORKSHOP Software — Apple Design System (light + dark) */
 :root{
-  --o950:#431407; --o900:#7C2D12; --o800:#9A3412; --o700:#C2410C; --o600:#EA580C;
-  --o500:#F97316; --o400:#FB923C; --o300:#FDBA74; --o200:#FED7AA; --o100:#FFEDD5; --o50:#FFF7ED;
-  --ink:#29211D; --ink2:#766A62; --ink3:#92847A;
-  --bg:#FAF7F3; --surface:#FFFFFF; --surface-warm:#FFF9F3;
-  --border:#EAE0D7; --border-strong:#D9C8B9;
-  --overlay:rgba(35,20,12,0.62);
-  --r-s:8px; --r-m:12px; --r-l:16px; --r-xl:22px;
-  --sh-s:0 1px 2px rgba(67,20,7,.07);
-  --sh-m:0 4px 18px rgba(67,20,7,.09);
-  --sh-l:0 14px 44px rgba(67,20,7,.16);
-  --font-ui:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --font-display:'Manrope','DM Sans',system-ui,sans-serif;
+  --accent:#007AFF;
+  --accent-pressed:#0051D5;
+  --accent-border:rgba(0,122,255,.35);
+  --accent-soft:rgba(0,122,255,.12);
+  --accent-softer:#EAF3FF;
+  --accent-faint:#F5F9FF;
+  --destructive:#FF3B30;
+  --success:#34C759;
+  --text:#000000;
+  --text2:#3A3A3C;
+  --text3:#8E8E93;
+  --bg:#FFFFFF;
+  --bg-grouped:#F2F2F7;
+  --card:#FFFFFF;
+  --fill:#E9E9EE;
+  --hairline:rgba(60,60,67,.12);
+  --hairline-strong:rgba(60,60,67,.3);
+  --topbar-bg:rgba(255,255,255,.72);
+  --overlay:rgba(0,0,0,.4);
+  --r-s:8px;
+  --r-m:10px;
+  --r-l:12px;
+  --r-xl:16px;
+  --sh-s:0 1px 2px rgba(0,0,0,.06);
+  --sh-m:0 4px 16px rgba(0,0,0,.08);
+  --sh-l:0 12px 40px rgba(0,0,0,.14);
+  --font-ui:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
+  --font-display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,sans-serif;
   --ease:cubic-bezier(.22,.8,.3,1);
-  --t-fast:120ms; --t-med:200ms; --t-slow:280ms;
+  --t-fast:120ms;
+  --t-med:200ms;
+  --t-slow:280ms;
+  color-scheme:light;
+}
+[data-theme="dark"]{
+  --accent:#0A84FF;
+  --accent-pressed:#409CFF;
+  --accent-border:rgba(10,132,255,.5);
+  --accent-soft:rgba(10,132,255,.18);
+  --accent-softer:#16283F;
+  --accent-faint:#101B2C;
+  --destructive:#FF453A;
+  --success:#30D158;
+  --text:#FFFFFF;
+  --text2:#EBEBF5;
+  --text3:#8E8E93;
+  --bg:#000000;
+  --bg-grouped:#1C1C1E;
+  --card:#1C1C1E;
+  --fill:#2C2C2E;
+  --hairline:rgba(84,84,88,.6);
+  --hairline-strong:rgba(120,120,128,.7);
+  --topbar-bg:rgba(28,28,30,.72);
+  --overlay:rgba(0,0,0,.6);
+  --sh-s:0 1px 2px rgba(0,0,0,.4);
+  --sh-m:0 4px 16px rgba(0,0,0,.45);
+  --sh-l:0 12px 40px rgba(0,0,0,.5);
+  color-scheme:dark;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
-body{font-family:var(--font-ui);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body{font-family:var(--font-ui);background:var(--bg-grouped);color:var(--text);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
 button{font-family:inherit;cursor:pointer}
 input,select,textarea{font-family:inherit;font-size:14px}
-a{color:var(--o700);text-decoration:none}
+a{color:var(--accent-pressed);text-decoration:none}
 a:hover{text-decoration:underline}
-:focus-visible{outline:2px solid var(--o500);outline-offset:2px;border-radius:6px}
-::selection{background:var(--o200)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+::selection{background:var(--accent-soft)}
 
 /* ---------- Auth gate ---------- */
 .auth-gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
-  background:radial-gradient(900px 480px at 15% 10%,var(--o100),transparent 60%),
-             radial-gradient(800px 500px at 90% 90%,var(--o200),transparent 55%),var(--bg)}
-.auth-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);
+  background:radial-gradient(900px 480px at 15% 10%,var(--accent-softer),transparent 60%),
+             radial-gradient(800px 500px at 90% 90%,var(--accent-soft),transparent 55%),var(--bg-grouped)}
+.auth-card{background:var(--card);border:1px solid var(--hairline);border-radius:var(--r-xl);
   box-shadow:var(--sh-l);padding:40px 38px;max-width:440px;width:100%;text-align:center;
   animation:cardIn var(--t-slow) var(--ease)}
 @keyframes cardIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.brand-mark{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--o700),var(--o900));
-  color:#FFF7ED;display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);
+.brand-mark{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--accent),var(--accent-pressed));
+  color:#FFFFFF;display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);
   font-weight:800;font-size:18px;letter-spacing:.02em;box-shadow:var(--sh-m)}
-.auth-kicker{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--o700);margin:16px 0 6px}
+.auth-kicker{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-pressed);margin:16px 0 6px}
 .auth-card h1{font-family:var(--font-display);font-size:24px;font-weight:800;letter-spacing:-.01em;margin-bottom:10px}
-.auth-card p{color:var(--ink2);font-size:13.5px;margin-bottom:18px}
+.auth-card p{color:var(--text2);font-size:13.5px;margin-bottom:18px}
 .auth-card label{display:block;text-align:left;font-size:12.5px;font-weight:600;margin-bottom:6px}
-.auth-card input{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--r-m);
-  background:var(--surface-warm);transition:border-color var(--t-fast),box-shadow var(--t-fast)}
-.auth-card input:focus{outline:none;border-color:var(--o500);box-shadow:0 0 0 3px var(--o100)}
+.auth-card input{width:100%;padding:12px 14px;border:1.5px solid var(--hairline);border-radius:var(--r-m);
+  background:var(--fill);transition:border-color var(--t-fast),box-shadow var(--t-fast)}
+.auth-card input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-softer)}
 .auth-card .btn-primary{width:100%;margin-top:14px;padding:13px}
-.auth-error{color:var(--o900);font-size:13px;font-weight:600;min-height:20px;margin-top:10px}
-.auth-note{font-size:12px;color:var(--ink3);margin-top:14px;line-height:1.6}
-.auth-note b{color:var(--ink2)}
+.auth-error{color:var(--accent-pressed);font-size:13px;font-weight:600;min-height:20px;margin-top:10px}
+.auth-note{font-size:12px;color:var(--text3);margin-top:14px;line-height:1.6}
+.auth-note b{color:var(--text2)}
 
 /* ---------- Loading cover ---------- */
-.loading-cover{position:fixed;inset:0;z-index:200;background:var(--bg);display:flex;flex-direction:column;
+.loading-cover{position:fixed;inset:0;z-index:200;background:var(--bg-grouped);display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:18px}
 .loading-cover .brand-mark{width:60px;height:60px;font-size:20px}
-.spinner{width:34px;height:34px;border-radius:50%;border:3px solid var(--o200);border-top-color:var(--o600);
+.spinner{width:34px;height:34px;border-radius:50%;border:3px solid var(--accent-soft);border-top-color:var(--accent);
   animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.loading-cover p{color:var(--ink2);font-size:14px;font-weight:500}
+.loading-cover p{color:var(--text2);font-size:14px;font-weight:500}
 
 /* ---------- App shell ---------- */
 .app-shell{display:flex;min-height:100vh}
-.sidebar{width:264px;flex-shrink:0;background:linear-gradient(180deg,var(--o900) 0%,var(--o950) 100%);
+.sidebar{width:264px;flex-shrink:0;background:linear-gradient(180deg,var(--accent-pressed) 0%,var(--accent-pressed) 100%);
   color:#FFE9D6;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;z-index:60}
 .brand{display:flex;align-items:center;gap:12px;padding:20px 18px 14px}
 .brand .brand-mark{background:rgba(255,255,255,.14);color:#fff;box-shadow:none;width:44px;height:44px}
 .brand-title{font-family:var(--font-display);font-weight:800;font-size:15px;letter-spacing:.06em;color:#fff}
-.brand-sub{font-size:11px;color:var(--o200);letter-spacing:.04em}
-.nav-label{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--o300);
+.brand-sub{font-size:11px;color:var(--accent-soft);letter-spacing:.04em}
+.nav-label{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-border);
   padding:14px 20px 6px;opacity:.85}
 .nav{display:flex;flex-direction:column;gap:2px;padding:0 12px}
 .nav-btn{display:flex;align-items:center;gap:11px;width:100%;padding:10px 12px;border:0;border-radius:var(--r-m);
   background:transparent;color:#F5DCC8;font-size:13.5px;font-weight:500;text-align:left;
   transition:background var(--t-fast),color var(--t-fast),transform var(--t-fast)}
 .nav-btn:hover{background:rgba(255,255,255,.08);color:#fff}
-.nav-btn.active{background:var(--o500);color:#fff;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,.22)}
+.nav-btn.active{background:var(--accent);color:#fff;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,.22)}
 .nav-btn.active .pill{background:rgba(255,255,255,.22);color:#fff}
 .nav-icon{display:inline-flex;width:20px;height:20px;flex-shrink:0;align-items:center;justify-content:center}
 .nav-icon svg{width:20px;height:20px}
@@ -93,96 +138,97 @@ a:hover{text-decoration:underline}
 .sidebar-status{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-m);
   padding:12px 14px;font-size:12px}
 .tiny-row{display:flex;align-items:center;gap:8px;color:#F5DCC8}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--o400);box-shadow:0 0 8px var(--o400);flex-shrink:0}
-.dot.warn{background:var(--o300);box-shadow:0 0 8px var(--o300)}
-.sidebar-foot{margin-top:10px;font-size:11px;color:var(--o300);opacity:.8;text-align:center}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);flex-shrink:0}
+.dot.warn{background:var(--accent-border);box-shadow:0 0 8px var(--accent-border)}
+.sidebar-foot{margin-top:10px;font-size:11px;color:var(--accent-border);opacity:.8;text-align:center}
 .main{flex:1;min-width:0;display:flex;flex-direction:column}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 28px;
-  background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 28px;background:var(--topbar-bg);backdrop-filter:blur(20px) saturate(1.6);-webkit-backdrop-filter:blur(20px) saturate(1.6);
+  border-bottom:1px solid var(--hairline);position:sticky;top:0;z-index:50}
 .top-left{display:flex;align-items:center;gap:14px;min-width:0}
-.eyebrow{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--o700)}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-pressed)}
 .page-title{font-family:var(--font-display);font-size:22px;font-weight:800;letter-spacing:-.01em}
 .top-actions{display:flex;align-items:center;gap:10px}
-.last-updated{font-size:12px;color:var(--ink3);white-space:nowrap}
-.avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--o600),var(--o800));
+.last-updated{font-size:12px;color:var(--text3);white-space:nowrap}
+.avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-pressed));
   color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
 .mobile-menu{display:none}
 .content{padding:26px 28px 60px;max-width:1280px;width:100%;margin:0 auto}
 
 /* ---------- Buttons ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;border-radius:var(--r-m);
-  border:1.5px solid var(--border);background:var(--surface);color:var(--ink);font-size:13.5px;font-weight:600;
+  border:1.5px solid var(--hairline);background:var(--card);color:var(--text);font-size:13.5px;font-weight:600;
   transition:all var(--t-fast) var(--ease);white-space:nowrap}
-.btn:hover{border-color:var(--border-strong);transform:translateY(-1px);box-shadow:var(--sh-s)}
+.btn:hover{border-color:var(--hairline-strong);transform:translateY(-1px);box-shadow:var(--sh-s)}
 .btn:active{transform:translateY(0)}
 .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
 .btn svg{width:16px;height:16px}
-.btn-primary{background:var(--o600);border-color:var(--o600);color:#fff;box-shadow:0 4px 14px rgba(234,88,12,.28)}
-.btn-primary:hover{background:var(--o700);border-color:var(--o700);box-shadow:0 6px 18px rgba(194,65,12,.32)}
-.btn-quiet{background:transparent;border-color:transparent;color:var(--ink2)}
-.btn-quiet:hover{background:var(--o50);color:var(--o800);box-shadow:none}
-.btn-danger{background:var(--o950);border-color:var(--o950);color:#FFE9D6}
-.btn-danger:hover{background:var(--o900);border-color:var(--o900)}
-.btn-gold{background:var(--o100);border-color:var(--o200);color:var(--o900)}
-.btn-gold:hover{background:var(--o200)}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 4px 14px rgba(0,122,255,.28)}
+.btn-primary:hover{background:var(--accent-pressed);border-color:var(--accent-pressed);box-shadow:0 6px 18px rgba(194,65,12,.32)}
+.btn-quiet{background:transparent;border-color:transparent;color:var(--text2)}
+.btn-quiet:hover{background:var(--accent-faint);color:var(--accent-pressed);box-shadow:none}
+.btn-danger{background:var(--accent-pressed);border-color:var(--accent-pressed);color:#FFE9D6}
+.btn-danger:hover{background:var(--accent-pressed);border-color:var(--accent-pressed)}
+.btn-gold{background:var(--accent-softer);border-color:var(--accent-soft);color:var(--accent-pressed)}
+.btn-gold:hover{background:var(--accent-soft)}
 .btn-sm{padding:7px 13px;font-size:12.5px;border-radius:var(--r-s)}
-.link-btn{background:none;border:0;color:var(--o700);font-weight:600;font-size:13px;display:inline-flex;
+.link-btn{background:none;border:0;color:var(--accent-pressed);font-weight:600;font-size:13px;display:inline-flex;
   align-items:center;gap:5px;padding:4px 2px}
-.link-btn:hover{color:var(--o800);text-decoration:underline}
+.link-btn:hover{color:var(--accent-pressed);text-decoration:underline}
 .link-btn svg{width:14px;height:14px}
 .link-chip{display:inline-flex;align-items:center;gap:7px;padding:9px 15px;border-radius:999px;
-  border:1.5px solid var(--o200);background:var(--o50);color:var(--o800);font-size:13px;font-weight:600;
+  border:1.5px solid var(--accent-soft);background:var(--accent-faint);color:var(--accent-pressed);font-size:13px;font-weight:600;
   transition:all var(--t-fast)}
-.link-chip:hover{background:var(--o100);border-color:var(--o300);text-decoration:none}
+.link-chip:hover{background:var(--accent-softer);border-color:var(--accent-border);text-decoration:none}
 .link-chip svg{width:15px;height:15px}
 .link-list{display:flex;flex-wrap:wrap;gap:10px}
 
 /* ---------- Pills & status ---------- */
 .pill{display:inline-flex;align-items:center;gap:5px;padding:3px 11px;border-radius:999px;font-size:11px;
   font-weight:700;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
-.pill.ok{background:var(--o100);color:var(--o900);border:1px solid var(--o200)}
-.pill.warn{background:var(--o50);color:var(--o800);border:1px solid var(--o300)}
-.pill.err{background:var(--o950);color:#FFE9D6;border:1px solid var(--o950)}
-.pill.muted{background:#F1EAE2;color:var(--ink2);border:1px solid var(--border)}
-.pill.info{background:var(--o50);color:var(--o700);border:1px solid var(--o200)}
-.pill.amber{background:var(--o100);color:var(--o800);border:1px solid var(--o200)}
-.pill.red{background:var(--o950);color:#FFE9D6;border:1px solid var(--o950)}
-.pill.gray{background:#F1EAE2;color:var(--ink2);border:1px solid var(--border)}
-.pill.blue{background:var(--o50);color:var(--o700);border:1px solid var(--o200)}
-.pill.gold{background:var(--o100);color:var(--o900);border:1px solid var(--o300)}
+.pill.ok{background:var(--accent-softer);color:var(--accent-pressed);border:1px solid var(--accent-soft)}
+.pill.warn{background:var(--accent-faint);color:var(--accent-pressed);border:1px solid var(--accent-border)}
+.pill.err{background:var(--accent-pressed);color:#FFE9D6;border:1px solid var(--accent-pressed)}
+.pill.muted{background:#F1EAE2;color:var(--text2);border:1px solid var(--hairline)}
+.pill.info{background:var(--accent-faint);color:var(--accent-pressed);border:1px solid var(--accent-soft)}
+.pill.amber{background:var(--accent-softer);color:var(--accent-pressed);border:1px solid var(--accent-soft)}
+.pill.red{background:var(--accent-pressed);color:#FFE9D6;border:1px solid var(--accent-pressed)}
+.pill.gray{background:#F1EAE2;color:var(--text2);border:1px solid var(--hairline)}
+.pill.blue{background:var(--accent-faint);color:var(--accent-pressed);border:1px solid var(--accent-soft)}
+.pill.gold{background:var(--accent-softer);color:var(--accent-pressed);border:1px solid var(--accent-border)}
 
 /* ---------- Page toolbar ---------- */
 .page-toolbar{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:22px;flex-wrap:wrap}
 .page-toolbar h2{font-family:var(--font-display);font-size:20px;font-weight:800;letter-spacing:-.01em;margin-bottom:4px}
-.page-toolbar p{color:var(--ink2);font-size:13.5px;max-width:640px}
+.page-toolbar p{color:var(--text2);font-size:13.5px;max-width:640px}
 .toolbar-actions{display:flex;gap:10px;flex-wrap:wrap}
 
 /* ---------- Stat cards ---------- */
 .grid{display:grid;gap:16px}
-.stats-grid{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin-bottom:20px}
+.stats-grid{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:20px}
 .two-col{grid-template-columns:1fr 1fr}
 .three-col{grid-template-columns:repeat(3,1fr)}
 .cols-3{grid-template-columns:repeat(3,1fr)}
-.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-l);padding:18px 20px;
+.stat-card{background:var(--card);border:1px solid var(--hairline);border-radius:var(--r-l);padding:18px 20px;
   box-shadow:var(--sh-s);transition:transform var(--t-fast),box-shadow var(--t-fast);position:relative;overflow:hidden}
 .stat-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
-  background:linear-gradient(180deg,var(--o500),var(--o700));opacity:.9}
+  background:linear-gradient(180deg,var(--accent),var(--accent-pressed));opacity:.9}
 .stat-card:hover{transform:translateY(-2px);box-shadow:var(--sh-m)}
 .stat-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
-.stat-label{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink2)}
+.stat-label{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text2)}
 .stat-icon{width:38px;height:38px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;
-  background:var(--o100);color:var(--o700);flex-shrink:0}
+  background:var(--accent-softer);color:var(--accent-pressed);flex-shrink:0}
 .stat-icon svg{width:20px;height:20px}
-.stat-icon.blue{background:var(--o50);color:var(--o600)}
-.stat-icon.gold{background:linear-gradient(135deg,var(--o500),var(--o700));color:#fff}
+.stat-icon.blue{background:var(--accent-soft);color:var(--accent)}
+.stat-icon.gold{background:var(--accent-soft);color:var(--accent)}
+.stat-icon.red{background:rgba(255,59,48,.12);color:var(--destructive)}
 .stat-value{font-family:var(--font-display);font-size:30px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.stat-foot{font-size:12px;color:var(--ink3);margin-top:4px}
+.stat-foot{font-size:12px;color:var(--text3);margin-top:4px}
 
 /* ---------- Panels ---------- */
-.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-l);box-shadow:var(--sh-s);overflow:hidden}
-.panel-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 22px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.panel{background:var(--card);border:1px solid var(--hairline);border-radius:var(--r-l);box-shadow:var(--sh-s);overflow:hidden}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 22px;border-bottom:1px solid var(--hairline);flex-wrap:wrap}
 .panel-title{font-family:var(--font-display);font-size:15.5px;font-weight:700}
-.panel-subtitle{font-size:12.5px;color:var(--ink3);margin-top:2px}
+.panel-subtitle{font-size:12.5px;color:var(--text3);margin-top:2px}
 .panel-body{padding:20px 22px}
 .panel-body:empty{display:none}
 
@@ -190,130 +236,130 @@ a:hover{text-decoration:underline}
 .table-panel{margin-top:16px}
 .table-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .search-wrap{position:relative;display:flex;align-items:center}
-.search-wrap svg{position:absolute;left:11px;width:15px;height:15px;color:var(--ink3);pointer-events:none}
+.search-wrap svg{position:absolute;left:11px;width:15px;height:15px;color:var(--text3);pointer-events:none}
 .search-wrap .control{padding-left:34px}
 .table-wrap{overflow-x:auto;border-radius:0 0 var(--r-l) var(--r-l)}
 table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px}
-thead th{text-align:left;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink2);
-  padding:12px 16px;background:var(--surface-warm);border-bottom:1px solid var(--border);white-space:nowrap}
-tbody td{padding:13px 16px;border-bottom:1px solid var(--border);vertical-align:middle}
+thead th{text-align:left;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text2);
+  padding:12px 16px;background:var(--fill);border-bottom:1px solid var(--hairline);white-space:nowrap}
+tbody td{padding:13px 16px;border-bottom:1px solid var(--hairline);vertical-align:middle}
 tbody tr:last-child td{border-bottom:0}
 tbody tr{transition:background var(--t-fast)}
-tbody tr:hover{background:var(--o50)}
+tbody tr:hover{background:var(--accent-faint)}
 .primary-cell{font-weight:600}
-.secondary-cell{font-size:12px;color:var(--ink3);margin-top:2px}
+.secondary-cell{font-size:12px;color:var(--text3);margin-top:2px}
 .row-actions{display:flex;gap:8px;flex-wrap:wrap}
 .table-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 22px;
-  border-top:1px solid var(--border);font-size:12.5px;color:var(--ink2);flex-wrap:wrap}
+  border-top:1px solid var(--hairline);font-size:12.5px;color:var(--text2);flex-wrap:wrap}
 
 /* ---------- Forms ---------- */
 .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 16px}
 .field{display:flex;flex-direction:column;gap:6px;margin-bottom:2px}
 .field label{font-size:12.5px;font-weight:600}
-.field label .req{color:var(--o700)}
-.field small,.helper{font-size:12px;color:var(--ink3);line-height:1.5}
-.control{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--r-m);
-  background:var(--surface);color:var(--ink);transition:border-color var(--t-fast),box-shadow var(--t-fast)}
-.control:focus{outline:none;border-color:var(--o500);box-shadow:0 0 0 3px var(--o100)}
-.control:disabled{background:#F5F0EA;color:var(--ink3)}
+.field label .req{color:var(--accent-pressed)}
+.field small,.helper{font-size:12px;color:var(--text3);line-height:1.5}
+.control{width:100%;padding:10px 13px;border:1.5px solid var(--hairline);border-radius:var(--r-m);
+  background:var(--card);color:var(--text);transition:border-color var(--t-fast),box-shadow var(--t-fast)}
+.control:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-softer)}
+.control:disabled{background:#F5F0EA;color:var(--text3)}
 textarea.control{min-height:96px;resize:vertical}
 select.control{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23766A62' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 12px center;padding-right:36px}
-.toggle-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--border)}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--hairline)}
 .toggle-row:last-child{border-bottom:0}
 .toggle-copy strong{display:block;font-size:13.5px}
-.toggle-copy small{color:var(--ink2);font-size:12.5px}
+.toggle-copy small{color:var(--text2);font-size:12.5px}
 .switch{position:relative;display:inline-block;width:46px;height:26px;flex-shrink:0}
 .switch input{opacity:0;width:0;height:0}
 .slider{position:absolute;inset:0;border-radius:999px;background:#D9C8B9;transition:background var(--t-med);cursor:pointer}
 .slider::before{content:'';position:absolute;width:20px;height:20px;border-radius:50%;background:#fff;top:3px;left:3px;
   transition:transform var(--t-med) var(--ease);box-shadow:var(--sh-s)}
-.switch input:checked + .slider{background:var(--o600)}
+.switch input:checked + .slider{background:var(--accent)}
 .switch input:checked + .slider::before{transform:translateX(20px)}
-.switch input:focus-visible + .slider{outline:2px solid var(--o500);outline-offset:2px}
+.switch input:focus-visible + .slider{outline:2px solid var(--accent);outline-offset:2px}
 
 /* ---------- Modal ---------- */
 .modal-backdrop{position:fixed;inset:0;z-index:120;background:var(--overlay);display:none;align-items:flex-start;
   justify-content:center;padding:36px 18px;overflow-y:auto;opacity:0;transition:opacity var(--t-med)}
 .modal-backdrop.open{display:flex;opacity:1}
-.modal{background:var(--surface);border-radius:var(--r-xl);box-shadow:var(--sh-l);width:100%;max-width:720px;
+.modal{background:var(--card);border-radius:var(--r-xl);box-shadow:var(--sh-l);width:100%;max-width:720px;
   transform:translateY(12px) scale(.99);transition:transform var(--t-med) var(--ease);overflow:hidden}
 .modal-backdrop.open .modal{transform:none}
-.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:20px 24px;border-bottom:1px solid var(--border)}
+.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:20px 24px;border-bottom:1px solid var(--hairline)}
 .modal-head h2{font-family:var(--font-display);font-size:17px;font-weight:800}
-.modal-head p{font-size:12.5px;color:var(--ink3);margin-top:3px}
-.modal-close{width:34px;height:34px;border-radius:10px;border:1px solid var(--border);background:var(--surface);
-  font-size:18px;line-height:1;color:var(--ink2);flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.modal-close:hover{background:var(--o50);color:var(--o800)}
+.modal-head p{font-size:12.5px;color:var(--text3);margin-top:3px}
+.modal-close{width:34px;height:34px;border-radius:10px;border:1px solid var(--hairline);background:var(--card);
+  font-size:18px;line-height:1;color:var(--text2);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:var(--accent-faint);color:var(--accent-pressed)}
 .modal-body{padding:22px 24px;max-height:66vh;overflow-y:auto}
-.modal-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 24px;border-top:1px solid var(--border);flex-wrap:wrap}
+.modal-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 24px;border-top:1px solid var(--hairline);flex-wrap:wrap}
 .modal-foot .right{display:flex;gap:10px;margin-left:auto}
 
 /* ---------- Toasts ---------- */
 .toast-stack{position:fixed;bottom:22px;right:22px;z-index:300;display:flex;flex-direction:column;gap:10px;max-width:min(380px,calc(100vw - 44px))}
-.toast{background:var(--o950);color:#FFEEDD;padding:13px 17px;border-radius:var(--r-m);font-size:13.5px;font-weight:500;
-  box-shadow:var(--sh-l);animation:toastIn var(--t-med) var(--ease);border-left:4px solid var(--o500)}
-.toast.error{border-left-color:var(--o300);background:#2A1208}
+.toast{background:var(--accent-pressed);color:#FFEEDD;padding:13px 17px;border-radius:var(--r-m);font-size:13.5px;font-weight:500;
+  box-shadow:var(--sh-l);animation:toastIn var(--t-med) var(--ease);border-left:4px solid var(--accent)}
+.toast.error{border-left-color:var(--accent-border);background:#2A1208}
 @keyframes toastIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
 /* ---------- Attention, banners, notes ---------- */
 .attention-list{display:flex;flex-direction:column;gap:10px}
 .attention{display:flex;gap:12px;align-items:flex-start;padding:13px 15px;border-radius:var(--r-m);
-  background:var(--o50);border:1px solid var(--o200);font-size:13px}
-.attention.red{background:#2A1208;border-color:var(--o900);color:#FFE9D6}
+  background:var(--accent-faint);border:1px solid var(--accent-soft);font-size:13px}
+.attention.red{background:#2A1208;border-color:var(--accent-pressed);color:#FFE9D6}
 .attention.red strong{color:#fff}
-.attention-icon{width:32px;height:32px;border-radius:10px;background:var(--o100);color:var(--o700);
+.attention-icon{width:32px;height:32px;border-radius:10px;background:var(--accent-softer);color:var(--accent-pressed);
   display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .attention-icon svg{width:17px;height:17px}
-.attention.red .attention-icon{background:var(--o900);color:#FFD9B8}
+.attention.red .attention-icon{background:var(--accent-pressed);color:#FFD9B8}
 .attention strong{display:block;font-size:13.5px}
-.attention span{color:var(--ink2);font-size:12.5px}
+.attention span{color:var(--text2);font-size:12.5px}
 .attention.red span{color:#E8B48F}
-.status-banner{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--o100);border:1px solid var(--o300);
+.status-banner{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--accent-softer);border:1px solid var(--accent-border);
   border-radius:var(--r-m);padding:13px 18px;margin-bottom:18px;font-size:13.5px}
-.inline-note{font-size:12.5px;color:var(--ink2);background:var(--surface-warm);border:1px solid var(--border);
+.inline-note{font-size:12.5px;color:var(--text2);background:var(--fill);border:1px solid var(--hairline);
   border-radius:var(--r-m);padding:11px 15px;line-height:1.6}
-.inline-note.warn{background:var(--o50);border-color:var(--o300);color:var(--o900)}
-.section-card{background:var(--surface-warm);border:1px solid var(--border);border-radius:var(--r-m);padding:16px 18px;margin-bottom:14px}
-.section-heading{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--o700);margin-bottom:10px}
-.section-desc{font-size:13px;color:var(--ink2);margin-bottom:12px}
-.footer-note{margin-top:22px;font-size:12px;color:var(--ink3);text-align:center}
-.empty{text-align:center;padding:38px 20px;color:var(--ink2)}
-.empty strong{display:block;font-family:var(--font-display);font-size:15px;color:var(--ink);margin-bottom:6px}
-.muted{color:var(--ink3)}
-.error{color:var(--o900);font-weight:600}
+.inline-note.warn{background:var(--accent-faint);border-color:var(--accent-border);color:var(--accent-pressed)}
+.section-card{background:var(--fill);border:1px solid var(--hairline);border-radius:var(--r-m);padding:16px 18px;margin-bottom:14px}
+.section-heading{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-pressed);margin-bottom:10px}
+.section-desc{font-size:13px;color:var(--text2);margin-bottom:12px}
+.footer-note{margin-top:22px;font-size:12px;color:var(--text3);text-align:center}
+.empty{text-align:center;padding:38px 20px;color:var(--text2)}
+.empty strong{display:block;font-family:var(--font-display);font-size:15px;color:var(--text);margin-bottom:6px}
+.muted{color:var(--text3)}
+.error{color:var(--accent-pressed);font-weight:600}
 
 /* ---------- Lists, charts, misc ---------- */
 .simple-list{display:flex;flex-direction:column}
-.simple-item{display:flex;gap:13px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border)}
+.simple-item{display:flex;gap:13px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--hairline)}
 .simple-item:last-child{border-bottom:0}
-.item-marker{width:38px;height:38px;border-radius:12px;background:var(--o100);color:var(--o800);font-weight:800;
+.item-marker{width:38px;height:38px;border-radius:12px;background:var(--accent-softer);color:var(--accent-pressed);font-weight:800;
   display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--font-display)}
 .item-main{flex:1;min-width:0}
 .item-title{font-weight:600;font-size:13.5px}
-.item-meta{font-size:12px;color:var(--ink3);margin-top:2px}
+.item-meta{font-size:12px;color:var(--text3);margin-top:2px}
 .item-tail{text-align:right;flex-shrink:0}
 .bar-chart{display:flex;flex-direction:column;gap:9px}
 .bar-row{display:flex;align-items:center;gap:10px;font-size:12.5px}
-.bar-name{width:92px;flex-shrink:0;font-weight:600;color:var(--ink2);font-size:11.5px;letter-spacing:.03em}
-.bar-track{flex:1;height:9px;border-radius:999px;background:var(--o100);overflow:hidden}
-.bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--o500),var(--o700));transition:width .5s var(--ease)}
-.bar-count{width:30px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--o800)}
+.bar-name{width:92px;flex-shrink:0;font-weight:600;color:var(--text2);font-size:11.5px;letter-spacing:.03em}
+.bar-track{flex:1;height:9px;border-radius:999px;background:var(--accent-softer);overflow:hidden}
+.bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-pressed));transition:width .5s var(--ease)}
+.bar-count{width:30px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent-pressed)}
 .readiness-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
 .readiness-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 15px;
-  border:1px solid var(--border);border-radius:var(--r-m);background:var(--surface-warm);font-size:13px}
-.check-mark{color:var(--o700);font-weight:700}
-.cross-mark{color:var(--o950);font-weight:700}
+  border:1px solid var(--hairline);border-radius:var(--r-m);background:var(--fill);font-size:13px}
+.check-mark{color:var(--accent-pressed);font-weight:700}
+.cross-mark{color:var(--accent-pressed);font-weight:700}
 .settings-layout{display:grid;grid-template-columns:220px 1fr;gap:20px;align-items:start}
-.settings-nav{position:sticky;top:96px;display:flex;flex-direction:column;gap:2px;background:var(--surface);
-  border:1px solid var(--border);border-radius:var(--r-l);padding:10px}
+.settings-nav{position:sticky;top:96px;display:flex;flex-direction:column;gap:2px;background:var(--card);
+  border:1px solid var(--hairline);border-radius:var(--r-l);padding:10px}
 .settings-nav button{border:0;background:transparent;text-align:left;padding:10px 13px;border-radius:var(--r-m);
-  font-size:13px;font-weight:500;color:var(--ink2);transition:all var(--t-fast)}
-.settings-nav button:hover{background:var(--o50);color:var(--o800)}
-.settings-nav button.active{background:var(--o600);color:#fff;font-weight:600}
+  font-size:13px;font-weight:500;color:var(--text2);transition:all var(--t-fast)}
+.settings-nav button:hover{background:var(--accent-faint);color:var(--accent-pressed)}
+.settings-nav button.active{background:var(--accent);color:#fff;font-weight:600}
 .settings-section{margin-bottom:16px;scroll-margin-top:96px}
 .span-2{grid-column:span 2}.span-3{grid-column:span 3}
-.subline{font-size:12px;color:var(--ink3)}
+.subline{font-size:12px;color:var(--text3)}
 .right{margin-left:auto}
 i[data-lucide]{display:inline-flex}
 i[data-lucide] svg{width:1.15em;height:1.15em}
@@ -352,44 +398,55 @@ i[data-lucide] svg{width:1.15em;height:1.15em}
   .eyebrow{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10px}
   .top-actions .btn-primary .btn-label{display:none}
   .top-actions .btn-primary{padding:10px 12px;min-width:44px;justify-content:center}
+  .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .theme-toggle{display:inline-flex}
 }
 
 
+.sched-exact{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.sched-exact[hidden]{display:none}
+.brand-logo{position:relative;overflow:hidden;border:1px solid var(--hairline);border-radius:22%}
+.brand-mark.brand-logo,.avatar.brand-logo{background:var(--card)}
+.brand-mark.brand-logo{border-radius:22%}
+.brand-logo .brand-fc{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent)}
+.brand-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.auth-card .brand-logo{width:72px;height:72px}
+.avatar.brand-logo{border-radius:22%;width:32px;height:32px}
 /* ================= V2 premium elevation (visual only) ================= */
 /* Auth: mesh blobs + floating brand */
 .auth-gate{position:relative;overflow:hidden}
 .auth-blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;pointer-events:none;animation:blobFloat 11s ease-in-out infinite}
-.auth-blob.b1{width:430px;height:430px;left:-130px;top:-110px;background:radial-gradient(circle,var(--o200),transparent 70%)}
-.auth-blob.b2{width:390px;height:390px;right:-110px;bottom:-90px;background:radial-gradient(circle,var(--o300),transparent 70%);animation-delay:-4s}
-.auth-blob.b3{width:260px;height:260px;left:56%;top:6%;background:radial-gradient(circle,var(--o100),transparent 70%);animation-delay:-7s;opacity:.75}
+.auth-blob.b1{width:430px;height:430px;left:-130px;top:-110px;background:radial-gradient(circle,var(--accent-soft),transparent 70%)}
+.auth-blob.b2{width:390px;height:390px;right:-110px;bottom:-90px;background:radial-gradient(circle,var(--accent-border),transparent 70%);animation-delay:-4s}
+.auth-blob.b3{width:260px;height:260px;left:56%;top:6%;background:radial-gradient(circle,var(--accent-softer),transparent 70%);animation-delay:-7s;opacity:.75}
 @keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(34px,26px) scale(1.08)}}
-.auth-card{position:relative;z-index:1;overflow:hidden;box-shadow:0 2px 6px rgba(67,20,7,.06),0 24px 70px rgba(124,45,18,.17)}
-.auth-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--o400),var(--o700),var(--o400))}
+.auth-card{position:relative;z-index:1;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.06),0 24px 70px rgba(124,45,18,.17)}
+.auth-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent-pressed),var(--accent))}
 .auth-card .brand-mark{animation:brandFloat 5.5s ease-in-out infinite}
 @keyframes brandFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .auth-input-wrap{position:relative}
-.auth-input-wrap>i[data-lucide],.auth-input-wrap>svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--ink3);pointer-events:none;z-index:1}
+.auth-input-wrap>i[data-lucide],.auth-input-wrap>svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--text3);pointer-events:none;z-index:1}
 .auth-input-wrap input{padding-left:42px!important}
-.auth-input-wrap:focus-within input{border-color:var(--o500);box-shadow:0 0 0 4px rgba(249,115,22,.16)}
+.auth-input-wrap:focus-within input{border-color:var(--accent);box-shadow:0 0 0 4px rgba(0,122,255,.16)}
 /* Buttons: gradient primary, shine sweep, press scale, loading spinner */
 .btn:active{transform:scale(.98)}
-.btn-primary{background:linear-gradient(135deg,var(--o600),var(--o700));border-color:var(--o700);position:relative;overflow:hidden}
-.btn-primary:hover{background:linear-gradient(135deg,var(--o500),var(--o600));border-color:var(--o600);box-shadow:0 6px 20px rgba(194,65,12,.36)}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-pressed));border-color:var(--accent-pressed);position:relative;overflow:hidden}
+.btn-primary:hover{background:linear-gradient(135deg,var(--accent),var(--accent));border-color:var(--accent);box-shadow:0 6px 20px rgba(194,65,12,.36)}
 .btn-primary::after{content:'';position:absolute;top:0;bottom:0;left:-70%;width:45%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.38),transparent);transform:skewX(-18deg);transition:left .55s var(--ease);pointer-events:none}
 .btn-primary:hover::after{left:135%}
 .btn.is-loading{pointer-events:none;opacity:.88}
 .btn-spinner{width:15px;height:15px;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:spin .7s linear infinite;flex-shrink:0}
-.btn:not(.btn-primary) .btn-spinner{border-color:var(--o200);border-top-color:var(--o600)}
+.btn:not(.btn-primary) .btn-spinner{border-color:var(--accent-soft);border-top-color:var(--accent)}
 /* Sidebar: active indicator bar */
 .nav-btn{position:relative}
 .nav-btn:hover{transform:translateX(2px)}
 .nav-btn.active{position:relative}
-.nav-btn.active::before{content:'';position:absolute;left:-12px;top:9px;bottom:9px;width:4px;border-radius:4px;background:linear-gradient(180deg,#fff,var(--o200));box-shadow:0 0 10px rgba(255,255,255,.35)}
+.nav-btn.active::before{content:'';position:absolute;left:-12px;top:9px;bottom:9px;width:4px;border-radius:4px;background:linear-gradient(180deg,#fff,var(--accent-soft));box-shadow:0 0 10px rgba(255,255,255,.35)}
 /* Panels: layered shadow, title marker */
-.panel{box-shadow:0 1px 2px rgba(67,20,7,.05),0 12px 32px rgba(67,20,7,.07)}
+.panel{box-shadow:0 1px 2px rgba(0,0,0,.05),0 12px 32px rgba(0,0,0,.07)}
 .panel-title{display:flex;align-items:center;gap:10px}
-.panel-title::before{content:'';width:9px;height:9px;border-radius:3px;background:linear-gradient(135deg,var(--o500),var(--o700));flex-shrink:0;box-shadow:0 2px 6px rgba(234,88,12,.4)}
-.stat-card::after{content:'';position:absolute;top:0;right:0;width:130px;height:130px;background:radial-gradient(circle at top right,rgba(249,115,22,.10),transparent 70%);pointer-events:none}
+.panel-title::before{content:'';width:9px;height:9px;border-radius:3px;background:linear-gradient(135deg,var(--accent),var(--accent-pressed));flex-shrink:0;box-shadow:0 2px 6px rgba(0,122,255,.4)}
+.stat-card::after{content:'';position:absolute;top:0;right:0;width:130px;height:130px;background:radial-gradient(circle at top right,rgba(0,122,255,.10),transparent 70%);pointer-events:none}
 /* Modal: spring entrance + backdrop blur */
 .modal-backdrop{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .modal{transform:translateY(16px) scale(.96);opacity:0;transition:transform 210ms cubic-bezier(.3,1.25,.45,1),opacity 170ms ease}
@@ -402,11 +459,11 @@ i[data-lucide] svg{width:1.15em;height:1.15em}
 @keyframes toastIn{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
 /* Tables: sticky header + refined empty state */
 .table-wrap{overflow:auto;max-height:min(74vh,880px)}
-thead th{position:sticky;top:0;z-index:5;box-shadow:0 1px 0 var(--border)}
+thead th{position:sticky;top:0;z-index:5;box-shadow:0 1px 0 var(--hairline)}
 .empty{padding:46px 20px}
-.empty-ico{width:48px;height:48px;border-radius:16px;background:var(--o100);color:var(--o700);display:inline-flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.empty-ico{width:48px;height:48px;border-radius:16px;background:var(--accent-softer);color:var(--accent-pressed);display:inline-flex;align-items:center;justify-content:center;margin:0 auto 12px}
 .empty-ico svg{width:23px;height:23px}
-.empty-msg{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.empty-msg{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px}
 /* Page transition + splash */
 #content.page-enter{animation:pageIn 150ms ease-out}
 @keyframes pageIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
@@ -414,29 +471,29 @@ thead th{position:sticky;top:0;z-index:5;box-shadow:0 1px 0 var(--border)}
 /* Date picker */
 .dp-wrap{position:relative}
 .dp-native{position:absolute!important;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.dp-trigger{width:100%;justify-content:space-between;font-weight:500;color:var(--ink)}
+.dp-trigger{width:100%;justify-content:space-between;font-weight:500;color:var(--text)}
 .dp-trigger .dp-label{font-variant-numeric:tabular-nums}
-.dp-trigger.empty .dp-label{color:var(--ink3)}
-.dp-trigger>svg,.dp-trigger>i[data-lucide]{color:var(--o600);width:17px;height:17px;flex-shrink:0}
-.dp-pop{position:absolute;top:calc(100% + 8px);left:0;z-index:250;width:292px;max-width:calc(100vw - 60px);background:var(--surface);border:1px solid var(--border);border-radius:var(--r-l);box-shadow:0 2px 6px rgba(67,20,7,.06),0 20px 55px rgba(67,20,7,.20);padding:14px;display:none}
+.dp-trigger.empty .dp-label{color:var(--text3)}
+.dp-trigger>svg,.dp-trigger>i[data-lucide]{color:var(--accent);width:17px;height:17px;flex-shrink:0}
+.dp-pop{position:absolute;top:calc(100% + 8px);left:0;z-index:250;width:292px;max-width:calc(100vw - 60px);background:var(--card);border:1px solid var(--hairline);border-radius:var(--r-l);box-shadow:0 2px 6px rgba(0,0,0,.06),0 20px 55px rgba(0,0,0,.20);padding:14px;display:none}
 .dp-pop.open{display:block;animation:dpIn 160ms var(--ease)}
 @keyframes dpIn{from{opacity:0;transform:translateY(-6px) scale(.98)}to{opacity:1;transform:none}}
 .dp-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.dp-title{font-family:var(--font-display);font-weight:800;font-size:14px;background:none;border:0;padding:6px 10px;border-radius:8px;color:var(--ink)}
-.dp-nav{width:32px;height:32px;border-radius:10px;border:1px solid var(--border);background:var(--surface);display:inline-flex;align-items:center;justify-content:center;color:var(--o700)}
-.dp-nav:hover{background:var(--o50);border-color:var(--o300)}
+.dp-title{font-family:var(--font-display);font-weight:800;font-size:14px;background:none;border:0;padding:6px 10px;border-radius:8px;color:var(--text)}
+.dp-nav{width:32px;height:32px;border-radius:10px;border:1px solid var(--hairline);background:var(--card);display:inline-flex;align-items:center;justify-content:center;color:var(--accent-pressed)}
+.dp-nav:hover{background:var(--accent-faint);border-color:var(--accent-border)}
 .dp-nav svg{width:16px;height:16px}
 .dp-week{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:6px}
-.dp-week span{text-align:center;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--ink3);padding:4px 0;text-transform:uppercase}
+.dp-week span{text-align:center;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--text3);padding:4px 0;text-transform:uppercase}
 .dp-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-.dp-day{aspect-ratio:1;border:0;border-radius:10px;background:transparent;font-size:13px;font-weight:500;color:var(--ink);display:flex;align-items:center;justify-content:center;min-height:36px;min-width:0}
-.dp-day:hover{background:var(--o100)}
-.dp-day:focus-visible{outline:2px solid var(--o500);outline-offset:1px}
-.dp-day.out{color:var(--ink3);opacity:.45}
-.dp-day.today{font-weight:800;color:var(--o700);box-shadow:inset 0 0 0 1.5px var(--o400)}
-.dp-day.sel{background:linear-gradient(135deg,var(--o600),var(--o700));color:#fff;font-weight:700;box-shadow:0 4px 12px rgba(234,88,12,.35)}
-.dp-day.sel.today{box-shadow:0 4px 12px rgba(234,88,12,.35),inset 0 0 0 1.5px rgba(255,255,255,.65)}
-.dp-foot{display:flex;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.dp-day{aspect-ratio:1;border:0;border-radius:10px;background:transparent;font-size:13px;font-weight:500;color:var(--text);display:flex;align-items:center;justify-content:center;min-height:36px;min-width:0}
+.dp-day:hover{background:var(--accent-softer)}
+.dp-day:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.dp-day.out{color:var(--text3);opacity:.45}
+.dp-day.today{font-weight:800;color:var(--accent-pressed);box-shadow:inset 0 0 0 1.5px var(--accent)}
+.dp-day.sel{background:linear-gradient(135deg,var(--accent),var(--accent-pressed));color:#fff;font-weight:700;box-shadow:0 4px 12px rgba(0,122,255,.35)}
+.dp-day.sel.today{box-shadow:0 4px 12px rgba(0,122,255,.35),inset 0 0 0 1.5px rgba(255,255,255,.65)}
+.dp-foot{display:flex;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid var(--hairline)}
 @media (prefers-reduced-motion:reduce){
   .auth-blob,.auth-card .brand-mark{animation:none}
   .btn-primary::after{display:none}
@@ -452,7 +509,7 @@ thead th{position:sticky;top:0;z-index:5;box-shadow:0 1px 0 var(--border)}
   <div class="auth-blob b2" aria-hidden="true"></div>
   <div class="auth-blob b3" aria-hidden="true"></div>
   <form class="auth-card" onsubmit="loginAccess(event)">
-    <div class="brand-mark">FC</div>
+    <div class="brand-mark brand-logo"><span class="brand-fc" aria-hidden="true">FC</span><img src="https://cdn.jsdelivr.net/gh/SudiptoKumar/WORKSHOP-@1/cdn/brand/finance-club.jpg" alt="Finance Club PSTU" onerror="this.remove()"></div>
     <div class="auth-kicker">Finance Club PSTU</div>
     <h1>WORKSHOP Software</h1>
     <p>Connect this hosted dashboard to your existing Google Apps Script backend. Enter the private software access token from your spreadsheet-generated dashboard link.</p>
@@ -463,10 +520,10 @@ thead th{position:sticky;top:0;z-index:5;box-shadow:0 1px 0 var(--border)}
     <p class="auth-note">In the master Google Sheet, choose <b>WORKSHOP Automation &rarr; Open Software Dashboard</b>. Copy the generated link, then paste it here. Keep that link and token private. Access is stored only for this browser tab session.</p>
   </form>
 </div>
-<div id="loadingCover" class="loading-cover"><div class="brand-mark">FC</div><div class="spinner" role="status" aria-label="Loading"></div><p id="connectMsg">Opening WORKSHOP Software&hellip;</p></div>
+<div id="loadingCover" class="loading-cover"><div class="brand-mark brand-logo"><span class="brand-fc" aria-hidden="true">FC</span><img src="https://cdn.jsdelivr.net/gh/SudiptoKumar/WORKSHOP-@1/cdn/brand/finance-club.jpg" alt="Finance Club PSTU" onerror="this.remove()"></div><div class="spinner" role="status" aria-label="Loading"></div><p id="connectMsg">Opening WORKSHOP Software&hellip;</p></div>
 <div class="app-shell">
   <aside class="sidebar" id="sidebar">
-    <div class="brand"><div class="brand-mark">FC</div><div><div class="brand-title">WORKSHOP</div><div class="brand-sub">Management Suite</div></div></div>
+    <div class="brand"><div class="brand-mark brand-logo"><span class="brand-fc" aria-hidden="true">FC</span><img src="https://cdn.jsdelivr.net/gh/SudiptoKumar/WORKSHOP-@1/cdn/brand/finance-club.jpg" alt="Finance Club PSTU" onerror="this.remove()"></div><div><div class="brand-title">WORKSHOP</div><div class="brand-sub">Management Suite</div></div></div>
     <div class="nav-label">Workspace</div>
     <nav class="nav" id="mainNav" aria-label="Primary">
       <button class="nav-btn active" data-page="dashboard"><span class="nav-icon"><i data-lucide="layout-dashboard"></i></span>Dashboard</button>
@@ -485,7 +542,7 @@ thead th{position:sticky;top:0;z-index:5;box-shadow:0 1px 0 var(--border)}
   </aside>
   <div class="sidebar-scrim" id="sidebarScrim" onclick="toggleSidebar()"></div>
   <main class="main">
-    <header class="topbar"><div class="top-left"><button class="btn mobile-menu" onclick="toggleSidebar()" aria-label="Open navigation" aria-expanded="false"><i data-lucide="menu"></i></button><div><div class="eyebrow">WORKSHOP / <span id="breadcrumb">Overview</span></div><h1 class="page-title" id="topTitle">Dashboard</h1></div></div><div class="top-actions"><span class="last-updated" id="lastUpdated">Connecting&hellip;</span><button class="btn btn-primary" onclick="openWorkshopModal()" aria-label="New workshop"><i data-lucide="plus"></i><span class="btn-label">New workshop</span></button><button class="btn btn-quiet" onclick="logoutAccess()" title="Clear this browser session"><i data-lucide="log-out"></i>Sign out</button><div class="avatar" aria-hidden="true">FC</div></div></header>
+    <header class="topbar"><div class="top-left"><button class="btn mobile-menu" onclick="toggleSidebar()" aria-label="Open navigation" aria-expanded="false"><i data-lucide="menu"></i></button><div><div class="eyebrow">WORKSHOP / <span id="breadcrumb">Overview</span></div><h1 class="page-title" id="topTitle">Dashboard</h1></div></div><div class="top-actions"><span class="last-updated" id="lastUpdated">Connecting&hellip;</span><button class="btn theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark mode"><i data-lucide="moon"></i></button><button class="btn btn-primary" onclick="openWorkshopModal()" aria-label="New workshop"><i data-lucide="plus"></i><span class="btn-label">New workshop</span></button><button class="btn btn-quiet" onclick="logoutAccess()" title="Clear this browser session"><i data-lucide="log-out"></i>Sign out</button><div class="avatar brand-logo" aria-hidden="true"><span class="brand-fc" aria-hidden="true">FC</span><img src="https://cdn.jsdelivr.net/gh/SudiptoKumar/WORKSHOP-@1/cdn/brand/finance-club.jpg" alt="Finance Club PSTU" onerror="this.remove()"></div></div></header>
     <div class="content" id="content"></div>
   </main>
 </div>
@@ -535,7 +592,7 @@ thead th{position:sticky;top:0;z-index:5;box-shadow:0 1px 0 var(--border)}
   };
   function showAuthGate(message=''){document.getElementById('loadingCover').style.display='none';document.getElementById('authGate').style.display='flex';document.getElementById('authError').textContent=message;}
   function parseAccessToken(value){let candidate=String(value||'').trim();if(!candidate)return '';try{if(/^https?:\/\//i.test(candidate)){const url=new URL(candidate);candidate=url.searchParams.get('token')||'';}else if(/^token=/i.test(candidate)){candidate=candidate.slice(candidate.indexOf('=')+1).trim();}}catch(_){return '';}return candidate.trim();}
-  async function loginAccess(event){event.preventDefault();const raw=document.getElementById('accessTokenInput').value;const token=parseAccessToken(raw);if(!token){document.getElementById('authError').textContent='Paste the raw token or the complete generated Apps Script dashboard link.';return;}SOFTWARE_TOKEN=token;sessionStorage.setItem('WORKSHOP_SOFTWARE_TOKEN',token);document.getElementById('authGate').style.display='none';document.getElementById('loadingCover').style.display='flex';document.getElementById('loadingCover').innerHTML='<div class="brand-mark" style="width:52px;height:52px;border-radius:16px;font-size:15px">FC</div><div class="spinner"></div><p>Connecting to your WORKSHOP backend…</p>';var __t0=Date.now();var __tick=setInterval(function(){var el=document.getElementById('connectMsg');if(el)el.textContent='Connecting to your WORKSHOP backend… '+Math.floor((Date.now()-__t0)/1000)+'s';},1000);try{await boot();}finally{clearInterval(__tick);}}
+  async function loginAccess(event){event.preventDefault();const raw=document.getElementById('accessTokenInput').value;const token=parseAccessToken(raw);if(!token){document.getElementById('authError').textContent='Paste the raw token or the complete generated Apps Script dashboard link.';return;}SOFTWARE_TOKEN=token;sessionStorage.setItem('WORKSHOP_SOFTWARE_TOKEN',token);document.getElementById('authGate').style.display='none';document.getElementById('loadingCover').style.display='flex';document.getElementById('loadingCover').innerHTML='<div class="brand-mark brand-logo" style="width:52px;height:52px;font-size:15px"><span class="brand-fc" aria-hidden="true">FC</span><img src="https://cdn.jsdelivr.net/gh/SudiptoKumar/WORKSHOP-@1/cdn/brand/finance-club.jpg" alt="Finance Club PSTU" onerror="this.remove()"></div><div class="spinner"></div><p>Connecting to your WORKSHOP backend…</p>';var __t0=Date.now();var __tick=setInterval(function(){var el=document.getElementById('connectMsg');if(el)el.textContent='Connecting to your WORKSHOP backend… '+Math.floor((Date.now()-__t0)/1000)+'s';},1000);try{await boot();}finally{clearInterval(__tick);}}
   function logoutAccess(){sessionStorage.removeItem('WORKSHOP_SOFTWARE_TOKEN');SOFTWARE_TOKEN='';state.data=null;showAuthGate('Session cleared. Enter your private access token to reconnect.');document.getElementById('accessTokenInput').value='';}
   async function boot(){if(!SOFTWARE_TOKEN){showAuthGate();return;}document.getElementById('authGate').style.display='none';document.getElementById('loadingCover').style.display='flex';try{state.data=await rpc('getSoftwareAppData');renderCurrent();fadeOutCover();}catch(e){const message=String(e&&e.message||e);if(/access denied|unsupported software api operation/i.test(message)){sessionStorage.removeItem('WORKSHOP_SOFTWARE_TOKEN');SOFTWARE_TOKEN='';document.getElementById('accessTokenInput').value='';showAuthGate('Access was denied. Your token may be invalid or have been reset.');return;}document.getElementById('loadingCover').innerHTML=`<div class="panel" style="padding:30px;max-width:560px;margin:20px"><h2>Unable to connect to WORKSHOP</h2><p class="muted">${esc(message)}</p><p class="helper">Confirm that doPost was added to Workshop_Automation.gs, a new Apps Script deployment was published, and APPS_SCRIPT_WEB_APP_URL is configured in your hosting platform.</p><button class="btn btn-primary" onclick="logoutAccess()">Change access token</button></div>`;}}
   function snapshotFormState(){const snap={};try{document.querySelectorAll('#content input,#content textarea,#content select').forEach(el=>{const k=el.name||el.id;if(!k)return;const t=String(el.type||'').toLowerCase();snap[k]=(t==='checkbox'||t==='radio')?!!el.checked:el.value;});}catch(_){}return snap;}
@@ -565,7 +622,7 @@ thead th{position:sticky;top:0;z-index:5;box-shadow:0 1px 0 var(--border)}
   function statCard(label,value,foot,ico,variant=''){return `<article class="stat-card"><div class="stat-top"><span class="stat-label">${esc(label)}</span><span class="stat-icon ${variant}">${ico}</span></div><div class="stat-value">${esc(nfmt(value))}</div><div class="stat-foot">${esc(foot||'')}</div></article>`;}
   const svgIcon=(path)=>`<svg viewBox="0 0 24 24" aria-hidden="true">${path}</svg>`;
   function renderDashboard(){const d=state.data,m=d.metrics,ws=d.workshops.filter(w=>!['ARCHIVED'].includes(w.status)).slice(0,6);const statuses=['OPEN','DRAFT','LIVE','COMPLETED','CANCELLED'];const bars=statuses.map(st=>({st,count:d.workshops.filter(w=>w.status===st).length}));const max=Math.max(1,...bars.map(x=>x.count));const attention=[];if(m.failedEmails)attention.push(`<div class="attention red"><div class="attention-icon">!</div><div><strong>${nfmt(m.failedEmails)} email job(s) failed</strong><span>Open Email Center to inspect errors and retry eligible jobs.</span></div></div>`);if(m.paused)attention.push(`<div class="attention"><div class="attention-icon">Ⅱ</div><div><strong>Automation is paused</strong><span>Resume it from Settings when ready.</span></div></div>`);if(String(m.emailQuota)==='0')attention.push(`<div class="attention red"><div class="attention-icon">!</div><div><strong>Email quota is exhausted</strong><span>Queued messages wait until quota becomes available.</span></div></div>`);if(!attention.length)attention.push(`<div class="attention"><div class="attention-icon">✓</div><div><strong>No urgent issues detected</strong><span>Review System Health when you need a full integration check.</span></div></div>`);
-    return `<div class="page-toolbar"><div><h2>Good day. Here's your operations overview.</h2><p>Manage workshops, participants, emails, and certificates from one place. Your Google Sheet continues to store the data behind the scenes.</p></div><div class="toolbar-actions"><button class="btn" onclick="refreshData()">↻ Refresh</button><button class="btn btn-primary" onclick="openWorkshopModal()">＋ Create workshop</button></div></div>${m.paused?`<div class="status-banner"><strong>Automation paused.</strong><span>Scheduled reminders, attendance processing, and certificate workflows will not run until resumed in Settings.</span><button class="btn btn-sm" style="margin-left:auto" onclick="setPage('settings')">Open settings</button></div>`:''}<div class="grid stats-grid">${statCard('Active workshops',m.activeWorkshops,'Not cancelled or archived','<i data-lucide="calendar-days"></i>' )}${statCard('Participants',m.participants,'All registration records','<i data-lucide="users"></i>','blue')}${statCard('Certificates issued',m.certificates,'Excludes test certificates','<i data-lucide="badge-check"></i>','gold')}${statCard('Emails pending',m.pendingEmails,'Waiting to be processed','<i data-lucide="mail"></i>','blue')}${statCard('Email quota',m.emailQuota,'Remaining recipients today','<i data-lucide="circle-plus"></i>','') }</div><div class="grid two-col"><section class="panel"><div class="panel-head"><div><h3 class="panel-title">Recent workshops</h3><div class="panel-subtitle">Latest events and their registration status</div></div><button class="link-btn" onclick="setPage('workshops')">View all →</button></div><div class="panel-body">${ws.length?`<div class="simple-list">${ws.map((w,i)=>`<div class="simple-item"><div class="item-marker">${esc((w.name||'W').trim().slice(0,1).toUpperCase())}</div><div class="item-main"><div class="item-title">${esc(w.name)}</div><div class="item-meta">${esc(w.eventId)} · ${esc(fmtDate(w.date))} · ${esc(w.startTime||'')}</div></div><div class="item-tail">${pill(w.status)}<div style="margin-top:5px;font-size:10px;color:#7d887f">${nfmt(w.activeParticipantCount)} participant(s)</div></div></div>`).join('')}</div>`:`<div class="empty"><strong>No workshops yet</strong>Create your first workshop to get started.</div>`}</div></section><section class="panel"><div class="panel-head"><div><h3 class="panel-title">System attention</h3><div class="panel-subtitle">Items that may need your review</div></div><button class="btn btn-sm" onclick="setPage('system')">System health</button></div><div class="panel-body"><div class="attention-list">${attention.join('')}</div><div style="margin-top:18px"><div class="section-heading" style="margin-bottom:12px">Workshop status</div><div class="bar-chart">${bars.map(x=>`<div class="bar-row"><span class="bar-name">${esc(x.st.replaceAll('_',' '))}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.round(x.count/max*100)}%"></div></div><span class="bar-count">${x.count}</span></div>`).join('')}</div></div></div></section></div><div class="grid two-col" style="margin-top:16px"><section class="panel"><div class="panel-head"><div><h3 class="panel-title">Recent email activity</h3><div class="panel-subtitle">Most recent lifecycle email jobs</div></div><button class="link-btn" onclick="setPage('email')">Email center →</button></div>${tableHtml(['Type','Recipient','Status','Last update'],d.queue.slice(0,5).map(q=>[`<span class="primary-cell">${esc(q.type)}</span><div class="secondary-cell">${esc(q.eventId)}</div>`,esc(q.recipient),pill(q.status),esc(q.sentAt||q.scheduledAt||'—')]),'No email jobs yet.')}</section><section class="panel"><div class="panel-head"><div><h3 class="panel-title">Quick actions</h3><div class="panel-subtitle">Frequent tasks, without opening spreadsheet cells</div></div></div><div class="panel-body"><div class="link-list"><button class="link-chip" onclick="openWorkshopModal()">＋ Create workshop</button><button class="link-chip" onclick="setPage('email')">✉ Send custom email</button><button class="link-chip" onclick="setPage('selftest')">◷ Run email self-test</button><button class="link-chip" onclick="setPage('settings')">⚙ Update settings</button><button class="link-chip" onclick="setPage('certificates')">✧ View certificates</button></div><div class="inline-note" style="margin-top:15px">Daily operations are handled here. The spreadsheet remains the database and audit trail, not the interface you need to edit.</div></div></section></div><div class="footer-note">WORKSHOP Automation ${esc(d.version)} · Finance Club PSTU</div>`;}
+    return `<div class="page-toolbar"><div><h2>Good day. Here's your operations overview.</h2><p>Manage workshops, participants, emails, and certificates from one place. Your Google Sheet continues to store the data behind the scenes.</p></div><div class="toolbar-actions"><button class="btn" onclick="refreshData()">↻ Refresh</button><button class="btn btn-primary" onclick="openWorkshopModal()">＋ Create workshop</button></div></div>${m.paused?`<div class="status-banner"><strong>Automation paused.</strong><span>Scheduled reminders, attendance processing, and certificate workflows will not run until resumed in Settings.</span><button class="btn btn-sm" style="margin-left:auto" onclick="setPage('settings')">Open settings</button></div>`:''}<div class="grid stats-grid">${statCard('Active workshops',m.activeWorkshops,'Not cancelled or archived','<i data-lucide="calendar-days"></i>' )}${statCard('Participants',m.participants,'All registration records','<i data-lucide="users"></i>','blue')}${statCard('Certificates issued',m.certificates,'Excludes test certificates','<i data-lucide="badge-check"></i>','gold')}${statCard('Emails pending',m.pendingEmails,'Waiting to be processed','<i data-lucide="mail"></i>','blue')}${statCard('Email quota',m.emailQuota,'Remaining recipients today','<i data-lucide="circle-plus"></i>','') }</div><div class="grid two-col"><section class="panel"><div class="panel-head"><div><h3 class="panel-title">Recent workshops</h3><div class="panel-subtitle">Latest events and their registration status</div></div><button class="link-btn" onclick="setPage('workshops')">View all →</button></div><div class="panel-body">${ws.length?`<div class="simple-list">${ws.map((w,i)=>`<div class="simple-item"><div class="item-marker">${esc((w.name||'W').trim().slice(0,1).toUpperCase())}</div><div class="item-main"><div class="item-title">${esc(w.name)}</div><div class="item-meta">${esc(w.eventId)} · ${esc(fmtDate(w.date))} · ${esc(w.startTime||'')}</div></div><div class="item-tail">${pill(w.status)}<div style="margin-top:5px;font-size:10px;color:var(--text3)">${nfmt(w.activeParticipantCount)} participant(s)</div></div></div>`).join('')}</div>`:`<div class="empty"><strong>No workshops yet</strong>Create your first workshop to get started.</div>`}</div></section><section class="panel"><div class="panel-head"><div><h3 class="panel-title">System attention</h3><div class="panel-subtitle">Items that may need your review</div></div><button class="btn btn-sm" onclick="setPage('system')">System health</button></div><div class="panel-body"><div class="attention-list">${attention.join('')}</div><div style="margin-top:18px"><div class="section-heading" style="margin-bottom:12px">Workshop status</div><div class="bar-chart">${bars.map(x=>`<div class="bar-row"><span class="bar-name">${esc(x.st.replaceAll('_',' '))}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.round(x.count/max*100)}%"></div></div><span class="bar-count">${x.count}</span></div>`).join('')}</div></div></div></section></div><div class="grid two-col" style="margin-top:16px"><section class="panel"><div class="panel-head"><div><h3 class="panel-title">Recent email activity</h3><div class="panel-subtitle">Most recent lifecycle email jobs</div></div><button class="link-btn" onclick="setPage('email')">Email center →</button></div>${tableHtml(['Type','Recipient','Status','Last update'],d.queue.slice(0,5).map(q=>[`<span class="primary-cell">${esc(q.type)}</span><div class="secondary-cell">${esc(q.eventId)}</div>`,esc(q.recipient),pill(q.status),esc(q.sentAt||q.scheduledAt||'—')]),'No email jobs yet.')}</section><section class="panel"><div class="panel-head"><div><h3 class="panel-title">Quick actions</h3><div class="panel-subtitle">Frequent tasks, without opening spreadsheet cells</div></div></div><div class="panel-body"><div class="link-list"><button class="link-chip" onclick="openWorkshopModal()">＋ Create workshop</button><button class="link-chip" onclick="setPage('email')">✉ Send custom email</button><button class="link-chip" onclick="setPage('selftest')">◷ Run email self-test</button><button class="link-chip" onclick="setPage('settings')">⚙ Update settings</button><button class="link-chip" onclick="setPage('certificates')">✧ View certificates</button></div><div class="inline-note" style="margin-top:15px">Daily operations are handled here. The spreadsheet remains the database and audit trail, not the interface you need to edit.</div></div></section></div><div class="footer-note">WORKSHOP Automation ${esc(d.version)} · Finance Club PSTU</div>`;}
   function tableHtml(headers,rows,empty='No records found.',opts={}){return `<div class="table-wrap"><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.length?rows.map(r=>`<tr>${r.map(c=>`<td>${c===null||c===undefined?'':c}</td>`).join('')}</tr>`).join(''):`<tr><td colspan="${headers.length}"><div class="empty"><span class="empty-ico"><i data-lucide="inbox"></i></span><div class="empty-msg">${esc(empty)}</div></div></td></tr>`}</tbody></table></div>`;}
   function renderWorkshops(){const all=state.data.workshops;const filtered=all.filter(w=>{const q=state.workshopSearch.toLowerCase();return(!q||[w.name,w.eventId,w.date,w.deliveryMode].join(' ').toLowerCase().includes(q))&&(state.workshopStatus==='ALL'||w.status===state.workshopStatus);});const rows=filtered.map(w=>[`<div class="primary-cell">${esc(w.name)}</div><div class="secondary-cell">${esc(w.eventId)}</div>`,`<div class="primary-cell">${esc(fmtDate(w.date))}</div><div class="secondary-cell">${esc(w.startTime)}–${esc(w.endTime)}</div>`,esc(w.deliveryMode),`<div class="primary-cell">${nfmt(w.activeParticipantCount)}</div><div class="secondary-cell">${nfmt(w.participantCount)} total</div>`,pill(w.status),`<div class="row-actions"><button class="btn btn-sm" onclick="openWorkshopModal('${esc(w.eventId)}')">Manage</button><button class="btn btn-sm" onclick="workshopLinks('${esc(w.eventId)}')">Links</button></div>`]);return `<div class="page-toolbar"><div><h2>Workshop management</h2><p>Create events and edit their configuration. Registration forms, attendance forms, Drive folders, email schedules, and certificate handling remain connected to the existing engine.</p></div><div class="toolbar-actions"><button class="btn" onclick="refreshData()">↻ Refresh</button><button class="btn btn-primary" onclick="openWorkshopModal()">＋ New workshop</button></div></div><section class="panel table-panel"><div class="panel-head"><div><h3 class="panel-title">All workshops</h3><div class="panel-subtitle">${nfmt(filtered.length)} workshop(s) match your filters</div></div><div class="table-controls"><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input class="control" placeholder="Search workshop or ID" value="${esc(state.workshopSearch)}" oninput="state.workshopSearch=this.value;updateWorkshopsTable()"></div><select class="control" onchange="state.workshopStatus=this.value;updateWorkshopsTable()"><option value="ALL">All statuses</option>${['DRAFT','OPEN','LIVE','COMPLETED','CANCELLED','ARCHIVED'].map(x=>`<option ${state.workshopStatus===x?'selected':''}>${x}</option>`).join('')}</select></div></div><div id="workshopsTable">${tableHtml(['Workshop','Date / time','Delivery','Participants','Status','Actions'],rows,'No workshops match your search.')}</div><div class="table-footer"><span>Showing ${filtered.length} of ${all.length} workshop(s)</span><a href="${esc(state.data.source.spreadsheetUrl)}" target="_blank" rel="noopener">Open database sheet ↗</a></div></section>`;}
   function updateWorkshopsTable(){const box=document.getElementById('workshopsTable');if(!box)return;const filtered=state.data.workshops.filter(w=>{const q=state.workshopSearch.toLowerCase();return(!q||[w.name,w.eventId,w.date,w.deliveryMode].join(' ').toLowerCase().includes(q))&&(state.workshopStatus==='ALL'||w.status===state.workshopStatus);});const rows=filtered.map(w=>[`<div class="primary-cell">${esc(w.name)}</div><div class="secondary-cell">${esc(w.eventId)}</div>`,`<div class="primary-cell">${esc(fmtDate(w.date))}</div><div class="secondary-cell">${esc(w.startTime)}–${esc(w.endTime)}</div>`,esc(w.deliveryMode),`<div class="primary-cell">${nfmt(w.activeParticipantCount)}</div><div class="secondary-cell">${nfmt(w.participantCount)} total</div>`,pill(w.status),`<div class="row-actions"><button class="btn btn-sm" onclick="openWorkshopModal('${esc(w.eventId)}')">Manage</button><button class="btn btn-sm" onclick="workshopLinks('${esc(w.eventId)}')">Links</button></div>`]);box.innerHTML=tableHtml(['Workshop','Date / time','Delivery','Participants','Status','Actions'],rows,'No workshops match your search.');}
@@ -576,16 +633,16 @@ thead th{position:sticky;top:0;z-index:5;box-shadow:0 1px 0 var(--border)}
   async function changeParticipantStatus(id,newStatus){const p=state.data.participants.find(p=>p.participantId===id);if(!p||p.status===newStatus)return;if(!confirm(`Change ${p.name||p.email} from ${p.status} to ${newStatus}?`)){renderCurrent();return;}try{await rpc('updateParticipantFromSoftware',id,newStatus);toast('Participant status updated.');await refreshData(true);}catch(e){toast(e.message,'error');renderCurrent();}}
   function renderCertificates(){const all=state.data.certificates.filter(c=>!c.isTest);const q=state.certSearch.toLowerCase();const filtered=all.filter(c=>[c.certificateId,c.name,c.email,c.workshopName,c.eventId].join(' ').toLowerCase().includes(q));const rows=filtered.map(c=>[`<div class="primary-cell">${esc(c.certificateId)}</div><div class="secondary-cell">${esc(c.eventId)}</div>`,`<div class="primary-cell">${esc(c.name)}</div><div class="secondary-cell">${esc(c.email)}</div>`,`<div class="primary-cell">${esc(c.workshopName)}</div><div class="secondary-cell">${esc(c.season||'')}</div>`,esc(c.issuedAt||'—'),pill(c.status),`<div class="row-actions">${c.pdfUrl?`<a class="btn btn-sm" href="${esc(c.pdfUrl)}" target="_blank" rel="noopener">PDF ↗</a>`:''}${c.verificationUrl?`<a class="btn btn-sm" href="${esc(c.verificationUrl)}" target="_blank" rel="noopener">Verify ↗</a>`:''}</div>`]);return `<div class="page-toolbar"><div><h2>Certificate registry</h2><p>Review generated certificates, open their PDF files, and access verification links.</p></div><div class="toolbar-actions"><button class="btn" onclick="refreshData()">↻ Refresh</button><button class="btn btn-primary" onclick="registerMaster()">Register latest master</button></div></div><section class="panel table-panel"><div class="panel-head"><div><h3 class="panel-title">Issued certificates</h3><div class="panel-subtitle">${nfmt(filtered.length)} record(s), excluding test certificates</div></div><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input class="control" placeholder="Search certificate, participant, workshop" value="${esc(state.certSearch)}" oninput="state.certSearch=this.value;updateCertificatesTable()"></div></div><div id="certificatesTable">${tableHtml(['Certificate ID','Participant','Workshop','Issued at','Status','Links'],rows,'No certificates found.')}</div><div class="table-footer"><span>${nfmt(filtered.length)} certificate(s)</span><span>Test certificates are listed in Self Test, not here.</span></div></section>`;}
   function updateCertificatesTable(){const box=document.getElementById('certificatesTable');if(!box)return;const all=state.data.certificates.filter(c=>!c.isTest);const q=state.certSearch.toLowerCase();const filtered=all.filter(c=>[c.certificateId,c.name,c.email,c.workshopName,c.eventId].join(' ').toLowerCase().includes(q));const rows=filtered.map(c=>[`<div class="primary-cell">${esc(c.certificateId)}</div><div class="secondary-cell">${esc(c.eventId)}</div>`,`<div class="primary-cell">${esc(c.name)}</div><div class="secondary-cell">${esc(c.email)}</div>`,`<div class="primary-cell">${esc(c.workshopName)}</div><div class="secondary-cell">${esc(c.season||'')}</div>`,esc(c.issuedAt||'—'),pill(c.status),`<div class="row-actions">${c.pdfUrl?`<a class="btn btn-sm" href="${esc(c.pdfUrl)}" target="_blank" rel="noopener">PDF ↗</a>`:''}${c.verificationUrl?`<a class="btn btn-sm" href="${esc(c.verificationUrl)}" target="_blank" rel="noopener">Verify ↗</a>`:''}</div>`]);box.innerHTML=tableHtml(['Certificate ID','Participant','Workshop','Issued at','Status','Links'],rows,'No certificates found.');}
-  function renderEmail(){const d=state.data;const filtered=d.queue.filter(q=>{const str=[q.eventId,q.type,q.recipient,q.subject,q.jobId].join(' ').toLowerCase();return(!state.queueSearch||str.includes(state.queueSearch.toLowerCase()))&&(state.queueStatus==='ALL'||q.status===state.queueStatus);});const rows=filtered.map(q=>[`<div class="primary-cell">${esc(q.type)}</div><div class="secondary-cell">${esc(q.jobId)}</div>`,`<div class="primary-cell">${esc(q.recipient)}</div><div class="secondary-cell">${esc(q.subject)}</div>`,esc(q.eventId),pill(q.status),esc(q.scheduledAt||'—'),esc(q.sentAt||'—'),q.lastError?`<span title="${esc(q.lastError)}" style="display:inline-block;max-width:180px;overflow:hidden;text-overflow:ellipsis;vertical-align:middle;color:#b5483d">${esc(q.lastError.slice(0,44))}${q.lastError.length>44?'…':''}</span>`:'—',(['FAILED','EXPIRED','WAITING_FOR_QUOTA','RETRY'].includes(q.status)?`<button class="btn btn-sm" onclick="retryEmail('${esc(q.jobId)}')">Retry</button>`:'—')]);return `<div class="page-toolbar"><div><h2>Email Center</h2><p>Queue custom broadcasts through the existing email engine, inspect failures, and retry jobs that are eligible.</p></div><div class="toolbar-actions"><button class="btn" onclick="refreshData()">↻ Refresh</button><button class="btn btn-primary" onclick="scrollToComposer()">＋ Compose email</button></div></div><div class="grid stats-grid" style="grid-template-columns:repeat(4,minmax(0,1fr))">${statCard('Pending',d.metrics.pendingEmails,'Queued or waiting','<i data-lucide="clock"></i>','gold')}${statCard('Sent',d.metrics.sentEmails,'Completed email jobs','<i data-lucide="check"></i>')}${statCard('Failed',d.metrics.failedEmails,'Check error details','<i data-lucide="triangle-alert"></i>','red')}${statCard('Quota left',d.metrics.emailQuota,'Recipients remaining today','<i data-lucide="clock"></i>','blue')}</div><section class="panel" id="emailComposer" style="margin-bottom:16px"><div class="panel-head"><div><h3 class="panel-title">Compose custom broadcast</h3><div class="panel-subtitle">Tokens supported: {{participant_name}}, {{workshop_name}}, {{event_date}}, {{start_time}}, {{meeting_url}}, {{group_url}}, {{registration_number}}</div></div><span class="pill blue">Queued delivery</span></div><div class="panel-body"><form id="customEmailForm" onsubmit="submitCustomEmail(event)"><div class="form-grid"><div class="field"><label>Workshop *</label><select class="control" name="eventId" required>${d.workshops.filter(w=>!['ARCHIVED','CANCELLED'].includes(w.status)).map(w=>`<option value="${esc(w.eventId)}">${esc(w.eventId+' · '+w.name)}</option>`).join('')}</select></div><div class="field"><label>Recipient group *</label><select class="control" name="recipientMode" id="recipientMode" onchange="toggleRecipientField()"><option value="ALL">All registered / approved participants</option><option value="SPECIFIC">Specific email addresses</option></select></div><div class="field span-2" id="specificRecipients" style="display:none"><label>Email addresses</label><textarea name="recipients" placeholder="person@example.com, another@example.com"></textarea><small>Separate addresses with commas, semicolons, or new lines. Invalid addresses are skipped.</small></div><div class="field"><label>Message preset</label><select class="control" name="messageType" id="messageType" onchange="applyEmailPreset()"><option>Custom</option><option>Important Update</option><option>Schedule Change</option><option>Venue Change</option><option>Meeting Link Update</option><option>Last Call</option><option>Workshop Information</option><option>Thank You</option><option>Certificate Information</option></select></div><div class="field"><label>Email subject *</label><input class="control" name="subject" required placeholder="Important update — {{workshop_name}}"></div><div class="field"><label>Email heading *</label><input class="control" name="heading" required placeholder="Important update"></div><div class="field"><label>Preheader</label><input class="control" name="preheader" placeholder="Short preview shown in the inbox"></div><div class="field span-2"><label>Message *</label><textarea name="message" required placeholder="Write the message for participants…" style="min-height:120px"></textarea></div><div class="field"><label>Button text (optional)</label><input class="control" name="ctaText" placeholder="Open workshop details"></div><div class="field"><label>Button URL (optional)</label><input class="control" name="ctaUrl" type="url" placeholder="https://…"></div></div><div class="toggle-row" style="margin-top:14px;margin-bottom:0"><div class="toggle-copy"><strong>Include a call-to-action button</strong><small>When enabled, both button text and a valid URL are required.</small></div><label class="switch"><input type="checkbox" name="ctaEnabled" id="ctaEnabled"><span class="slider"></span></label></div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:16px"><button class="btn" type="button" onclick="previewEmail()">Preview message</button><button class="btn btn-primary" type="submit" id="sendEmailBtn">Queue broadcast</button></div><div id="emailPreview" style="display:none;margin-top:14px"></div></form></div></section><section class="panel table-panel"><div class="panel-head"><div><h3 class="panel-title">Email queue</h3><div class="panel-subtitle">Recent 500 jobs · failed jobs can be retried where eligible</div></div><div class="table-controls"><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input class="control" placeholder="Search recipient, ID, subject" value="${esc(state.queueSearch)}" oninput="state.queueSearch=this.value;updateEmailQueueTable()"></div><select class="control" onchange="state.queueStatus=this.value;updateEmailQueueTable()"><option value="ALL">All statuses</option>${['PENDING','PROCESSING','SENT','FAILED','RETRY','WAITING_FOR_QUOTA','EXPIRED'].map(s=>`<option ${state.queueStatus===s?'selected':''}>${s}</option>`).join('')}</select></div></div><div id="emailQueueTable">${tableHtml(['Type / Job','Recipient / Subject','Workshop','Status','Scheduled','Sent','Error','Action'],rows,'No email jobs found.')}</div><div class="table-footer"><span>Showing ${filtered.length} job(s)</span><button class="btn btn-sm" onclick="runScheduler()">Run scheduler now</button></div></section>`;}
-  function updateEmailQueueTable(){const box=document.getElementById('emailQueueTable');if(!box)return;const filtered=state.data.queue.filter(q=>(!state.queueSearch||[q.eventId,q.type,q.recipient,q.subject,q.jobId].join(' ').toLowerCase().includes(state.queueSearch.toLowerCase()))&&(state.queueStatus==='ALL'||q.status===state.queueStatus));const rows=filtered.map(q=>[`<div class="primary-cell">${esc(q.type)}</div><div class="secondary-cell">${esc(q.jobId)}</div>`,`<div class="primary-cell">${esc(q.recipient)}</div><div class="secondary-cell">${esc(q.subject)}</div>`,esc(q.eventId),pill(q.status),esc(q.scheduledAt||'—'),esc(q.sentAt||'—'),q.lastError?`<span title="${esc(q.lastError)}" style="display:inline-block;max-width:180px;overflow:hidden;text-overflow:ellipsis;vertical-align:middle;color:#b5483d">${esc(q.lastError.slice(0,44))}${q.lastError.length>44?'…':''}</span>`:'—',(['FAILED','EXPIRED','WAITING_FOR_QUOTA','RETRY'].includes(q.status)?`<button class="btn btn-sm" onclick="retryEmail('${esc(q.jobId)}')">Retry</button>`:'—')]);box.innerHTML=tableHtml(['Type / Job','Recipient / Subject','Workshop','Status','Scheduled','Sent','Error','Action'],rows,'No email jobs found.');}
+  function renderEmail(){const d=state.data;const filtered=d.queue.filter(q=>{const str=[q.eventId,q.type,q.recipient,q.subject,q.jobId].join(' ').toLowerCase();return(!state.queueSearch||str.includes(state.queueSearch.toLowerCase()))&&(state.queueStatus==='ALL'||q.status===state.queueStatus);});const rows=filtered.map(q=>[`<div class="primary-cell">${esc(q.type)}</div><div class="secondary-cell">${esc(q.jobId)}</div>`,`<div class="primary-cell">${esc(q.recipient)}</div><div class="secondary-cell">${esc(q.subject)}</div>`,esc(q.eventId),pill(q.status),esc(q.scheduledAt||'—'),esc(q.sentAt||'—'),q.lastError?`<span title="${esc(q.lastError)}" style="display:inline-block;max-width:180px;overflow:hidden;text-overflow:ellipsis;vertical-align:middle;color:var(--destructive)">${esc(q.lastError.slice(0,44))}${q.lastError.length>44?'…':''}</span>`:'—',(['FAILED','EXPIRED','WAITING_FOR_QUOTA','RETRY'].includes(q.status)?`<button class="btn btn-sm" onclick="retryEmail('${esc(q.jobId)}')">Retry</button>`:'—')]);return `<div class="page-toolbar"><div><h2>Email Center</h2><p>Queue custom broadcasts through the existing email engine, inspect failures, and retry jobs that are eligible.</p></div><div class="toolbar-actions"><button class="btn" onclick="refreshData()">↻ Refresh</button><button class="btn btn-primary" onclick="scrollToComposer()">＋ Compose email</button></div></div><div class="grid stats-grid">${statCard('Pending',d.metrics.pendingEmails,'Queued or waiting','<i data-lucide="clock"></i>','gold')}${statCard('Sent',d.metrics.sentEmails,'Completed email jobs','<i data-lucide="check"></i>')}${statCard('Failed',d.metrics.failedEmails,'Check error details','<i data-lucide="triangle-alert"></i>','red')}${statCard('Quota left',d.metrics.emailQuota,'Recipients remaining today','<i data-lucide="clock"></i>','blue')}</div><section class="panel" id="emailComposer" style="margin-bottom:16px"><div class="panel-head"><div><h3 class="panel-title">Compose custom broadcast</h3><div class="panel-subtitle">Tokens supported: {{participant_name}}, {{workshop_name}}, {{event_date}}, {{start_time}}, {{meeting_url}}, {{group_url}}, {{registration_number}}</div></div><span class="pill blue">Queued delivery</span></div><div class="panel-body"><form id="customEmailForm" onsubmit="submitCustomEmail(event)"><div class="form-grid"><div class="field"><label>Workshop *</label><select class="control" name="eventId" required>${d.workshops.filter(w=>!['ARCHIVED','CANCELLED'].includes(w.status)).map(w=>`<option value="${esc(w.eventId)}">${esc(w.eventId+' · '+w.name)}</option>`).join('')}</select></div><div class="field"><label>Recipient group *</label><select class="control" name="recipientMode" id="recipientMode" onchange="toggleRecipientField()"><option value="ALL">All registered / approved participants</option><option value="SPECIFIC">Specific email addresses</option></select></div><div class="field span-2" id="specificRecipients" style="display:none"><label>Email addresses</label><textarea name="recipients" placeholder="person@example.com, another@example.com"></textarea><small>Separate addresses with commas, semicolons, or new lines. Invalid addresses are skipped.</small></div><div class="field"><label>Message preset</label><select class="control" name="messageType" id="messageType" onchange="applyEmailPreset()"><option>Custom</option><option>Important Update</option><option>Schedule Change</option><option>Venue Change</option><option>Meeting Link Update</option><option>Last Call</option><option>Workshop Information</option><option>Thank You</option><option>Certificate Information</option></select></div><div class="field"><label>Email subject *</label><input class="control" name="subject" required placeholder="Important update — {{workshop_name}}"></div><div class="field"><label>Email heading *</label><input class="control" name="heading" required placeholder="Important update"></div><div class="field"><label>Preheader</label><input class="control" name="preheader" placeholder="Short preview shown in the inbox"></div><div class="field span-2"><label>Message *</label><textarea name="message" required placeholder="Write the message for participants…" style="min-height:120px"></textarea></div><div class="field"><label>Button text (optional)</label><input class="control" name="ctaText" placeholder="Open workshop details"></div><div class="field"><label>Button URL (optional)</label><input class="control" name="ctaUrl" type="url" placeholder="https://…"></div></div><div class="toggle-row" style="margin-top:14px;margin-bottom:0"><div class="toggle-copy"><strong>Include a call-to-action button</strong><small>When enabled, both button text and a valid URL are required.</small></div><label class="switch"><input type="checkbox" name="ctaEnabled" id="ctaEnabled"><span class="slider"></span></label></div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:16px"><button class="btn" type="button" onclick="previewEmail()">Preview message</button><button class="btn btn-primary" type="submit" id="sendEmailBtn">Queue broadcast</button></div><div id="emailPreview" style="display:none;margin-top:14px"></div></form></div></section><section class="panel table-panel"><div class="panel-head"><div><h3 class="panel-title">Email queue</h3><div class="panel-subtitle">Recent 500 jobs · failed jobs can be retried where eligible</div></div><div class="table-controls"><div class="search-wrap"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input class="control" placeholder="Search recipient, ID, subject" value="${esc(state.queueSearch)}" oninput="state.queueSearch=this.value;updateEmailQueueTable()"></div><select class="control" onchange="state.queueStatus=this.value;updateEmailQueueTable()"><option value="ALL">All statuses</option>${['PENDING','PROCESSING','SENT','FAILED','RETRY','WAITING_FOR_QUOTA','EXPIRED'].map(s=>`<option ${state.queueStatus===s?'selected':''}>${s}</option>`).join('')}</select></div></div><div id="emailQueueTable">${tableHtml(['Type / Job','Recipient / Subject','Workshop','Status','Scheduled','Sent','Error','Action'],rows,'No email jobs found.')}</div><div class="table-footer"><span>Showing ${filtered.length} job(s)</span><button class="btn btn-sm" onclick="runScheduler()">Run scheduler now</button></div></section>`;}
+  function updateEmailQueueTable(){const box=document.getElementById('emailQueueTable');if(!box)return;const filtered=state.data.queue.filter(q=>(!state.queueSearch||[q.eventId,q.type,q.recipient,q.subject,q.jobId].join(' ').toLowerCase().includes(state.queueSearch.toLowerCase()))&&(state.queueStatus==='ALL'||q.status===state.queueStatus));const rows=filtered.map(q=>[`<div class="primary-cell">${esc(q.type)}</div><div class="secondary-cell">${esc(q.jobId)}</div>`,`<div class="primary-cell">${esc(q.recipient)}</div><div class="secondary-cell">${esc(q.subject)}</div>`,esc(q.eventId),pill(q.status),esc(q.scheduledAt||'—'),esc(q.sentAt||'—'),q.lastError?`<span title="${esc(q.lastError)}" style="display:inline-block;max-width:180px;overflow:hidden;text-overflow:ellipsis;vertical-align:middle;color:var(--destructive)">${esc(q.lastError.slice(0,44))}${q.lastError.length>44?'…':''}</span>`:'—',(['FAILED','EXPIRED','WAITING_FOR_QUOTA','RETRY'].includes(q.status)?`<button class="btn btn-sm" onclick="retryEmail('${esc(q.jobId)}')">Retry</button>`:'—')]);box.innerHTML=tableHtml(['Type / Job','Recipient / Subject','Workshop','Status','Scheduled','Sent','Error','Action'],rows,'No email jobs found.');}
   function toggleRecipientField(){const mode=document.getElementById('recipientMode');const box=document.getElementById('specificRecipients');if(box)box.style.display=mode&&mode.value==='SPECIFIC'?'flex':'none';}
   const PRESETS={'Important Update':['Important update — {{workshop_name}}','Important update','We have an important update about your upcoming workshop.'],'Schedule Change':['Schedule update — {{workshop_name}}','The workshop schedule has changed','Please review the updated workshop schedule below.'],'Venue Change':['Venue update — {{workshop_name}}','The workshop venue has changed','Please note the updated venue information for your workshop.'],'Meeting Link Update':['Updated meeting link — {{workshop_name}}','Your meeting link has been updated','Please use the updated meeting link below to join the workshop.'],'Last Call':['Last call — {{workshop_name}}','Your workshop is coming up','This is a final reminder to keep your workshop details ready.'],'Workshop Information':['Workshop information — {{workshop_name}}','Workshop information','Here are the latest details for your workshop.'],'Thank You':['Thank you — {{workshop_name}}','Thank you for joining us','Thank you for taking part in our workshop.'],'Certificate Information':['Certificate information — {{workshop_name}}','Certificate information','Here is an important update about your workshop certificate.']};
   function applyEmailPreset(){const form=document.getElementById('customEmailForm');if(!form)return;const p=PRESETS[form.elements.messageType.value];if(p){form.elements.subject.value=p[0];form.elements.heading.value=p[1];form.elements.message.value=p[2];}}
-  function previewEmail(){const f=document.getElementById('customEmailForm');const box=document.getElementById('emailPreview');box.style.display='block';box.innerHTML=`<div class="section-card" style="background:#fbfcfa"><div class="section-heading">Preview · ${esc(f.elements.subject.value||'No subject')}</div><div style="font:800 18px var(--display);margin-bottom:8px">${esc(f.elements.heading.value||'Email heading')}</div><div style="white-space:pre-wrap;line-height:1.7;color:#56645a">${esc(f.elements.message.value||'Your message will appear here.')}</div>${f.elements.ctaEnabled.checked?`<div style="margin-top:15px"><span class="btn btn-primary">${esc(f.elements.ctaText.value||'Button')}</span></div>`:''}<div class="helper" style="margin-top:12px">Preview of content only. The actual email uses your configured WORKSHOP email theme.</div></div>`;}
+  function previewEmail(){const f=document.getElementById('customEmailForm');const box=document.getElementById('emailPreview');box.style.display='block';box.innerHTML=`<div class="section-card" style="background:var(--card)"><div class="section-heading">Preview · ${esc(f.elements.subject.value||'No subject')}</div><div style="font:800 18px var(--display);margin-bottom:8px">${esc(f.elements.heading.value||'Email heading')}</div><div style="white-space:pre-wrap;line-height:1.7;color:var(--text2)">${esc(f.elements.message.value||'Your message will appear here.')}</div>${f.elements.ctaEnabled.checked?`<div style="margin-top:15px"><span class="btn btn-primary">${esc(f.elements.ctaText.value||'Button')}</span></div>`:''}<div class="helper" style="margin-top:12px">Preview of content only. The actual email uses your configured WORKSHOP email theme.</div></div>`;}
   async function submitCustomEmail(e){e.preventDefault();const f=e.currentTarget;if(!confirm('Queue this broadcast using the current recipient selection? Email delivery will occur through the central queue.'))return;const btn=document.getElementById('sendEmailBtn');setBtnLoading(btn,'Queueing…');try{const p=Object.fromEntries(new FormData(f).entries());p.ctaEnabled=f.elements.ctaEnabled.checked;p.ctaText=f.elements.ctaText.value;p.ctaUrl=f.elements.ctaUrl.value;const r=await rpc('sendCustomEmailFromSoftware',p);toast(r.message);f.reset();document.getElementById('emailPreview').style.display='none';await refreshData(true);}catch(err){toast(err.message,'error');}finally{setBtnLoading(btn);}}
   async function retryEmail(jobId){if(!confirm('Queue this email job for retry?'))return;try{const r=await rpc('retryEmailFromSoftware',jobId);toast(r.message);await refreshData(true);}catch(e){toast(e.message,'error');}}
   function scrollToComposer(){document.getElementById('emailComposer')?.scrollIntoView({behavior:'smooth',block:'start'});}
-  function renderSelfTest(){const d=state.data;return `<div class="page-toolbar"><div><h2>Test the communication workflow</h2><p>Send a controlled test to your own email address. This creates a Test Run snapshot, not a production participant registration.</p></div><div class="toolbar-actions"><button class="btn" onclick="refreshData()">↻ Refresh</button></div></div><div class="grid two-col"><section class="panel"><div class="panel-head"><div><h3 class="panel-title">Start a self-test</h3><div class="panel-subtitle">Use a real workshop configuration to test email themes and certificate delivery.</div></div><span class="pill blue">Safe test mode</span></div><div class="panel-body"><form id="selfTestForm" onsubmit="submitSelfTest(event)"><div class="form-grid"><div class="field span-2"><label>Workshop *</label><select name="eventId" class="control" required>${d.workshops.map(w=>`<option value="${esc(w.eventId)}">${esc(w.eventId+' · '+w.name)}</option>`).join('')}</select></div><div class="field"><label>Recipient email *</label><input name="recipient" type="email" class="control" required placeholder="you@example.com" value="${esc(d.settings.DEFAULT_SUPPORT_EMAIL||'')}"></div><div class="field"><label>Test participant name</label><input name="participantName" class="control" value="Test Participant"></div><div class="field"><label>Department (optional)</label><input name="department" class="control"></div><div class="field"><label>Season (optional)</label><input name="season" class="control" placeholder="Spring 2026"></div></div><div class="toggle-row" style="margin-top:14px"><div class="toggle-copy"><strong>Include attendance email step</strong><small>Only enable this when the selected workshop has an attendance form.</small></div><label class="switch"><input type="checkbox" name="includeAttendance"><span class="slider"></span></label></div><div class="inline-note warn">The test sends real emails. Ensure you control the recipient inbox. Follow-up stages are handled by the existing test scheduler.</div><div style="display:flex;justify-content:flex-end;margin-top:15px"><button class="btn btn-primary" type="submit" id="startTestBtn">Start test workflow</button></div></form></div></section><section class="panel"><div class="panel-head"><div><h3 class="panel-title">How the test works</h3><div class="panel-subtitle">Uses a temporary test participant only</div></div></div><div class="panel-body"><div class="simple-list"><div class="simple-item"><div class="item-marker">1</div><div class="item-main"><div class="item-title">Registration confirmation</div><div class="item-meta">Sent immediately from the configured email template.</div></div><span class="pill ok">Immediate</span></div><div class="simple-item"><div class="item-marker">2</div><div class="item-main"><div class="item-title">Reminder email</div><div class="item-meta">The standard legacy test path attempts the reminder after about one minute.</div></div></div><div class="simple-item"><div class="item-marker">3</div><div class="item-main"><div class="item-title">Certificate workflow</div><div class="item-meta">Depending on the test configuration, the system generates and sends a test certificate.</div></div></div></div><div class="inline-note" style="margin-top:16px">Test runs are recorded separately from production certificates and participants.</div></div></section></div><section class="panel table-panel" style="margin-top:16px"><div class="panel-head"><div><h3 class="panel-title">Recent test runs</h3><div class="panel-subtitle">${d.tests.length} recent run(s)</div></div></div>${tableHtml(['Run ID','Workshop','Recipient','Started','Status','Current step','Certificate ID','Error'],d.tests.map(t=>[`<span class="primary-cell">${esc(t.runId)}</span>`,esc(t.workshopName),esc(t.recipient),esc(t.startedAt||'—'),pill(t.status),esc(t.currentStep),esc(t.certificateId||'—'),t.lastError?`<span title="${esc(t.lastError)}" style="display:inline-block;max-width:180px;overflow:hidden;text-overflow:ellipsis;vertical-align:middle;color:#b5483d">${esc(t.lastError.slice(0,44))}${t.lastError.length>44?'…':''}</span>`:'—']),'No test runs yet.')}</section>`;}
+  function renderSelfTest(){const d=state.data;return `<div class="page-toolbar"><div><h2>Test the communication workflow</h2><p>Send a controlled test to your own email address. This creates a Test Run snapshot, not a production participant registration.</p></div><div class="toolbar-actions"><button class="btn" onclick="refreshData()">↻ Refresh</button></div></div><div class="grid two-col"><section class="panel"><div class="panel-head"><div><h3 class="panel-title">Start a self-test</h3><div class="panel-subtitle">Use a real workshop configuration to test email themes and certificate delivery.</div></div><span class="pill blue">Safe test mode</span></div><div class="panel-body"><form id="selfTestForm" onsubmit="submitSelfTest(event)"><div class="form-grid"><div class="field span-2"><label>Workshop *</label><select name="eventId" class="control" required>${d.workshops.map(w=>`<option value="${esc(w.eventId)}">${esc(w.eventId+' · '+w.name)}</option>`).join('')}</select></div><div class="field"><label>Recipient email *</label><input name="recipient" type="email" class="control" required placeholder="you@example.com" value="${esc(d.settings.DEFAULT_SUPPORT_EMAIL||'')}"></div><div class="field"><label>Test participant name</label><input name="participantName" class="control" value="Test Participant"></div><div class="field"><label>Department (optional)</label><input name="department" class="control"></div><div class="field"><label>Season (optional)</label><input name="season" class="control" placeholder="Spring 2026"></div></div><div class="toggle-row" style="margin-top:14px"><div class="toggle-copy"><strong>Include attendance email step</strong><small>Only enable this when the selected workshop has an attendance form.</small></div><label class="switch"><input type="checkbox" name="includeAttendance"><span class="slider"></span></label></div><div class="inline-note warn">The test sends real emails. Ensure you control the recipient inbox. Follow-up stages are handled by the existing test scheduler.</div><div style="display:flex;justify-content:flex-end;margin-top:15px"><button class="btn btn-primary" type="submit" id="startTestBtn">Start test workflow</button></div></form></div></section><section class="panel"><div class="panel-head"><div><h3 class="panel-title">How the test works</h3><div class="panel-subtitle">Uses a temporary test participant only</div></div></div><div class="panel-body"><div class="simple-list"><div class="simple-item"><div class="item-marker">1</div><div class="item-main"><div class="item-title">Registration confirmation</div><div class="item-meta">Sent immediately from the configured email template.</div></div><span class="pill ok">Immediate</span></div><div class="simple-item"><div class="item-marker">2</div><div class="item-main"><div class="item-title">Reminder email</div><div class="item-meta">The standard legacy test path attempts the reminder after about one minute.</div></div></div><div class="simple-item"><div class="item-marker">3</div><div class="item-main"><div class="item-title">Certificate workflow</div><div class="item-meta">Depending on the test configuration, the system generates and sends a test certificate.</div></div></div></div><div class="inline-note" style="margin-top:16px">Test runs are recorded separately from production certificates and participants.</div></div></section></div><section class="panel table-panel" style="margin-top:16px"><div class="panel-head"><div><h3 class="panel-title">Recent test runs</h3><div class="panel-subtitle">${d.tests.length} recent run(s)</div></div></div>${tableHtml(['Run ID','Workshop','Recipient','Started','Status','Current step','Certificate ID','Error'],d.tests.map(t=>[`<span class="primary-cell">${esc(t.runId)}</span>`,esc(t.workshopName),esc(t.recipient),esc(t.startedAt||'—'),pill(t.status),esc(t.currentStep),esc(t.certificateId||'—'),t.lastError?`<span title="${esc(t.lastError)}" style="display:inline-block;max-width:180px;overflow:hidden;text-overflow:ellipsis;vertical-align:middle;color:var(--destructive)">${esc(t.lastError.slice(0,44))}${t.lastError.length>44?'…':''}</span>`:'—']),'No test runs yet.')}</section>`;}
   async function submitSelfTest(e){e.preventDefault();const f=e.currentTarget;const p=Object.fromEntries(new FormData(f).entries());p.includeAttendance=f.elements.includeAttendance.checked;if(!confirm(`Send a test registration email to ${p.recipient} now? Follow-up messages may also be sent.`))return;const b=document.getElementById('startTestBtn');setBtnLoading(b,'Starting test…');try{const r=await rpc('startTestFromSoftware',p);toast(r.message||'Self-test started.');await refreshData(true);}catch(err){toast(err.message,'error');}finally{setBtnLoading(b);}}
   const SETTING_GROUPS=[{id:'branding',title:'Organization & branding',desc:'Brand identity and public verification details.',keys:[['ORGANIZATION_NAME','Organization name','text'],['SENDER_NAME','Email sender name','text'],['DEFAULT_LOGO_URL','Default logo URL','url'],['PUBLIC_VERIFY_URL','Public certificate verification URL','url'],['DEFAULT_SUPPORT_EMAIL','Support email','email'],['DEFAULT_WEBSITE','Website URL','url'],['DEFAULT_FACEBOOK','Facebook URL','url'],['DEFAULT_INSTAGRAM','Instagram URL','url'],['DEFAULT_LINKEDIN','LinkedIn URL','url'],['DEFAULT_YOUTUBE','YouTube URL','url'],['DEFAULT_X','X / Twitter URL','url']]},{id:'defaults',title:'Workshop defaults',desc:'Initial values prefilled when you create a new workshop.',keys:[['DEFAULT_TIMEZONE','Timezone','timezone'],['DEFAULT_WORKSHOP_TYPE','Default workshop type','text'],['DEFAULT_DELIVERY_MODE','Default delivery mode','select:OFFLINE,ONLINE'],['DEFAULT_MEETING_PLATFORM','Default online platform','text'],['DEFAULT_GROUP_TYPE','Default community group','text'],['DEFAULT_CAPACITY','Default capacity (0 = unlimited)','number'],['DEFAULT_OPEN_DAYS_BEFORE','Registration opens (days before)','number'],['DEFAULT_CLOSE_MINUTES_BEFORE','Registration closes (minutes before)','number'],['DEFAULT_ATTENDANCE_ENABLED','Enable attendance by default','bool'],['DEFAULT_ATTENDANCE_WINDOW_MINUTES','Attendance window (minutes)','number'],['DEFAULT_REMINDERS','Legacy reminder offsets (minutes, comma separated)','text']]},{id:'certdefaults',title:'Certificate defaults',desc:'Default certificate settings for new workshops.',keys:[['DEFAULT_CERTIFICATE_ENABLED','Enable certificates by default','bool'],['DEFAULT_CERTIFICATE_RELEASE','Default release rule','select:AFTER_WORKSHOP,NEXT_MORNING,CUSTOM_DATETIME'],['DEFAULT_CERTIFICATE_DELAY','Delay after workshop (minutes)','number'],['DEFAULT_CERTIFICATE_TIME','Next-morning release time','time'],['DEFAULT_CERTIFICATE_ELIGIBILITY','Eligibility rule','select:ALL_REGISTERED,APPROVED_ONLY,ATTENDANCE_REQUIRED'],['DEFAULT_CERTIFICATE_SUBTITLE','Default certificate subtitle','text'],['DEFAULT_CERTIFICATE_SIGNATORY_KEY','Default signatory key','text']]},{id:'emailsettings',title:'Email engine',desc:'Limits and retry behavior used by the existing queue.',keys:[['EMAIL_SAFETY_RESERVE','Daily email safety reserve','number'],['EMAIL_MAX_BATCH','Maximum emails per batch (1–100)','number'],['EMAIL_RETRY_LIMIT','Retry limit (0–10)','number'],['EMAIL_RETRY_BASE_MINUTES','Retry base delay (minutes)','number'],['EMAIL_QUOTA_RECHECK_MINUTES','Quota recheck delay (minutes)','number']]},{id:'automation',title:'Automation controls',desc:'Pause or resume scheduled processing. Pausing stops scheduler work until re-enabled.',keys:[['PAUSE_AUTOMATION','Pause automation','bool']]}];
   function settingInput(key,label,type,val){const id='setting_'+key;let input='';if(type==='bool'){input=`<select class="control" id="${id}" data-setting="${key}"><option value="FALSE" ${String(val).toUpperCase()!=='TRUE'?'selected':''}>Off / No</option><option value="TRUE" ${String(val).toUpperCase()==='TRUE'?'selected':''}>On / Yes</option></select>`;}else if(type.startsWith('select:')){const options=type.substring(7).split(',');input=`<select class="control" id="${id}" data-setting="${key}">${options.map(o=>`<option value="${esc(o)}" ${String(val)===o?'selected':''}>${esc(o.replaceAll('_',' '))}</option>`).join('')}</select>`;}else if(type==='timezone'){const opts=['Asia/Dhaka','UTC','Asia/Kolkata','Asia/Singapore','Europe/London','Europe/Paris','America/New_York','America/Los_Angeles','Australia/Sydney'];if(val&&!opts.includes(val))opts.unshift(val);input=`<select class="control" id="${id}" data-setting="${key}">${opts.map(o=>`<option ${String(val)===o?'selected':''}>${esc(o)}</option>`).join('')}</select>`;}else{input=`<input class="control" id="${id}" data-setting="${key}" type="${type==='time'?'time':type}" value="${esc(val)}" ${type==='number'?'min="0"':''}>`;}return `<div class="field"><label for="${id}">${esc(label)}</label>${input}</div>`;}
@@ -634,7 +691,7 @@ thead th{position:sticky;top:0;z-index:5;box-shadow:0 1px 0 var(--border)}
   function askResetToken(){
     document.getElementById('modalTitle').textContent='Reset software access token';
     document.getElementById('modalSubtitle').textContent='This cannot be undone';
-    document.getElementById('modalBody').innerHTML='<div class="section-card"><p><strong>Warning:</strong> resetting generates a brand-new token and <strong>immediately invalidates the current one</strong>.</p><ul style="margin:10px 0 0 18px;font-size:13px;color:var(--ink2)"><li>This browser session keeps working — the new token is saved automatically.</li><li>Bookmarked or shared dashboard links using the old token stop working.</li><li>If the token leaked, reset it now and share the new link only with trusted people.</li></ul></div>';
+    document.getElementById('modalBody').innerHTML='<div class="section-card"><p><strong>Warning:</strong> resetting generates a brand-new token and <strong>immediately invalidates the current one</strong>.</p><ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text2)"><li>This browser session keeps working — the new token is saved automatically.</li><li>Bookmarked or shared dashboard links using the old token stop working.</li><li>If the token leaked, reset it now and share the new link only with trusted people.</li></ul></div>';
     document.getElementById('modalFootHint').textContent='';
     document.getElementById('modalSaveBtn').style.display='none';
     document.getElementById('modalBackdrop').classList.add('open');
@@ -678,29 +735,29 @@ thead th{position:sticky;top:0;z-index:5;box-shadow:0 1px 0 var(--border)}
   function showInfoModal(title,html){document.getElementById('modalTitle').textContent=title;document.getElementById('modalSubtitle').textContent='';document.getElementById('modalBody').innerHTML=html;document.getElementById('modalFootHint').textContent='';document.getElementById('modalSaveBtn').style.display='none';document.getElementById('modalBackdrop').classList.add('open');const foot=document.querySelector('.modal-foot .right');foot.innerHTML='<button class="btn btn-primary" onclick="closeModal();restoreModalButtons()">Close</button>';}
   function restoreModalButtons(){const msb=document.getElementById('modalSaveBtn');if(msb)msb.style.display='inline-flex';const foot=document.querySelector('.modal-foot .right');if(foot)foot.innerHTML='<button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" id="modalSaveBtn" onclick="submitWorkshopForm()">Create workshop</button>';}
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
-  boot();
+  function setBtnLoading(btn,label){
+    if(!btn)return;
+    if(label===undefined||label===null){
+      btn.disabled=false;btn.classList.remove('is-loading');
+      if(btn.dataset.origHtml!==undefined){btn.innerHTML=btn.dataset.origHtml;delete btn.dataset.origHtml;}
+      return;
+    }
+    if(btn.dataset.origHtml===undefined){btn.dataset.origHtml=btn.innerHTML;}
+    btn.disabled=true;btn.classList.add('is-loading');
+    btn.innerHTML='<span class="btn-spinner" aria-hidden="true"></span>';
+    btn.appendChild(document.createTextNode(label));
+  }
+    function fadeOutCover(){
+    const c=document.getElementById('loadingCover');if(!c)return;
+    if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){c.style.display='none';return;}
+    c.classList.add('splash-out');
+    setTimeout(function(){c.style.display='none';c.classList.remove('splash-out');},380);
+  }
+    boot();
 
 </script>
 <script>
 /* ===== WORKSHOP dashboard V2 premium elevation — visual only. No business-logic changes. ===== */
-function setBtnLoading(btn,label){
-  if(!btn)return;
-  if(label===undefined||label===null){
-    btn.disabled=false;btn.classList.remove('is-loading');
-    if(btn.dataset.origHtml!==undefined){btn.innerHTML=btn.dataset.origHtml;delete btn.dataset.origHtml;}
-    return;
-  }
-  if(btn.dataset.origHtml===undefined){btn.dataset.origHtml=btn.innerHTML;}
-  btn.disabled=true;btn.classList.add('is-loading');
-  btn.innerHTML='<span class="btn-spinner" aria-hidden="true"></span>';
-  btn.appendChild(document.createTextNode(label));
-}
-function fadeOutCover(){
-  const c=document.getElementById('loadingCover');if(!c)return;
-  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){c.style.display='none';return;}
-  c.classList.add('splash-out');
-  setTimeout(function(){c.style.display='none';c.classList.remove('splash-out');},380);
-}
 const __v2ReducedMotion=function(){return window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;};
 /* page transition + stat count-up (first render per page+dataset) */
 const __v2Counted=new Set();
@@ -748,7 +805,7 @@ function __v2FocusFirst(){
   if(f){try{f.focus({preventScroll:true});}catch(_){try{f.focus();}catch(_2){}}}
 }
 const __openWorkshopModalV2=openWorkshopModal;
-openWorkshopModal=function(){__v2LastFocus=document.activeElement;__openWorkshopModalV2.apply(null,arguments);enhanceDateInputs();__v2FocusFirst();};
+openWorkshopModal=function(){__v2LastFocus=document.activeElement;__openWorkshopModalV2.apply(null,arguments);enhanceDateInputs();enhanceScheduleFields();__v2FocusFirst();};
 const __showInfoModalV2=showInfoModal;
 showInfoModal=function(){__v2LastFocus=document.activeElement;__showInfoModalV2.apply(null,arguments);__v2FocusFirst();};
 const __closeModalV2=closeModal;
@@ -766,8 +823,33 @@ let __v2DpOpen=null;
 function dpParse(v){const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v||'');return m?{y:+m[1],m:+m[2]-1,d:+m[3]}:null;}
 function dpFmt(y,m,d){return y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');}
 function dpLabel(v){const p=dpParse(v);return p?DP_MONTHS[p.m].slice(0,3)+' '+p.d+', '+p.y:'Select date';}
+var SCHED_PAIRS=[['reminder1Mode','reminder1Value'],['reminder2Mode','reminder2Value'],['attendanceScheduleMode','attendanceScheduleValue'],['certificateScheduleMode','certificateScheduleValue']];
+function enhanceScheduleFields(){
+  SCHED_PAIRS.forEach(function(pr){
+    var modeSel=document.querySelector('#modalBody select[name="'+pr[0]+'"]');
+    var valInput=document.querySelector('#modalBody input[name="'+pr[1]+'"]');
+    if(!modeSel||!valInput||valInput.dataset.schedDone)return;
+    valInput.dataset.schedDone='1';
+    var field=valInput.closest('.field')||valInput.parentNode;
+    var wrap=document.createElement('div');
+    wrap.className='sched-exact';
+    wrap.innerHTML='<input type="date" class="control" data-dp-exact aria-label="Exact date"><input type="time" class="control" aria-label="Exact time">';
+    field.appendChild(wrap);
+    var dIn=wrap.querySelector('input[type="date"]'),tIn=wrap.querySelector('input[type="time"]');
+    function parse(){var m=/^(\d{4}-\d{2}-\d{2})[ T](\d{2}):(\d{2})/.exec(valInput.value||'');if(m){dIn.value=m[1];tIn.value=m[2]+':'+m[3];}else{dIn.value='';tIn.value='';}}
+    function compose(){if(dIn.value&&tIn.value){valInput.value=dIn.value+' '+tIn.value;}else if(dIn.value){valInput.value=dIn.value+' 00:00';}else{valInput.value='';}}
+    function sync(){var exact=modeSel.value==='EXACT_DATETIME';wrap.hidden=!exact;valInput.classList.toggle('dp-native',exact);valInput.setAttribute('aria-hidden',exact?'true':'false');if(exact){valInput.tabIndex=-1;parse();}else{valInput.tabIndex=0;}}
+    modeSel.addEventListener('change',function(){if(modeSel.value!=='EXACT_DATETIME'){valInput.value='';}sync();});
+    dIn.addEventListener('change',compose);tIn.addEventListener('change',compose);
+    sync();
+  });
+  try{enhanceDateInputs();}catch(_){}
+}
+function setTheme(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('WORKSHOP_THEME',t);}catch(e){}var b=document.querySelector('.theme-toggle');if(b){b.innerHTML='<i data-lucide="'+(t==='dark'?'sun':'moon')+'"></i>';b.setAttribute('aria-label',t==='dark'?'Switch to light mode':'Switch to dark mode');try{renderLucideIcons(b);}catch(_){}}}
+function toggleTheme(){setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');}
+document.addEventListener('DOMContentLoaded',function(){try{setTheme(document.documentElement.getAttribute('data-theme')||'light');}catch(e){}});
 function enhanceDateInputs(){
-  document.querySelectorAll('#modalBody input[type="date"][name="workshopDate"]').forEach(function(native){
+  document.querySelectorAll('#modalBody input[type="date"][name="workshopDate"],#modalBody input[type="date"][data-dp-exact]').forEach(function(native){
     if(native.dataset.dpDone)return;native.dataset.dpDone='1';
     const wrap=document.createElement('div');wrap.className='dp-wrap';
     native.parentNode.insertBefore(wrap,native);wrap.appendChild(native);
