@@ -346,6 +346,12 @@ i[data-lucide] svg{width:1.15em;height:1.15em}
   .modal-backdrop{padding:16px 10px}
   .toast-stack{left:16px;right:16px;bottom:16px;max-width:none}
   .top-actions .btn-quiet{display:none}
+  .top-left{min-width:0;flex:1}
+  .top-left>div{min-width:0}
+  .page-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .eyebrow{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10px}
+  .top-actions .btn-primary .btn-label{display:none}
+  .top-actions .btn-primary{padding:10px 12px;min-width:44px;justify-content:center}
 }
 
 
@@ -457,7 +463,7 @@ thead th{position:sticky;top:0;z-index:5;box-shadow:0 1px 0 var(--border)}
     <p class="auth-note">In the master Google Sheet, choose <b>WORKSHOP Automation &rarr; Open Software Dashboard</b>. Copy the generated link, then paste it here. Keep that link and token private. Access is stored only for this browser tab session.</p>
   </form>
 </div>
-<div id="loadingCover" class="loading-cover"><div class="brand-mark">FC</div><div class="spinner" role="status" aria-label="Loading"></div><p id="connectMsg">Opening WORKSHOP Software&hellip;</p></div><div class="spinner"></div><p>Opening WORKSHOP Software…</p></div>
+<div id="loadingCover" class="loading-cover"><div class="brand-mark">FC</div><div class="spinner" role="status" aria-label="Loading"></div><p id="connectMsg">Opening WORKSHOP Software&hellip;</p></div>
 <div class="app-shell">
   <aside class="sidebar" id="sidebar">
     <div class="brand"><div class="brand-mark">FC</div><div><div class="brand-title">WORKSHOP</div><div class="brand-sub">Management Suite</div></div></div>
@@ -479,7 +485,7 @@ thead th{position:sticky;top:0;z-index:5;box-shadow:0 1px 0 var(--border)}
   </aside>
   <div class="sidebar-scrim" id="sidebarScrim" onclick="toggleSidebar()"></div>
   <main class="main">
-    <header class="topbar"><div class="top-left"><button class="btn mobile-menu" onclick="toggleSidebar()" aria-label="Open navigation" aria-expanded="false"><i data-lucide="menu"></i></button><div><div class="eyebrow">WORKSHOP / <span id="breadcrumb">Overview</span></div><h1 class="page-title" id="topTitle">Dashboard</h1></div></div><div class="top-actions"><span class="last-updated" id="lastUpdated">Connecting&hellip;</span><button class="btn btn-primary" onclick="openWorkshopModal()"><i data-lucide="plus"></i>New workshop</button><button class="btn btn-quiet" onclick="logoutAccess()" title="Clear this browser session"><i data-lucide="log-out"></i>Sign out</button><div class="avatar" aria-hidden="true">FC</div></div></header>
+    <header class="topbar"><div class="top-left"><button class="btn mobile-menu" onclick="toggleSidebar()" aria-label="Open navigation" aria-expanded="false"><i data-lucide="menu"></i></button><div><div class="eyebrow">WORKSHOP / <span id="breadcrumb">Overview</span></div><h1 class="page-title" id="topTitle">Dashboard</h1></div></div><div class="top-actions"><span class="last-updated" id="lastUpdated">Connecting&hellip;</span><button class="btn btn-primary" onclick="openWorkshopModal()" aria-label="New workshop"><i data-lucide="plus"></i><span class="btn-label">New workshop</span></button><button class="btn btn-quiet" onclick="logoutAccess()" title="Clear this browser session"><i data-lucide="log-out"></i>Sign out</button><div class="avatar" aria-hidden="true">FC</div></div></header>
     <div class="content" id="content"></div>
   </main>
 </div>
