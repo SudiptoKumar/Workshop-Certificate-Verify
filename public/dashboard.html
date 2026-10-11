@@ -797,7 +797,7 @@ const PAGES = {
   settings:     { label: 'Settings',      short: 'Settings',     icon: 'settings',         group: 'Administration' },
   system:       { label: 'System Health', short: 'System',       icon: 'heart-pulse',      group: 'Administration' }
 };
-const WRITE_METHODS = new Set(['createWorkshopFromSoftware', 'updateWorkshopFromSoftware', 'setWorkshopLifecycleFromSoftware', 'updateParticipantFromSoftware', 'sendCustomEmailFromSoftware', 'retryEmailFromSoftware', 'startTestFromSoftware', 'saveSoftwareSettings', 'runSchedulerFromSoftware', 'registerCertificateMasterFromSoftware', 'setupFromSoftware', 'resetSoftwareAccessLinkFromSoftware', 'reinstallSchedulerFromSoftware', 'normalizeStableDefaultsFromSoftware', 'repairRegistrationFormsFromSoftware', 'hardDeleteWorkshopFromSoftware']);
+const WRITE_METHODS = new Set(['createWorkshopFromSoftware', 'updateWorkshopFromSoftware', 'setWorkshopLifecycleFromSoftware', 'updateParticipantFromSoftware', 'sendCustomEmailFromSoftware', 'retryEmailFromSoftware', 'startTestFromSoftware', 'saveSoftwareSettings', 'runSchedulerFromSoftware', 'registerCertificateMasterFromSoftware', 'setupFromSoftware', 'resetSoftwareAccessLinkFromSoftware', 'reinstallSchedulerFromSoftware', 'normalizeStableDefaultsFromSoftware', 'repairRegistrationFormsFromSoftware', 'hardDeleteWorkshopFromSoftware', 'deleteCertificateFromSoftware']);
 
 const state = {
   page: 'dashboard', data: null, fetchedAt: 0, readiness: null, railPref: false,
@@ -2430,9 +2430,24 @@ Object.assign(ACTIONS, {
           html += `<div class="zone-row"><div><strong>${esc(d.email)}</strong> <span class="pill">${esc(d.eventId)}</span><span>${d.records.map(x => `${esc(x.name)} (${esc(x.participantId)}, ${esc(x.status)})`).join(' vs ')}</span></div></div>`;
         });
         dc.forEach(d => {
-          html += `<div class="zone-row"><div><strong>${esc(d.participantName || d.email)}</strong> <span class="pill">${esc(d.eventId)}</span><span>${d.certificates.map(x => `${esc(x.certificateId)} (${esc(x.status)}, ${esc(x.issuedAt)})`).join(' vs ')}</span></div></div>`;
+          const newer = d.certificates[1] || d.certificates[0];
+          html += `<div class="zone-row"><div><strong>${esc(d.participantName || d.email)}</strong> <span class="pill">${esc(d.eventId)}</span><span>${d.certificates.map(x => `${esc(x.certificateId)} (${esc(x.status)}, ${esc(x.issuedAt)})`).join(' vs ')}</span></div><button type="button" class="btn danger sm" data-act="delete-cert" data-id="${esc(newer.certificateId)}">${ic('trash-2')}<span class="lbl">Delete newer</span></button></div>`;
         });
         box.innerHTML = `<div style="margin-bottom:8px"><strong>${dp.length} duplicate participant(s), ${dc.length} duplicate certificate(s)</strong></div>` + html;
+      } catch (e) { fail(e); }
+    });
+  },
+  async 'delete-cert'(el) {
+    const id = el.dataset.id;
+    const ok = await confirmDialog({ title: 'Delete this certificate?', body: `Permanently delete certificate ${esc(id)}? The registry row and PDF go to trash. This cannot be undone.`, confirmLabel: 'Delete', cancelLabel: 'Keep', tone: 'danger' });
+    if (!ok) return;
+    await run('delete-cert:' + id, el, 'Deleting', async () => {
+      try {
+        await rpc('deleteCertificateFromSoftware', id);
+        toast(`Certificate ${esc(id)} deleted.`);
+        await refreshData(true);
+        const scanBtn = document.querySelector('[data-act="find-duplicates"]');
+        if (scanBtn) scanBtn.click();
       } catch (e) { fail(e); }
     });
   },

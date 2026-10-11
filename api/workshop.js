@@ -20,6 +20,7 @@ const ALLOWED_METHODS = Object.freeze({
   repairRegistrationFormsFromSoftware: 0,
   hardDeleteWorkshopFromSoftware: 1,
   findDuplicateRecordsFromSoftware: 0,
+  deleteCertificateFromSoftware: 1,
 });
 
 const GOOGLE_HOSTS = new Set(['script.google.com', 'script.googleusercontent.com']);
@@ -98,6 +99,9 @@ function validateOperation(method, args) {
       break;
     case 'hardDeleteWorkshopFromSoftware':
       if (typeof args[0] !== 'string' || !args[0].trim() || args[0].length > 64) return 'Invalid workshop identifier.';
+      break;
+    case 'deleteCertificateFromSoftware':
+      if (typeof args[0] !== 'string' || !args[0].trim() || args[0].length > 64) return 'Invalid certificate identifier.';
       break;
     default:
       break;
