@@ -18,6 +18,7 @@ const ALLOWED_METHODS = Object.freeze({
   reinstallSchedulerFromSoftware: 0,
   normalizeStableDefaultsFromSoftware: 0,
   repairRegistrationFormsFromSoftware: 0,
+  hardDeleteWorkshopFromSoftware: 1,
 });
 
 const GOOGLE_HOSTS = new Set(['script.google.com', 'script.googleusercontent.com']);
@@ -93,6 +94,9 @@ function validateOperation(method, args) {
       break;
     case 'retryEmailFromSoftware':
       if (typeof args[0] !== 'string' || !args[0].trim() || args[0].length > 256) return 'Invalid email job identifier.';
+      break;
+    case 'hardDeleteWorkshopFromSoftware':
+      if (typeof args[0] !== 'string' || !args[0].trim() || args[0].length > 64) return 'Invalid workshop identifier.';
       break;
     default:
       break;
