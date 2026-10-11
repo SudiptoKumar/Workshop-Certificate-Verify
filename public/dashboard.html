@@ -2346,7 +2346,8 @@ views.system = {
         <div class="zone-row"><div><strong>Reset software access link</strong><span>Creates a new private access token and invalidates the current link. You will sign in again with the new link.</span></div><button type="button" class="btn danger" data-act="reset-access-link">${ic('lock-keyhole')}<span class="lbl">Reset link</span></button></div>
         <div class="zone-row"><div><strong>Reinstall scheduler trigger</strong><span>Removes the existing time trigger and installs a fresh one-minute scheduler.</span></div><button type="button" class="btn" data-act="reinstall-scheduler">${ic('refresh-cw')}<span class="lbl">Reinstall scheduler</span></button></div>
         <div class="zone-row"><div><strong>Normalize stable defaults</strong><span>Rewrites stable default settings to their canonical values. Workshops and records are kept.</span></div><button type="button" class="btn" data-act="normalize-defaults">${ic('sliders-horizontal')}<span class="lbl">Normalize defaults</span></button></div>
-        <div class="zone-row"><div><strong>Repair registration forms</strong><span>Checks every workshop registration form and repairs broken links and settings.</span></div><button type="button" class="btn" data-act="repair-forms">${ic('wrench')}<span class="lbl">Repair forms</span></button></div></section>
+        <div class="zone-row"><div><strong>Repair registration forms</strong><span>Checks every workshop registration form and repairs broken links and settings.</span></div><button type="button" class="btn" data-act="repair-forms">${ic('wrench')}<span class="lbl">Repair forms</span></button></div>
+        <div class="zone-row"><div><strong>Find duplicates</strong><span>Scans for duplicate participants (same email) and duplicate certificates.</span></div><button type="button" class="btn" data-act="find-duplicates">${ic('search')}<span class="lbl">Scan now</span></button></div><div id="dupResults" style="margin-top:12px"></div></section>
       <section class="sheet"><div class="sheet-head col"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap"><div><h2 class="sheet-title">Activity log</h2><div class="sheet-sub">Latest ${nfmt(d.logs.length)} entries</div></div><button type="button" class="btn sm" data-act="refresh">${ic('refresh-cw')}<span class="lbl">Refresh logs</span></button></div>
         <div class="toolbar">${searchBox('Search logs', state.sys.q, 'sys-q')}${lv.length > 1 ? seg('sysLevel', [['ALL', 'All']].concat(lv.map(x => [x, human(x)])), state.sys.level) : ''}</div></div>
         <div id="logList">${logsHtml()}</div></section>
@@ -2410,6 +2411,28 @@ Object.assign(ACTIONS, {
         const total = Object.values(d).reduce((a, b) => a + (Number(b) || 0), 0);
         toast(`Deleted ${esc(id)}: ${total} rows removed${r && r.folderTrashed ? ', folder trashed' : ''}.`);
         await refreshData(true);
+      } catch (e) { fail(e); }
+    });
+  },
+  async 'find-duplicates'(el) {
+    const box = $('#dupResults');
+    await run('find-duplicates', el, 'Scanning', async () => {
+      try {
+        const r = await rpc('findDuplicateRecordsFromSoftware');
+        const dp = (r && r.duplicateParticipants) || [];
+        const dc = (r && r.duplicateCertificates) || [];
+        if (!dp.length && !dc.length) {
+          box.innerHTML = `<div class="zone-row"><div><strong style="color:var(--ok)">No duplicates found.</strong><span>Participants and certificates are clean.</span></div></div>`;
+          return;
+        }
+        let html = '';
+        dp.forEach(d => {
+          html += `<div class="zone-row"><div><strong>${esc(d.email)}</strong> <span class="pill">${esc(d.eventId)}</span><span>${d.records.map(x => `${esc(x.name)} (${esc(x.participantId)}, ${esc(x.status)})`).join(' vs ')}</span></div></div>`;
+        });
+        dc.forEach(d => {
+          html += `<div class="zone-row"><div><strong>${esc(d.participantName || d.email)}</strong> <span class="pill">${esc(d.eventId)}</span><span>${d.certificates.map(x => `${esc(x.certificateId)} (${esc(x.status)}, ${esc(x.issuedAt)})`).join(' vs ')}</span></div></div>`;
+        });
+        box.innerHTML = `<div style="margin-bottom:8px"><strong>${dp.length} duplicate participant(s), ${dc.length} duplicate certificate(s)</strong></div>` + html;
       } catch (e) { fail(e); }
     });
   },

@@ -19,6 +19,7 @@ const ALLOWED_METHODS = Object.freeze({
   normalizeStableDefaultsFromSoftware: 0,
   repairRegistrationFormsFromSoftware: 0,
   hardDeleteWorkshopFromSoftware: 1,
+  findDuplicateRecordsFromSoftware: 0,
 });
 
 const GOOGLE_HOSTS = new Set(['script.google.com', 'script.googleusercontent.com']);
